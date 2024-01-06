@@ -39,7 +39,7 @@ module.exports = {
             else{
                 return res
                         .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
-                        .json()
+                        .json({success: false, message: message.FAILED})
             }
 
         }
