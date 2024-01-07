@@ -4,7 +4,8 @@ const facultyschema = new mongoose.Schema({
         id : {type : String},
         name: {type : String},
         email :{type : String},
-        batch : {type : String, require : true},
+        password : {type : String},
+        batch : {type : String},
         img: { 
             data: Buffer, 
             contentType: String 
