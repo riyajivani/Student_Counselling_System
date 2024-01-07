@@ -7,7 +7,7 @@
 	"USER_NOT_FOUND": "User not found Please Register Yourself.",
 	"GENERAL": "Something Went Wrong!!, Please Try Again.",
 	"NOT_AUTHORIZED":"You Are Not Authorized.",
-	"NOT_MATCH":"Email Or Password Doesn't Match.",
+	"NOT_MATCH":"Password Doesn't Match.",
 	"UPDATE_SUCCESSFULLY":"User Updated Successfully.",
 	"DELETE_SUCCESS":"User deleted successfully.",
 	"EMAIL_SEND":"Email Sent Successfully.",
