@@ -56,15 +56,9 @@ module.exports = {
         const {id, email, password} = req.body;
 
         try{
-            const adminExist = await adminSchema.find({id : id})
+            const adminExist = await adminSchema.findOne({id : id})
 
             if(!adminExist)
-            {
-                return res
-                        .status(enums.HTTP_CODE.BAD_REQUEST)
-                        .json({success : false , message : message.USER_NOT_FOUND})
-            }
-            else if(!adminExist.password)
             {
                 return res
                         .status(enums.HTTP_CODE.BAD_REQUEST)
@@ -73,7 +67,9 @@ module.exports = {
 
             const adminPassword = adminExist.password
 
-            const isMatch = await bcrypt.compare(password, adminPassword)
+            // const isMatch = await bcrypt.compare(password, adminPassword)
+
+            const isMatch = (adminPassword === password)
 
             if(!isMatch)
             {
@@ -85,7 +81,7 @@ module.exports = {
             const data = {
                 _id : adminExist._id,
                 id : adminExist.id,
-                name : adminExist.name
+                email : adminExist.email
             }
 
             const token = jwt.sign(data, process.env.JWT_SECRET)
