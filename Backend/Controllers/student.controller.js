@@ -3,34 +3,47 @@ const message = require("../utils/message.json")
 const enums = require("../utils/enums.json")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken");
-
+require("dotenv").config();
 
 module.exports = {
     createstudent : async(req,res) => {
+
+        //console.log(req.body)
         const { id, name, email, password, semester } = req.body;
         
         try{
             const studentExist = await studentSchema.find({id : id})
 
-            if(studentExist.password)
+            console.log(studentExist)
+
+            if(studentExist.length==0)
+            {
+                return res
+                        .status(enums.HTTP_CODE.BAD_REQUEST)
+                        .json({success : false , message : message.ID_NOT_EXIST})
+            }
+            
+            console.log(studentExist[0].password)
+            if(studentExist[0].password)
             {
                return res
                         .status(enums.HTTP_CODE.BAD_REQUEST)
-                        .json({success : false , message : message.USER_NOT_FOUND})
+                        .json({success : false , message : message.USER_ALREADY_EXIST})
             }
+            
             const salt = await bcrypt.genSalt(10);
             const hash = await bcrypt.hash(password,salt)
             
             const create ={
-                id,
-                name,
-                email,
-                password : hash,
-                semester
+                id: id,
+                name: name,
+                email: email,
+                password : hash
             }
 
-            const studentdata = await studentSchema.create(create)
-
+            const studentdata = await studentSchema.updateOne({id: studentExist[0].id},{$set: create})
+            //const studentdata = await studentSchema.create(create)
+            console.log(studentdata)
             if(studentdata)
             {
                 return res
@@ -42,7 +55,6 @@ module.exports = {
                         .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
                         .json({success: false, message: message.FAILED})
             }
-
         }
         catch(err){
             return res
@@ -64,14 +76,15 @@ module.exports = {
                         .status(enums.HTTP_CODE.BAD_REQUEST)
                         .json({success : false , message : message.USER_NOT_FOUND})
             }
-            else if(!studentExist.password)
+            //console.log(studentExist[0].password)
+            if(!studentExist[0].password)
             {
                 return res
                         .status(enums.HTTP_CODE.BAD_REQUEST)
                         .json({success : false , message : message.USER_NOT_FOUND})
             }
 
-            const studentPassword = studentExist.password
+            const studentPassword = studentExist[0].password
 
             const isMatch = await bcrypt.compare(password, studentPassword)
 
@@ -83,12 +96,12 @@ module.exports = {
             }
 
             const data = {
-                _id : studentExist._id,
-                id : studentExist.id,
-                semester : studentExist.semester
+                _id : studentExist[0]._id,
+                id : studentExist[0].id,
+                semester : studentExist[0].semester
             }
 
-            const token = jwt.sign(data, process.env.JWT_SECRET)
+           const token = jwt.sign(data, process.env.JWT_SECRET)
 
             return res
 				.status(enums.HTTP_CODE.OK)
@@ -107,7 +120,7 @@ module.exports = {
         try{
             const students = await studentSchema.find()
 
-            if(student)
+            if(students.length!=0)
             {
                 return res
 				.status(enums.HTTP_CODE.OK)

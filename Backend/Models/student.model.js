@@ -6,14 +6,14 @@ const studentschema = new mongoose.Schema({
         email :{type : String},
         password: { type: String },
         semester : {type : Number},
-        batch : {type : String},
+        // batch : {type : String},
         totalquery : {type : Number,default : 0},
-        facultyId : {type : mongoose.Schema.Types.ObjectId, ref : "faculty"}
+        // facultyId : {type : mongoose.Schema.Types.ObjectId, ref : "faculty"}
 },
 {
     timestamps: true,
     versionKey: false,
-    autoCreate: true,
+    autoCreate: true
 }
 );
 
