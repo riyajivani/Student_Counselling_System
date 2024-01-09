@@ -3,7 +3,7 @@ const message = require("../utils/message.json")
 const enums = require("../utils/enums.json")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken");
-
+require("dotenv").config();
 module.exports = {
 
     createFaculty : async (req,res) => {
@@ -12,8 +12,15 @@ module.exports = {
 
         try{
             const facultyExist = await facultySchema.find({id : id})
+            //console.log(facultyExist)
+            if(facultyExist.length==0)
+            {
+               return res
+                        .status(enums.HTTP_CODE.BAD_REQUEST)
+                        .json({success : false , message : message.ID_NOT_EXIST})
+            }
 
-            if(facultyExist.password)
+            else if(facultyExist[0].password)
             {
                return res
                         .status(enums.HTTP_CODE.BAD_REQUEST)
@@ -29,7 +36,7 @@ module.exports = {
                 password : hash
             }
 
-            const facultydata = await facultySchema.create(create)
+            const facultydata = await facultySchema.updateOne({id : facultyExist[0].id},{$set : create})
 
             if(facultydata)
             {
@@ -55,7 +62,7 @@ module.exports = {
         const {id, email, password} = req.body;
 
         try{
-            const facultyExist = await facultySchema.find({id : id})
+            const facultyExist = await facultySchema.findOne({id : id})
 
             if(!facultyExist)
             {
@@ -63,11 +70,15 @@ module.exports = {
                         .status(enums.HTTP_CODE.BAD_REQUEST)
                         .json({success : false , message : message.USER_NOT_FOUND})
             }
-            else if(!facultyExist.password)
+            else if(facultyExist)
             {
-                return res
+                if(!facultyExist.password)
+                {
+                    return res
                         .status(enums.HTTP_CODE.BAD_REQUEST)
                         .json({success : false , message : message.USER_NOT_FOUND})
+                }
+                
             }
 
             const facultyPassword = facultyExist.password

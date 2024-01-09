@@ -5,11 +5,11 @@ const facultyschema = new mongoose.Schema({
         name: {type : String},
         email :{type : String},
         password : {type : String},
-        batch : {type : String},
-        img: { 
-            data: Buffer, 
-            contentType: String 
-          },
+        //batch : {type : String},
+        // img: { 
+        //     data: Buffer, 
+        //     contentType: String 
+        //   },
         totalquery : {type : Number , default : 0},
         solvedquery : {type : Number, default : 0},
         remainingquery : {type : Number, default : 0},

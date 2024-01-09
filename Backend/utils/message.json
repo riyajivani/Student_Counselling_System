@@ -20,5 +20,6 @@
 	"IMAGE_REQUIRE":"Image Is Required.",
 	"QUERY_EMAIL_SEND":"query Details Sent Out To Your Email.",
 	"CONTACT_SUCCESS":"Thank You For Contacting Us.",
-	"USER_ALREADY_EXIST":"User is already exist."
+	"USER_ALREADY_EXIST":"User is already exist.",
+	"ID_NOT_EXIST":"user id is not valide"
 }
