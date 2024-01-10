@@ -53,10 +53,10 @@ module.exports = {
 
     adminLogin : async (req,res) => {
         
-        const {id, email, password} = req.body;
+        const { email, password} = req.body;
 
         try{
-            const adminExist = await adminSchema.findOne({id : id})
+            const adminExist = await adminSchema.findOne({email : email})
 
             if(!adminExist)
             {
@@ -80,7 +80,6 @@ module.exports = {
 
             const data = {
                 _id : adminExist._id,
-                id : adminExist.id,
                 email : adminExist.email
             }
 

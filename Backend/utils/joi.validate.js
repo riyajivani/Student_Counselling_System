@@ -40,5 +40,22 @@ module.exports = {
         } else {
             next();
         }
+    },
+    validate4loginadmin : (req, res, next) => {
+
+        let schema = Joi.object().keys({
+            email: Joi.string().email().required(),
+            password: Joi.string().required()
+        })
+
+        let { error } = schema.validate(req.body)
+
+        if (error) {
+            return res
+                .status(enums.HTTP_CODE.BAD_REQUEST)
+                .json({ success: false, message: error.details[0].message });
+        } else {
+            next();
+        }
     }
 }

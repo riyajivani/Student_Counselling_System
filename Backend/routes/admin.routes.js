@@ -1,8 +1,8 @@
 const express = require("express")
 const router = express.Router()
 const adminController = require("../Controllers/admin.controller")
-const { validate4login } = require("../utils/joi.validate")
+const { validate4loginadmin } = require("../utils/joi.validate")
 
-router.post("/login",validate4login,adminController.adminLogin)
+router.post("/login",validate4loginadmin,adminController.adminLogin)
 
 module.exports = router

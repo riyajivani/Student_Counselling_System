@@ -1,9 +1,9 @@
 const mongoose = require("mongoose")
 
 const adminschema = new mongoose.Schema({
-    id : {type : String},
     email :{type : String},
-    password : {type : String}
+    password : {type : String},
+    role : {type : String}
 },
 {
     timestamps: true,
