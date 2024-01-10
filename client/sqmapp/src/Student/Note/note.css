@@ -1,0 +1,9 @@
+.note-container{
+     background: var(--dark-silver);
+     max-width: 100%;
+     min-height: 100vh;
+}
+
+.note-body {
+     margin: 14vh 2rem 0 7rem;
+   }

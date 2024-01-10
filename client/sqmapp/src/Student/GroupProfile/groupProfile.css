@@ -1,0 +1,9 @@
+.group-profile-container{
+     background: var(--dark-silver);
+     max-width: 100%;
+     min-height: 100vh;
+}
+
+.group-profile-body {
+     margin: 14vh 2rem 0 7rem;
+   }
