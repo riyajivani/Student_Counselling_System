@@ -30,6 +30,7 @@ app.get('/',(req, res)=>{
 
 app.use("/student",studentroutes)   
 app.use("/faculty",facultyrouter)
+app.use("/admin",adminrouter)
 
 
 
