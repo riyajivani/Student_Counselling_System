@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 const db = mongoose.connect("mongodb+srv://monilghori:monil343@project.dblil8c.mongodb.net/Student_counselling_system?retryWrites=true&w=majority").catch((err) => {console.log(err)});
 
 module.exports = db;
+
 // console.log("hello")
 
 // const schema = new mongoose.Schema({
