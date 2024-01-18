@@ -1,0 +1,32 @@
+:root {
+  flex: 1;
+  /* light theme */
+  --light-background:#ffffff;
+  --light-green:#9ed2c5;
+  --light-grey:#7b7b7b;
+  --hover-color:#7fad9e;
+  --black:#000000;
+  --input-color: #edf5f3;
+  --orange-color:#ff4040;
+
+  /* dark theme */
+  --dark-background: #1d1e22;
+  --dark-grey:#393f4d;
+  --dark-silver: #d4d4dc;
+  --dark-yellow:#feda6a;
+}
+
+body{
+  font-family: 'poppins',sans-serif;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  list-style: none;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
