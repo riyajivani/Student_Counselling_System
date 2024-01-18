@@ -10,26 +10,28 @@ const SignUp = () =>
      const navigate = useNavigate();
      
      const [data, setData] = useState({
+          id:"",
           name:"",
           email:"",
-          password:"",
-          semester:"",
-
+          password:""
      })
 
-     const handleChange = (e) =>{
+     const handleChange = (e) => {
+          console.log(data)
           setData({...data,[e.target.name]:e.target.value})
      }
 
      const handleSubmit = async (e)=>{
           e.preventDefault()
-          try{
-               // const url = "";
-               // const {data:res} = await axios.post(url,data)
+          try {
+               let url;
+               { role === "student" ? url = "mongodb+srv://monilghori:monil343@project.dblil8c.mongodb.net/" : url = "http://localhost:3000/faculty/createfaculty"}
+                    
+                    const res = await axios.post(url, data)
+                    console.log(res.data.message)
                navigate("../login")
-               // console.log(res.message)
-
-          }catch(error){
+          
+          } catch (error) {
                if(error.response && error.response.status >=400 && error.response.status <=500){
                     setError(error.response.data.message)
                }
@@ -54,11 +56,22 @@ const SignUp = () =>
                                         <option value="student">Student</option>
                                         <option value="faculty">Faculty</option>
                                    </select>
+
+                                   <input
+                                        type="text" 
+                                        placeholder='Enter id'
+                                        name="id"
+                                        value={data.id}
+                                        onChange={handleChange}
+                                        required
+                                        className='signup-input'>
+                                   </input>
+
                                    <input
                                         type="text" 
                                         placeholder='Enter Name'
-                                        name="firstName"
-                                        value={data.firstName}
+                                        name="name"
+                                        value={data.name}
                                         onChange={handleChange}
                                         required
                                         className='signup-input'>
@@ -81,16 +94,6 @@ const SignUp = () =>
                                         required
                                         className='signup-input'>
                                    </input>
-
-                                   {role=='student'?<input
-                                        type="number" 
-                                        placeholder='Enter Semester'
-                                        name="semester"
-                                        value={data.semester}
-                                        onChange={handleChange}
-                                        required
-                                        className='signup-input'>
-                                   </input>:<></>}
 
                                    {error && <div className='error_msg'>{error}</div>} 
                                    <button type='submit' className='signup-green-btn'>

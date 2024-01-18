@@ -5,12 +5,12 @@
 }
 
 .askmentor-body {
+     overflow-x: hidden;
      margin: 14vh 2rem 0 7rem;
 }
 
 .askmentor-body h1{
      color: var(--light-background);
-     padding: 2px;
      text-align: center;
      text-shadow: 2px 2px 8px var(--black);
 }
@@ -20,7 +20,7 @@
      flex-direction: column;
      background-color: var(--input-color);
      padding: 20px;
-     margin: 30px 0;
+     margin: 2px 0 20px 0;
      border-radius: 20px;
 }
 

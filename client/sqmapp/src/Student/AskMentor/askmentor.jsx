@@ -6,7 +6,24 @@ import { Button } from 'antd';
 
 const AskMentor = () => {
 
-     const handleAsk = () => {
+     const handleAsk = async () => {
+          // try{
+          //      const response = await fetch('your_api_endpoint', {
+          //           method: 'POST',
+          //           headers: {
+          //           'Content-Type': 'application/json',
+          //           },
+          //           body: JSON.stringify({ question }),
+          //      });
+          
+          //      if (response.ok) {
+          //           history.push(`/askedque?question=${encodeURIComponent(question)}`);
+          //      } else {
+          //           console.error('Failed to submit question');
+          //      }
+          // }catch(error) {
+          //      console.error('Error occurred while submitting question', error);
+          // }
 
      }
 
@@ -20,7 +37,7 @@ const AskMentor = () => {
                               ???</h1>
                          
                          <div className='ask__form'>
-                              <textarea className='input__que' rows={15} cols={300} placeholder='enter your question here and send it...🖊️'/>
+                              <textarea className='input__que' rows={14} cols={300} placeholder='enter your question here and send it...🖊️'/>
                               <button type='button' className='ask__btn' onClick={handleAsk}><SendIcon/></button>
                          </div>
                     </div>

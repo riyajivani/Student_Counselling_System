@@ -1,6 +1,6 @@
 import './login.css';
 import { useState } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import loginImg from '../../assets/login.png';
 
 
@@ -8,25 +8,68 @@ const Login = () =>
 {
      const [role, setRole] = useState("");
      const [error, setError] = useState("");
+     let navigate = useNavigate();
      
      const [data, setData] = useState({
-          sid:"",
-          password:"",
+          id: "",
+          email:"",
+          password:""
      })
 
-     const handleChange = (e) =>{
+     const handleChange = (e) => {
+          console.log(data)
           setData({...data,[e.target.name]:e.target.value})
      }
 
      const handleSubmit = async (e)=>{
           e.preventDefault()
-          try{
-               // const url = "";
-               // const {data:res} = await axios.post(url,data)
-               // localStorage.setItem("token",res.data)
-               window.location="/"
-               // console.log(res.message)
+          try {
+               let url;
+               let res;
 
+               //console.log(data.id , data.password)
+               if (role === "student")
+               {
+                    url = "http://localhost:3000/student/login"
+                    
+                    res = await fetch(url, {
+                         method: "POST",
+                         headers: {
+                           "Content-Type": "application/json"   
+                         },
+                         body : JSON.stringify({id : data.id, password : data.password})
+                    })
+                    res = await res.json()
+                    
+                    if (res.success === true) {
+                         localStorage.setItem("student",res)
+                         navigate("../askmentor")
+                    }
+                    else {
+                         alert(res.message)
+                    }
+                    
+               }       
+               else if (role === "faculty")
+               {
+                    url = "http://localhost:3000/faculty/login"
+                    res = await axios.post(url, {
+                         id: data.id,
+                         password:data.password
+                    })
+               }           
+               else if (role === "admin") {
+                    url = "http://localhost:3000/admin/login"
+                    res = await axios.post(url,
+                         {
+                              email: data.email,
+                              password: data.password
+                    })
+               }
+
+               console.log(res)
+              
+               
           }catch(error){
                if(error.response && error.response.status >=400 && error.response.status <=500){
                     setError(error.response.data.message)
@@ -45,18 +88,30 @@ const Login = () =>
                                         <option disabled={true} value="">Select Role</option>
                                         <option value="student">Student</option>
                                         <option value="faculty">Faculty</option>
-                                        <option value="faculty">Admin</option>
+                                        <option value="admin">Admin</option>
                                    </select>
                                    
-                                   <input
-                                        type="text" 
-                                        placeholder='Enter Id'
-                                        name="id"
-                                        value={data.sid}
+                                   {role === "admin"
+                                   ?<input
+                                        type="email" 
+                                        placeholder='Enter Email'
+                                        name="email"
+                                        value={data.email}
                                         onChange={handleChange}
                                         required
                                         className='login-input'>
                                    </input>
+                                   
+                                   : <input
+                                        type="text" 
+                                        placeholder='Enter Id'
+                                        name="id"
+                                        value={data.id}
+                                        onChange={handleChange}
+                                        required
+                                        className='login-input'>
+                                   </input>}
+
                                    <input
                                         type="password" 
                                         placeholder='Enter Password'
@@ -68,6 +123,7 @@ const Login = () =>
                                    </input>
                
                                    {error && <div className='error_msg'>{error}</div>} 
+
                                    <button type='submit' className='login-green-btn'>
                                         Sign In 
                                    </button>

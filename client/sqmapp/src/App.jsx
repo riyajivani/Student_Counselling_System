@@ -7,6 +7,7 @@ import MyQuestion from './Student/MyQuestion/myquestion'
 import Note from './Student/Note/note'
 import PublicQuestion from './Student/publicQuestion/publicque'
 import Todo from './Student/ToDo/todo'
+import Profile from './Student/Profile/profile'
 
 
 function App() {
@@ -22,7 +23,8 @@ function App() {
           <Route exact path='/myquestion' element={<MyQuestion />}></Route>
           <Route exact path='/note' element={<Note/>}></Route>
           <Route exact path='/publicquestion' element={<PublicQuestion/>}></Route>
-          <Route exact path='/todo' element={<Todo/>}></Route>
+          <Route exact path='/todo' element={<Todo />}></Route>
+          <Route exact path='/profile' element={<Profile/>}></Route>
         </Routes>
           
       </div>

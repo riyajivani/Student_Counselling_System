@@ -9,7 +9,8 @@ module.exports = {
     createstudent : async(req,res) => {
 
         //console.log(req.body)
-        const { id, name, email, password, semester } = req.body;
+        const {
+            id,name, email, password } = req.body;
         
         try{
             const studentExist = await studentSchema.find({id : id})
@@ -65,13 +66,14 @@ module.exports = {
 
     studentLogin : async (req,res) => {
         
-        const {id, email, password} = req.body;
+        const {id, password} = req.body;
 
         try{
             const studentExist = await studentSchema.find({id : id})
 
             if(!studentExist)
-            {
+            {   
+                console.log(studentExist);
                 return res
                         .status(enums.HTTP_CODE.BAD_REQUEST)
                         .json({success : false , message : message.USER_NOT_FOUND})
@@ -79,6 +81,7 @@ module.exports = {
             //console.log(studentExist[0].password)
             if(!studentExist[0].password)
             {
+                console.log(studentExist);
                 return res
                         .status(enums.HTTP_CODE.BAD_REQUEST)
                         .json({success : false , message : message.USER_NOT_FOUND})
@@ -90,6 +93,7 @@ module.exports = {
 
             if(!isMatch)
             {
+                console.log(studentExist);
                 return res
                         .status(enums.HTTP_CODE.BAD_REQUEST)
                         .json({ success: false, message: message.NOT_MATCH})
