@@ -9,7 +9,7 @@ module.exports = {
     createstudent : async(req,res) => {
 
         //console.log(req.body)
-        const { id, name, email, password, semester } = req.body;
+        const { id, name, email, password} = req.body;
         
         try{
             const studentExist = await studentSchema.find({id : id})
@@ -65,7 +65,7 @@ module.exports = {
 
     studentLogin : async (req,res) => {
         
-        const {id, email, password} = req.body;
+        const {id,password} = req.body;
 
         try{
             const studentExist = await studentSchema.find({id : id})
