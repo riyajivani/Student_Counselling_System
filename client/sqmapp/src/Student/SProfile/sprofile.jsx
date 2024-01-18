@@ -1,16 +1,17 @@
-import './todo.css';
+import './sprofile.css';
 import Sidebar from '../../components/Sidebar/sidebar'
 import Footer from '../../components/Footer/footer'
 
-const Todo = () => {
+const SProfile = () => {
      return (
           <>
-               <div className='todo-container'>
+               <div className='sprofile-container'>
                <Sidebar />
 
-               <div className='todo-body'>
+               <div className='sprofile-body'>
+                         <h1>s profile</h1>  
                          
-               <h1>todo</h1>
+
                </div>
 
                <Footer />
@@ -20,4 +21,4 @@ const Todo = () => {
      )
 }
 
-export default Todo
+export default SProfile

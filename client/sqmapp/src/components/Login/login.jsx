@@ -2,14 +2,15 @@ import './login.css';
 import { useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import loginImg from '../../assets/login.png';
-
+//import { useAuth } from '../../store/auth';
 
 const Login = () =>
 {
      const [role, setRole] = useState("");
      const [error, setError] = useState("");
      let navigate = useNavigate();
-     
+     //const {storeLS} = useAuth();
+
      const [data, setData] = useState({
           id: "",
           email:"",
@@ -27,7 +28,6 @@ const Login = () =>
                let url;
                let res;
 
-               //console.log(data.id , data.password)
                if (role === "student")
                {
                     url = "http://localhost:3000/student/login"
@@ -39,35 +39,88 @@ const Login = () =>
                          },
                          body : JSON.stringify({id : data.id, password : data.password})
                     })
+
                     res = await res.json()
                     
+                    const studentobj = {
+                         role,
+                         isStudent: true,
+                         id: data.id,
+                         token: res.token
+                    }
+
                     if (res.success === true) {
-                         localStorage.setItem("student",res)
+
+                         //storeLS(studentobj)
+                         localStorage.setItem("isStudent", JSON.stringify(studentobj));
+
                          navigate("../askmentor")
                     }
                     else {
-                         alert(res.message)
+                         setError(res.message);
                     }
                     
                }       
                else if (role === "faculty")
                {
                     url = "http://localhost:3000/faculty/login"
-                    res = await axios.post(url, {
-                         id: data.id,
-                         password:data.password
+                    res = await fetch(url, {
+                         method: "POST",
+                         headers: {
+                           "Content-Type": "application/json"   
+                         },
+                         body : JSON.stringify({id : data.id, password : data.password})
                     })
+
+                    res = await res.json()
+
+                    if (res.success === true) {
+                         console.log(role);
+                         const facultyobj = {
+                              role,
+                              isFaculty: true,
+                              id: data.id,
+                              token: res.token
+                         }
+
+                         //storeLS(facultyobj);
+                         localStorage.setItem("isFaculty", JSON.stringify(facultyobj))
+                         
+                         navigate("../askfaculty")
+                    }
+                    else {
+                         setError(res.message);
+                    }
                }           
                else if (role === "admin") {
-                    url = "http://localhost:3000/admin/login"
-                    res = await axios.post(url,
-                         {
-                              email: data.email,
-                              password: data.password
-                    })
-               }
 
-               console.log(res)
+                    url = "http://localhost:3000/admin/login"
+
+                    res = await fetch(url, {
+                         method: "POST",
+                         headers: {
+                           "Content-Type": "application/json"   
+                         },
+                         body : JSON.stringify({email : data.email, password : data.password})
+                    })
+                    res = await res.json()
+
+                    const adminobj = {
+                         isAdmin: true,
+                         email: data.email,
+                         token: res.token
+                    }
+
+                    if (res.success === true) {
+
+                         //storeLS(adminobj);
+                         localStorage.setItem("isAdmin",JSON.stringify(adminobj))
+                         navigate("../askmentor")
+                    }
+                    else {
+                              setError(res.message);
+                    }
+               }
               
                
           }catch(error){

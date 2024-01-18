@@ -9,6 +9,10 @@ import './menuList.css';
 
 const MenuList = () => {
   const location = useLocation();
+  const isStudent = JSON.parse(localStorage.getItem("isStudent")).role;
+  const isFaculty = JSON.parse(localStorage.getItem("isFaculty")).role;
+  //const isAdmin = JSON.parse(localStorage.getItem("isAdmin")).isAdmin;
+
   const [selectedKey, setSelectedKey] = useState(location.pathname);
 
   const handleMenuClick = ({ key }) => {
@@ -17,31 +21,73 @@ const MenuList = () => {
 
   return (
     <Menu mode="inline" className="menu-bar" theme="light" selectedKeys={[selectedKey]} onClick={handleMenuClick}>
-      <Menu.Item key="/groupprofile" icon={<GroupsIcon />} className="custom-menu-item">
-        <Link to="/groupprofile">Group Profile</Link>
-      </Menu.Item>
 
-      <Menu.SubMenu key="questions" icon={<QuestionAnswerIcon />} title="Questions" className="custom-menu-item">
-        <Menu.Item key="/myquestion">
-          <Link to="/myquestion">My Questions</Link>
+      {isStudent==="student" && <>
+        <Menu.Item key="/groupprofile" icon={<GroupsIcon />} className="custom-menu-item">
+          <Link to="/groupprofile">Group Profile</Link>
         </Menu.Item>
-        <Menu.Item key="/askmentor">
-          <Link to="/askmentor">Ask Mentor</Link>
+
+        <Menu.SubMenu key="questions" icon={<QuestionAnswerIcon />} title="Questions" className="custom-menu-item">
+          <Menu.Item key="/myquestion">
+            <Link to="/myquestion">My Questions</Link>
+          </Menu.Item>
+          <Menu.Item key="/askmentor">
+            <Link to="/askmentor">Ask Mentor</Link>
+          </Menu.Item>
+        </Menu.SubMenu>
+
+        <Menu.Item key="/publicquestion" icon={<PublicIcon />} className="custom-menu-item">
+          <Link to="/publicquestion">Public Questions</Link>
         </Menu.Item>
-      </Menu.SubMenu>
 
-      <Menu.Item key="/publicquestion" icon={<PublicIcon />} className="custom-menu-item">
-        <Link to="/publicquestion">Public Questions</Link>
-      </Menu.Item>
-
-      <Menu.SubMenu key="important" icon={<ChecklistRtlIcon />} title="Important" className="custom-menu-item">
-        <Menu.Item key="/note">
+        <Menu.Item key="/note" icon={<ChecklistRtlIcon />} className="custom-menu-item">
           <Link to="/note">Note</Link>
+        </Menu.Item></>
+      }
+
+      {isFaculty==="faculty" && <>
+        <Menu.Item key="/studentlist" icon={<GroupsIcon />} className="custom-menu-item">
+          <Link to="/studentlist">Your Student</Link>
         </Menu.Item>
-        <Menu.Item key="/todo">
-          <Link to="/todo">To Do</Link>
+
+        <Menu.Item key="/askedquestion" icon={<QuestionAnswerIcon />} className="custom-menu-item">
+          <Link to="/askedquestion">Asked Question</Link>
         </Menu.Item>
-      </Menu.SubMenu>
+
+        <Menu.Item key="/askfaculty" icon={<PublicIcon />} className="custom-menu-item">
+          <Link to="/askfaculty">Ask Faculty</Link>
+        </Menu.Item>
+
+        <Menu.Item key="/solvedbyyou" icon={<ChecklistRtlIcon />} className="custom-menu-item">
+          <Link to="/solvedbyyou">Solved By You</Link>
+        </Menu.Item>
+
+        </>
+      }
+
+      {/* {isAdmin && <>
+        <Menu.Item key="/groupprofile" icon={<GroupsIcon />} className="custom-menu-item">
+          <Link to="/groupprofile">Group Profile</Link>
+        </Menu.Item>
+
+        <Menu.SubMenu key="questions" icon={<QuestionAnswerIcon />} title="Questions" className="custom-menu-item">
+          <Menu.Item key="/myquestion">
+            <Link to="/myquestion">My Questions</Link>
+          </Menu.Item>
+          <Menu.Item key="/askmentor">
+            <Link to="/askmentor">Ask Mentor</Link>
+          </Menu.Item>
+        </Menu.SubMenu>
+
+        <Menu.Item key="/publicquestion" icon={<PublicIcon />} className="custom-menu-item">
+          <Link to="/publicquestion">Public Questions</Link>
+        </Menu.Item>
+
+        <Menu.Item key="/note" icon={<ChecklistRtlIcon />} className="custom-menu-item">
+          <Link to="/note">Note</Link>
+        </Menu.Item></>
+      }    */}
+      
     </Menu>
   );
 };
