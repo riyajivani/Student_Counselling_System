@@ -9,8 +9,7 @@ module.exports = {
             id: Joi.string().required(),
             name: Joi.string(),
             email: Joi.string().email().required(),
-            password: Joi.string().required(),
-            semester: Joi.number()
+            password: Joi.string().required()
         });
 
         let { error } = schema.validate(req.body);
