@@ -25,7 +25,7 @@ const SignUp = () =>
           e.preventDefault()
           try {
                let url;
-               { role === "student" ? url = "mongodb+srv://monilghori:monil343@project.dblil8c.mongodb.net/" : url = "http://localhost:3000/faculty/createfaculty"}
+               { role === "student" ? url = "http://localhost:3000/student/createstudent" : url = "http://localhost:3000/faculty/createfaculty"}
                     
                     const res = await axios.post(url, data)
                     console.log(res.data.message)

@@ -28,7 +28,7 @@ app.get('/',(req, res)=>{
     res.send("Welcome")
 })
 
-app.use("/student",studentroutes)   
+app.use("/student",studentroutes)  
 app.use("/faculty",facultyrouter)
 app.use("/admin",adminrouter)
 

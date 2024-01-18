@@ -59,7 +59,7 @@ module.exports = {
 
     facultyLogin : async (req,res) => {
         
-        const {id, password} = req.body;
+        const {id, email, password} = req.body;
 
         try{
             const facultyExist = await facultySchema.findOne({id : id})
