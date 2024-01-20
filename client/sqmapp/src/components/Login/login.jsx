@@ -2,7 +2,7 @@ import './login.css';
 import { useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import loginImg from '../../assets/login.png';
-//import { useAuth } from '../../store/auth';
+// import { useAuth } from '../../store/auth';
 import axios from 'axios'
 
 const Login = () =>
@@ -10,7 +10,7 @@ const Login = () =>
      const [role, setRole] = useState("");
      const [error, setError] = useState("");
      let navigate = useNavigate();
-     //const {storeLS} = useAuth();
+     // const {storeLS} = useAuth();
 
      const [data, setData] = useState({
           id: "",
@@ -61,6 +61,7 @@ const Login = () =>
                                    id: data.id,
                                    token: res.data.token
                               }
+                              localStorage.clear()
                               localStorage.setItem("isStudent", JSON.stringify(studentobj));
                          }
                          else {
@@ -102,7 +103,8 @@ const Login = () =>
                               token: res.token
                          }
 
-                         //storeLS(facultyobj);
+                         // storeLS(facultyobj);
+                         localStorage.clear()
                          localStorage.setItem("isFaculty", JSON.stringify(facultyobj))
                          
                          navigate("../askfaculty")
@@ -132,7 +134,7 @@ const Login = () =>
 
                     if (res.success === true) {
 
-                         //storeLS(adminobj);
+                         // storeLS(adminobj);
                          localStorage.setItem("isAdmin",JSON.stringify(adminobj))
                          navigate("../askmentor")
                     }

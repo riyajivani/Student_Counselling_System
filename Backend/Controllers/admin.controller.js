@@ -3,6 +3,7 @@ const message = require("../utils/message.json")
 const enums = require("../utils/enums.json")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken");
+const admin = require("../Models/admin.model");
 
 
 module.exports = {
@@ -54,7 +55,6 @@ module.exports = {
     adminLogin : async (req,res) => {
         
         const { email, password} = req.body;
-
         try{
             const adminExist = await adminSchema.findOne({email : email})
 
@@ -80,7 +80,8 @@ module.exports = {
 
             const data = {
                 _id : adminExist._id,
-                email : adminExist.email
+                email : adminExist.email,
+                role : admin.role
             }
 
             const token = jwt.sign(data, process.env.JWT_SECRET)

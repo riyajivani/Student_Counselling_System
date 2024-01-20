@@ -5,6 +5,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
      
      const storeLS = (userdata) => {
+          localStorage.clear();
           return localStorage.setItem("userdata", JSON.stringify(userdata));
      }
 

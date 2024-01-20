@@ -56,5 +56,26 @@ module.exports = {
         } else {
             next();
         }
+    },
+
+    validate4askQuery : (req,res,next) => {
+        const schema = Joi.object().keys({
+            question : Joi.string().required(),
+            sid : Joi.string().required()
+        })
+
+        let { error } = schema.validate(req.body)
+        if(error){
+            return res
+                    .status(enums.HTTP_CODE.BAD_REQUEST)
+                    .json({success : false , message : error.details[0].message})
+        }
+
+        else{
+            next();
+        }
     }
+
+    
+
 }
