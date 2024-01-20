@@ -3,6 +3,7 @@ import { useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import loginImg from '../../assets/login.png';
 //import { useAuth } from '../../store/auth';
+import axios from 'axios'
 
 const Login = () =>
 {
@@ -18,7 +19,7 @@ const Login = () =>
      })
 
      const handleChange = (e) => {
-          console.log(data)
+          // console.log(data)
           setData({...data,[e.target.name]:e.target.value})
      }
 
@@ -32,33 +33,52 @@ const Login = () =>
                {
                     url = "http://localhost:3000/student/login"
                     
-                    res = await fetch(url, {
-                         method: "POST",
-                         headers: {
-                           "Content-Type": "application/json"   
-                         },
-                         body : JSON.stringify({id : data.id, password : data.password})
-                    })
+                    // res = await fetch(url, {
+                    //      method: "POST",
+                    //      headers: {
+                    //        "Content-Type": "application/json"   
+                    //      },
+                    //      body : JSON.stringify({id : data.id, password : data.password})
+                    // })
 
-                    res = await res.json()
+                    // res = await res.json()
                     
-                    const studentobj = {
-                         role,
-                         isStudent: true,
-                         id: data.id,
-                         token: res.token
-                    }
+                         res = await axios.post(url, {
+                              id: data.id,
+                              password: data.password
+                         }, {
+                              headers: {
+                                   'Content-Type': 'application/json'
+                              }
+                         });
+                         
+                         
+                         if (res.data.success === true) {
+     
+                              navigate("../askmentor")
+                              const studentobj = {
+                                   role,
+                                   isStudent: true,
+                                   id: data.id,
+                                   token: res.data.token
+                              }
+                              localStorage.setItem("isStudent", JSON.stringify(studentobj));
+                         }
+                         else {
+                              setError(res.data.message);
+                         }
 
-                    if (res.success === true) {
+                    
+                    // if (res.success === true) {
 
-                         //storeLS(studentobj)
-                         localStorage.setItem("isStudent", JSON.stringify(studentobj));
+                    //      //storeLS(studentobj)
+                         
 
-                         navigate("../askmentor")
-                    }
-                    else {
-                         setError(res.message);
-                    }
+                    //      navigate("../askmentor")
+                    // }
+                    // else {
+                    //      setError(res.message);
+                    // }
                     
                }       
                else if (role === "faculty")

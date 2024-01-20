@@ -9,7 +9,7 @@ import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
 const Navbar = () => {
      const [active, setActive] = useState("nav__menu");
      const isStudent = JSON.parse(localStorage.getItem("isStudent")).role;
-     const isFaculty = JSON.parse(localStorage.getItem("isFaculty")).role;
+     //const isFaculty = JSON.parse(localStorage.getItem("isFaculty")).role;
      
      const navToggle = () => {
           active === 'nav__menu'
@@ -42,7 +42,7 @@ const Navbar = () => {
                               </li></>
                          }
 
-                         {isFaculty === "faculty" && <>
+                         {/* {isFaculty === "faculty" && <>
                          <li className="nav__item">
                               <a href="./fprofile" className="nav__link">
                               {active == "nav__menu nav__active" && < Person2OutlinedIcon className='active-icon'/>} Profile</a>
@@ -55,7 +55,7 @@ const Navbar = () => {
                               <a href="./login" className="nav__link">
                               {active == "nav__menu nav__active" && <ExitToAppRoundedIcon className='active-icon'/>} Logout</a>
                          </li></>
-                         }
+                         } */}
 
                     </ul>
                

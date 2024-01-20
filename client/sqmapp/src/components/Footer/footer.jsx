@@ -5,13 +5,13 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import QuizIcon from '@mui/icons-material/Quiz';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import EmailIcon from '@mui/icons-material/Email';
-import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
-import PublicIcon from '@mui/icons-material/Public';
+// import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+// import PublicIcon from '@mui/icons-material/Public';
 import { Tooltip } from 'antd';     
 
 const MyFooter = () => {
      const isStudent = JSON.parse(localStorage.getItem("isStudent")).role;
-     const isFaculty = JSON.parse(localStorage.getItem("isFaculty")).role;
+     //const isFaculty = JSON.parse(localStorage.getItem("isFaculty")).role;
      return (
 
           <Footer className='footer'>
@@ -40,7 +40,7 @@ const MyFooter = () => {
                          </Tooltip></>
                     }
 
-                    {isFaculty === "faculty" && <>
+                    {/* {isFaculty === "faculty" && <>
                          <Tooltip title="Asked Question" arrow={false}>
                          <a href="/askedquestion" className='footer__link'><QuestionAnswerIcon /></a>
                          </Tooltip>
@@ -48,7 +48,7 @@ const MyFooter = () => {
                          <Tooltip title="Ask Faculty" arrow={false}>
                               <a href="/askfaculty" className='footer__link'><PublicIcon /></a>
                          </Tooltip></>
-                    }
+                    } */}
                     
                </div>
 
