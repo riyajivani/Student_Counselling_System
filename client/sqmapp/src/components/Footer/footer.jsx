@@ -10,8 +10,8 @@ import EmailIcon from '@mui/icons-material/Email';
 import { Tooltip } from 'antd';     
 
 const MyFooter = () => {
-     const isStudent = JSON.parse(localStorage.getItem("isStudent")).role;
-     //const isFaculty = JSON.parse(localStorage.getItem("isFaculty")).role;
+     const isStudent = JSON.parse(localStorage.getItem("isStudent"))?.role;
+     const isFaculty = JSON.parse(localStorage.getItem("isFaculty"))?.role;
      return (
 
           <Footer className='footer'>
@@ -39,8 +39,8 @@ const MyFooter = () => {
                               <a href="#" className='footer__link'><EmailIcon /></a>
                          </Tooltip></>
                     }
-
-                    {/* {isFaculty === "faculty" && <>
+{/* 
+                    {isFaculty === "faculty" && <>
                          <Tooltip title="Asked Question" arrow={false}>
                          <a href="/askedquestion" className='footer__link'><QuestionAnswerIcon /></a>
                          </Tooltip>
@@ -48,8 +48,8 @@ const MyFooter = () => {
                          <Tooltip title="Ask Faculty" arrow={false}>
                               <a href="/askfaculty" className='footer__link'><PublicIcon /></a>
                          </Tooltip></>
-                    } */}
-                    
+                    }
+                     */}
                </div>
 
                <div className='footer-text'>

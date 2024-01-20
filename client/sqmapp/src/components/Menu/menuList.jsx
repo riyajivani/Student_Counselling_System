@@ -9,10 +9,10 @@ import './menuList.css';
 
 const MenuList = () => {
   const location = useLocation();
-  const isStudent = JSON.parse(localStorage.getItem("isStudent")).role;
-  //const isFaculty = JSON.parse(localStorage.getItem("isFaculty")).role;
-  console.log(isStudent)
-  //const isAdmin = JSON.parse(localStorage.getItem("isAdmin")).isAdmin;
+  const isStudent = JSON.parse(localStorage.getItem("isStudent"))?.role;
+  const isFaculty = JSON.parse(localStorage.getItem("isFaculty"))?.role;
+  // console.log(isStudent)
+  const isAdmin = JSON.parse(localStorage.getItem("isAdmin"))?.isAdmin;
 
   const [selectedKey, setSelectedKey] = useState(location.pathname);
 
@@ -46,7 +46,7 @@ const MenuList = () => {
         </Menu.Item></>
       }
 
-      {/* {isFaculty==="faculty" && <>
+      {isFaculty==="faculty" && <>
         <Menu.Item key="/studentlist" icon={<GroupsIcon />} className="custom-menu-item">
           <Link to="/studentlist">Your Student</Link>
         </Menu.Item>
@@ -64,9 +64,9 @@ const MenuList = () => {
         </Menu.Item>
 
         </>
-      } */}
+      }
 
-      {/* {isAdmin && <>
+      {isAdmin && <>
         <Menu.Item key="/groupprofile" icon={<GroupsIcon />} className="custom-menu-item">
           <Link to="/groupprofile">Group Profile</Link>
         </Menu.Item>
@@ -87,7 +87,7 @@ const MenuList = () => {
         <Menu.Item key="/note" icon={<ChecklistRtlIcon />} className="custom-menu-item">
           <Link to="/note">Note</Link>
         </Menu.Item></>
-      }    */}
+      }   
       
     </Menu>
   );
