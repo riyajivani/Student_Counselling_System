@@ -15,11 +15,9 @@
 	"OLD_PASSWORD_WRONG":"You Entered Incorrect Old Password.",
 	"SUCCESS":"Success",
 	"FAILED":"Failed",
-	"INVALID_FILE_TYPE":"Invalid File Type.",
-	"INVALID_FILE_SIZE":"Image Size Less Then 1 MB.",
-	"IMAGE_REQUIRE":"Image Is Required.",
 	"QUERY_EMAIL_SEND":"query Details Sent Out To Your Email.",
 	"CONTACT_SUCCESS":"Thank You For Contacting Us.",
 	"USER_ALREADY_EXIST":"User is already exist.",
-	"ID_NOT_EXIST":"user id is not valid."
+	"ID_NOT_EXIST":"user id is not valid.",
+	"QUERY_SUCCESS":"query send successfully"
 }

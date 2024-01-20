@@ -1,7 +1,6 @@
 const mongoose = require("mongoose")
 
 const queryschema = new mongoose.Schema({
-        id : {type : String},
         query: {type : String},
         querybystudent : {type : mongoose.Schema.Types.ObjectId, ref : "student"},
         solvebyfaculty : {type : mongoose.Schema.Types.ObjectId, ref : "faculty"},
