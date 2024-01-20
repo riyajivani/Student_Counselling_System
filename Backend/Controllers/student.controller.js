@@ -38,7 +38,8 @@ module.exports = {
                 id: id,
                 name: name,
                 email: email,
-                password : hash
+                password : hash,
+                role : "student"
             }
 
             const studentdata = await studentSchema.updateOne({id: studentExist[0].id},{$set: create})

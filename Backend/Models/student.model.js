@@ -8,7 +8,8 @@ const studentschema = new mongoose.Schema({
         semester : {type : Number},
         // batch : {type : String},
         totalquery : {type : Number,default : 0},
-        // facultyId : {type : mongoose.Schema.Types.ObjectId, ref : "faculty"}
+        facultyId : {type : mongoose.Schema.Types.ObjectId, ref : "faculty"},
+        role : {type : String}
 },
 {
     timestamps: true,

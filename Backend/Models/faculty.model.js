@@ -13,6 +13,7 @@ const facultyschema = new mongoose.Schema({
         totalquery : {type : Number , default : 0},
         solvedquery : {type : Number, default : 0},
         remainingquery : {type : Number, default : 0},
+        role : {type : String}
         
 },
 {
