@@ -14,8 +14,6 @@ module.exports = {
         try{
             const studentExist = await studentSchema.find({id : id})
 
-            console.log(studentExist)
-
             if(studentExist.length==0)
             {
                 return res
@@ -111,31 +109,6 @@ module.exports = {
 				.status(enums.HTTP_CODE.OK)
 				.json({ success: true, message: message.LOGIN_SUCCESS, token, student: studentExist });
 
-        }catch(err)
-        {
-            return res
-                    .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
-                    .json({success:false , message: err.message})
-        }
-    },
-
-    getAllStudent : async (req,res) => {
-        
-        try{
-            const students = await studentSchema.find()
-
-            if(students.length!=0)
-            {
-                return res
-				.status(enums.HTTP_CODE.OK)
-                .json({success: true , student : students})
-            }
-            else
-            {
-                return res  
-                        .status(enums.HTTP_CODE.BAD_REQUEST)
-                        ,json({success: false , message : message.USER_NOT_FOUND})
-            }
         }catch(err)
         {
             return res
