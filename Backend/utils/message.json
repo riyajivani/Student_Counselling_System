@@ -21,5 +21,8 @@
 	"ID_NOT_EXIST":"User id is not valid.",
 	"QUERY_SUCCESS":"Query send successfully.",
 	"FACULTY_NOT_EXIST":"Faculty dose not exist.",
-	"ASIGN_SUCCESS":"Faculty asigned."
+	"ASIGN_SUCCESS":"Faculty asigned.",
+	"CREATE_SUCCESS":"User created successfully.",
+	"USER_NOT_EXIST":"User not exist.",
+	"NOT_ASSIGNED":"You are not assigned."
 }
