@@ -6,6 +6,7 @@ const { validate4signup ,validate4login } = require("../utils/joi.validate")
 
 router.post("/createfaculty",validate4signup,facultyController.createFaculty)
 router.post("/login",validate4login,facultyController.facultyLogin)
+router.get("/getstudents",facultyController.getStudentsByBatch)
 
 
 module.exports = router

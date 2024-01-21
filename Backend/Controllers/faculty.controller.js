@@ -1,4 +1,5 @@
 const facultySchema = require("../Models/faculty.model")
+const studentSchema = require("../Models/student.model")
 const message = require("../utils/message.json")
 const enums = require("../utils/enums.json")
 const bcrypt = require("bcryptjs")
@@ -140,5 +141,25 @@ module.exports = {
 
     changePassword : async (req,res) => {
         
+    },
+
+    getStudentsByBatch : async (req , res) => {
+        const { id } = await req.body
+
+        const facultyExist = await facultySchema.findOne({id : id})
+
+        const students = await studentSchema.find({ facultyId : facultyExist._id})
+
+        if(students.length == 0)
+        {
+            return res 
+                    .status(enums.HTTP_CODE.BAD_REQUEST)
+                    .json({success : false})
+        }
+        else{
+            return res
+                    .status(enums.HTTP_CODE.OK)
+                    .json({success : true , message : message.SUCCESS , students : students})
+        }
     }
 }
