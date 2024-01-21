@@ -1,4 +1,6 @@
 const adminSchema = require("../Models/admin.model")
+const facultySchema = require("../Models/faculty.model")
+const studentSchema = require("../Models/student.model")
 const message = require("../utils/message.json")
 const enums = require("../utils/enums.json")
 const bcrypt = require("bcryptjs")
@@ -121,5 +123,47 @@ module.exports = {
                     .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
                     .json({success:false , message: err.message})
         }
-    }
+    },
+
+    assignFaculty : async (req, res) => {
+        
+        const { sid , fid} = await req.body
+        try{
+            const facultyExist = await facultySchema.findOne({ id : fid })
+
+            if(!facultyExist)
+            {
+                return res      
+                        .status(enums.HTTP_CODE.BAD_REQUEST)
+                        .json({success : false , message : message.FACULTY_NOT_EXIST})
+            }
+            const student = await studentSchema.updateOne({id : sid}, {$set : { facultyId : facultyExist._id}})
+
+            if(student)
+            {
+                return res
+                        .status(enums.HTTP_CODE.OK)
+                        .json({success : true , message : message.ASIGN_SUCCESS })
+            }
+            else{
+                return res 
+                        .status(enums.HTTP_CODE.BAD_REQUEST)
+                        .json({success : false , message : message.FAILED})
+            }
+
+        }
+        catch(err)
+        {
+            return res 
+                    .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
+                    .json({success : false , message : err.message})
+        }
+    },
+
+    createStudent : async (req,res) => {},
+    deleteStudent : async (req,res) => {},
+    updatestudent : async (req,res) => {},
+    createFaculty : async (req,res) => {},
+    deleteFaculty : async (req,res) => {},
+    updateFaculty : async (req,res) => {}
 }
