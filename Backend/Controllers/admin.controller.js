@@ -10,50 +10,6 @@ const admin = require("../Models/admin.model");
 
 module.exports = {
 
-    // createAdmin : async (req,res) => {
-
-    //     const {id, name, email, password} = await req.body
-
-    //     try{
-    //         const adminExist = await adminSchema.find({id : id})
-
-    //         if(adminExist.password)
-    //         {
-    //            return res
-    //                     .status(enums.HTTP_CODE.BAD_REQUEST)
-    //                     .json({success : false , message : message.USER_ALREADY_EXIST})
-    //         }
-    //         const salt = await bcrypt.genSalt(10);
-    //         const hash = await bcrypt.hash(password,salt)
-            
-    //         const create ={
-    //             id,
-    //             name,
-    //             email,
-    //             password : hash
-    //         }
-
-    //         const admindata = await adminSchema.create(create)
-
-    //         if(admindata)
-    //         {
-    //             return res
-    //                     .status(enums.HTTP_CODE.OK)
-    //                     .json({success: true , message : message.SIGNUP_SUCCESS})
-    //         }
-    //         else{
-    //             return res
-    //                     .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
-    //                     .json({success: false, message: message.FAILED})
-    //         }
-
-    //     }catch(err){
-    //         return res
-    //                 .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
-    //                 .json({success:false , message: err.message})
-    //     }
-    // },
-
     adminLogin : async (req,res) => {
         
         const { email, password} = req.body;
@@ -160,10 +116,210 @@ module.exports = {
         }
     },
 
-    createStudent : async (req,res) => {},
-    deleteStudent : async (req,res) => {},
+    createStudent : async (req,res) => {
+
+        const { id , semester , batch } = await req.body
+
+        try{
+
+            const studentExist = await studentSchema.findOne({id : id})
+
+            if(studentExist)
+            {
+                return res
+                        .status(enums.HTTP_CODE.BAD_REQUEST)
+                        .json({success : false , message : message.USER_ALREADY_EXIST})
+            }
+
+            const data = {
+                id,
+                semester,
+                batch
+            }
+
+        
+            const student = await studentSchema.create(data)
+
+            if(student)
+            {
+                return res
+                        .status(enums.HTTP_CODE.OK)
+                        .json({success : true , message : message.CREATE_SUCCESS})
+            }
+            else{
+                return res  
+                        .status(enums.HTTP_CODE.BAD_REQUEST)
+                        .json({success : false , message : message.FAILED})
+            }
+        }catch(err)
+        {
+            return res  
+                    .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
+                    .json({success : false ,message : err.message})
+        }
+    },
+
+    deleteStudent : async (req,res) => {
+        const { id } = await req.body
+
+        try{
+
+            const studentExist = await studentSchema.findOne({id : id})
+
+            if(!studentExist)
+            {
+                return res
+                        .status(enums.HTTP_CODE.BAD_REQUEST)
+                        .json({success : false , message : message.USER_NOT_EXIST})
+            }
+            const data = await studentSchema.deleteOne({id : id})
+
+            if(data)
+            {
+                return res
+                        .status(enums.HTTP_CODE.OK)
+                        .json({success : true , message : message.DELETE_SUCCESS})
+            }
+            else{
+                return res 
+                        .status(enums.HTTP_CODE.BAD_REQUEST)
+                        .json({success : false , message : message.USER_NOT_EXIST})
+            }
+        }catch(err)
+        {
+            return res
+                    .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
+                    .json({success : false , message : err.message})
+        }
+    },
+
     updatestudent : async (req,res) => {},
-    createFaculty : async (req,res) => {},
-    deleteFaculty : async (req,res) => {},
-    updateFaculty : async (req,res) => {}
+
+    createFaculty : async (req,res) => {
+
+        const { id } = await req.body
+
+        try{
+
+            const facultyExist = await facultySchema.findOne({id : id})
+
+            if(facultyExist)
+            {
+                return res
+                        .status(enums.HTTP_CODE.BAD_REQUEST)
+                        .json({success : false , message : message.USER_ALREADY_EXIST})
+            }
+
+            const data = {
+                id
+            }
+
+        
+            const faculty = await facultySchema.create(data)
+
+            if(faculty)
+            {
+                return res
+                        .status(enums.HTTP_CODE.OK)
+                        .json({success : true , message : message.CREATE_SUCCESS})
+            }
+            else{
+                return res  
+                        .status(enums.HTTP_CODE.BAD_REQUEST)
+                        .json({success : false , message : message.FAILED})
+            }
+        }catch(err)
+        {
+            return res  
+                    .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
+                    .json({success : false ,message : err.message})
+        }
+    },
+
+    deleteFaculty : async (req,res) => {
+        const { id } = await req.body
+
+        try{
+
+            const facultyExist = await facultySchema.findOne({id : id})
+
+            if(!facultyExist)
+            {
+                return res
+                        .status(enums.HTTP_CODE.BAD_REQUEST)
+                        .json({success : false , message : message.USER_NOT_EXIST})
+            }
+            const data = await facultySchema.deleteOne({id : id})
+
+            if(data)
+            {
+                return res
+                        .status(enums.HTTP_CODE.OK)
+                        .json({success : true , message : message.DELETE_SUCCESS})
+            }
+            else{
+                return res 
+                        .status(enums.HTTP_CODE.BAD_REQUEST)
+                        .json({success : false , message : message.USER_NOT_EXIST})
+            }
+        }catch(err)
+        {
+            return res
+                    .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
+                    .json({success : false , message : err.message})
+        }
+    },
+    
+    updateFaculty : async (req,res) => {},
+
+    getAllStudent : async (req,res) => {
+        
+        try{
+            const students = await studentSchema.find()
+
+            if(students.length!=0)
+            {
+                return res
+				.status(enums.HTTP_CODE.OK)
+                .json({success: true , student : students})
+            }
+            else
+            {
+                return res  
+                        .status(enums.HTTP_CODE.BAD_REQUEST)
+                        ,json({success: false , message : message.USER_NOT_FOUND})
+            }
+        }catch(err)
+        {
+            return res
+                    .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
+                    .json({success:false , message: err.message})
+        }
+    },
+
+    getAllfaculty : async (req,res) => {
+        
+        try{
+            const faculty = await facultySchema.find()
+
+            if(faculty)
+            {
+                return res
+				.status(enums.HTTP_CODE.OK)
+                .json({success: true , faculty : faculty})
+            }
+            else
+            {
+                return res  
+                        .status(enums.HTTP_CODE.BAD_REQUEST)
+                        ,json({success: false , message : message.USER_NOT_FOUND})
+            }
+        }catch(err)
+        {
+            return res
+                    .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
+                    .json({success:false , message: err.message})
+        }
+    }
+
 }
