@@ -26,7 +26,6 @@ module.exports = {
 
         let schema = Joi.object().keys({
             id: Joi.string().required(),
-            // email: Joi.string().email().required(),
             password: Joi.string().required()
         })
 
@@ -73,6 +72,65 @@ module.exports = {
 
         else{
             next();
+        }
+    },
+
+    validate4createstudent : (req, res, next) => {
+
+        const schema = Joi.object().keys({
+            id : Joi.string().required(),
+            semester : Joi.number().required(),
+            batch : Joi.string().required()
+        })
+
+        let { error } = schema.validate(req.body)
+
+        if(error)
+        {
+            return res
+                    .status(enums.HTTP_CODE.BAD_REQUEST)
+                    .json({success : false , message : error.details[0].message})
+        }
+        else{
+            next()
+        }
+    },
+    
+    validate4createfaculty : (req, res, next) => {
+
+        const schema = Joi.object().keys({
+            id : Joi.string().required()
+        })
+
+        let { error } = schema.validate(req.body)
+
+        if(error)
+        {
+            return res
+                    .status(enums.HTTP_CODE.BAD_REQUEST)
+                    .json({success : false , message : error.details[0].message})
+        }
+        else{
+            next()
+        }
+    },
+
+    validate4delete : (req, res, next) => {
+
+        const schema = Joi.object().keys({
+            id : Joi.string().required()
+        })
+
+        let { error } = schema.validate(req.body)
+
+        if(error)
+        {
+            return res
+                    .status(enums.HTTP_CODE.BAD_REQUEST)
+                    .json({success : false , message : error.details[0].message})
+        }
+        else{
+            next()
         }
     }
 
