@@ -61,7 +61,7 @@ module.exports = {
 
     facultyLogin : async (req,res) => {
         
-        const {id, email, password} = req.body;
+        const {id, password} = req.body;
 
         try{
             const facultyExist = await facultySchema.findOne({id : id})
@@ -114,31 +114,6 @@ module.exports = {
         }
     },
 
-    getAllfaculty : async (req,res) => {
-        
-        try{
-            const faculty = await facultySchema.find()
-
-            if(faculty)
-            {
-                return res
-				.status(enums.HTTP_CODE.OK)
-                .json({success: true , faculty : faculty})
-            }
-            else
-            {
-                return res  
-                        .status(enums.HTTP_CODE.BAD_REQUEST)
-                        ,json({success: false , message : message.USER_NOT_FOUND})
-            }
-        }catch(err)
-        {
-            return res
-                    .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
-                    .json({success:false , message: err.message})
-        }
-    },
-
     changePassword : async (req,res) => {
         
     },
@@ -154,7 +129,7 @@ module.exports = {
         {
             return res 
                     .status(enums.HTTP_CODE.BAD_REQUEST)
-                    .json({success : false})
+                    .json({success : false , message : message.NOT_ASSIGNED})
         }
         else{
             return res
