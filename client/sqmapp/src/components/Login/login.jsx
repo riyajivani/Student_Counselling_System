@@ -19,7 +19,6 @@ const Login = () =>
      })
 
      const handleChange = (e) => {
-          // console.log(data)
           setData({...data,[e.target.name]:e.target.value})
      }
 
