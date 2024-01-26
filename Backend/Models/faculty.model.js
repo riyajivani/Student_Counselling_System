@@ -10,9 +10,9 @@ const facultyschema = new mongoose.Schema({
         //     data: Buffer, 
         //     contentType: String 
         //   },
-        totalquery : {type : Number , default : 0},
-        solvedquery : {type : Number, default : 0},
-        remainingquery : {type : Number, default : 0},
+        total_query : {type : Number , default : 0},
+        solved_query : {type : Number, default : 0},
+        remaining_query : {type : Number, default : 0},
         role : {type : String}
         
 },

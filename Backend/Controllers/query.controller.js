@@ -16,23 +16,23 @@ module.exports = {
             const student = await studentSchema.findOne({id : sid})
             const faculty = await facultySchema.findOne({ _id : student.facultyId })
 
-            let totalqueryOfFaculty = parseInt(faculty.totalquery)
-            let remainingquery = parseInt(faculty.remainingquery)
-
+            let totalqueryOfFaculty = parseInt(faculty.total_query)
+            let remainingquery = parseInt(faculty.remaining_query)
             totalqueryOfFaculty += 1
             remainingquery += 1
 
-            let totalquery = parseInt(student.totalquery)
+            let totalquery = parseInt(student.total_query)
             totalquery += 1
-        
+            
             const que = {
                 query : question,
-                querybystudent : student._id
+                querybystudent : student._id,
+                facultyId : student.facultyId
             }
 
             const querydata = await querySchema.create(que)
-            const studentdata = await studentSchema.updateOne({ id : sid }, { $set : { totalquery : totalquery }})
-            const facultydata = await facultySchema.updateOne({id : faculty.id}, {$set : { totalquery : totalqueryOfFaculty, remainingquery : remainingquery}})
+            const studentdata = await studentSchema.updateOne({ id : sid }, { $set : { total_query : totalquery }})
+            const facultydata = await facultySchema.updateOne({id : faculty.id}, {$set : { total_query : totalqueryOfFaculty, remaining_query : remainingquery}})
 
             if(querydata && studentdata && facultydata)
             {
@@ -55,6 +55,10 @@ module.exports = {
 
     solveQuery : async (req, res) => {
 
+    },
+
+    changeMode : async (req, res) => {
+        
     }
 
 }

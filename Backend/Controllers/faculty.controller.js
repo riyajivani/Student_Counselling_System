@@ -136,5 +136,6 @@ module.exports = {
                     .status(enums.HTTP_CODE.OK)
                     .json({success : true , message : message.SUCCESS , students : students})
         }
-    }
+    },
+    shareQuery : (req, res) => {}
 }
