@@ -7,12 +7,12 @@ const studentschema = new mongoose.Schema({
         password: { type: String },
         semester : {type : Number},
         batch : {type : String},
-        totalquery : {type : Number,default : 0},
+        total_query : {type : Number,default : 0},
         facultyId : {type : mongoose.Schema.Types.ObjectId, ref : "faculty"},
         role : {type : String}
 },
 {
-    timestamps: true,
+    timestamps: true,   
     versionKey: false,
     autoCreate: true
 }
