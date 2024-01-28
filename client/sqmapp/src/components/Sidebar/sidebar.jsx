@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./sidebar.css";
-import { Button,Layout } from "antd";
+import { Layout } from "antd";
 import Logo from "../Logo/logo";
 import MenuList from "../Menu/menuList";
 import Navbar from "../Navigation/navbar";

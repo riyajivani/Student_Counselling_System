@@ -1,76 +1,75 @@
-.askmentor-container{
-     background: var(--dark-silver);
-     max-width: 100%;
-     min-height: 100vh;
+.askmentor-container {
+  background: var(--dark-silver);
+  max-width: 100%;
+  min-height: 100vh;
 }
 
 .askmentor-body {
-     overflow-x: hidden;
-     margin: 14vh 2rem 0 7rem;
+  overflow-x: hidden;
+  margin: 14vh 2rem 0 7rem;
 }
 
-.askmentor-body h1{
-     color: var(--light-background);
-     text-align: center;
-     text-shadow: 2px 2px 8px var(--black);
+.askmentor-body h1 {
+  color: var(--light-background);
+  text-align: center;
+  text-shadow: 2px 2px 8px var(--black);
 }
 
-.ask__form{
-     display: flex;
-     flex-direction: column;
-     background-color: var(--input-color);
-     padding: 20px;
-     margin: 2px 0 20px 0;
-     border-radius: 20px;
+.ask__form {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--input-color);
+  padding: 20px;
+  margin: 2px 0 20px 0;
+  border-radius: 20px;
 }
 
-.input__que{
-     color: var(--orange-color);
-     font-size: 20px;
-     border: 1px solid var(--light-green);
-     padding: 10px;
-     border-radius: 20px;
+.input__que {
+  color: var(--orange-color);
+  font-size: 20px;
+  border: 1px solid var(--light-green);
+  padding: 10px;
+  border-radius: 20px;
 }
 
-.ask__btn{
-     align-self: flex-end;
-     width: 100px;
-     height: 40px;
-     margin-top: 20px;
-     color: var(--black);
-     align-items: center;
-     background-color: var(--light-green);
-     border: 2px solid var(--black);
-     border-radius: 10px;
+.ask__btn {
+  align-self: flex-end;
+  width: 100px;
+  height: 40px;
+  margin-top: 20px;
+  color: var(--black);
+  align-items: center;
+  background-color: var(--light-green);
+  border: 2px solid var(--black);
+  border-radius: 10px;
 }
 
-.ask__btn:hover{
-     cursor: pointer;
-     background-color: var(--hover-color);
+.ask__btn:hover {
+  cursor: pointer;
+  background-color: var(--hover-color);
 }
 
-.ask__btn:active{
-     transform: translateY(0.5px);
+.ask__btn:active {
+  transform: translateY(0.5px);
 }
 
-@media only screen and (max-width:552px){
-     .askmentor-body h1{
-          font-size: 20px;
-     }
+@media only screen and (max-width: 552px) {
+  .askmentor-body h1 {
+    font-size: 20px;
+  }
 }
 
-@media only screen and (max-width:412px){
-     
-     .ask__form{
-          width: 250px;
-          height: 300px;
-          margin-bottom: 50px;
-          margin-right: 40px;
-          padding: 10px;
-          border-radius: 0;
-     }
+@media only screen and (max-width: 412px) {
+  .ask__form {
+    width: 250px;
+    height: 300px;
+    margin-bottom: 50px;
+    margin-right: 40px;
+    padding: 10px;
+    border-radius: 0;
+  }
 
-     .input__que{
-          font-size: 15px;
-     }
+  .input__que {
+    font-size: 15px;
+  }
 }

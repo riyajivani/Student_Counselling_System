@@ -1,0 +1,18 @@
+.create-container{
+     background: var(--dark-silver);
+     max-width: 100%;
+     min-height: 100vh;
+     overflow-y: hidden;
+}
+
+.create-body{
+     margin-top: 14vh;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+}
+
+.create-body h1{
+     color: var(--light-background);
+     text-shadow: 2px 2px 8px var(--black);
+}
