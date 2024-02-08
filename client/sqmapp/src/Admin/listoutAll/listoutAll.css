@@ -3,6 +3,7 @@
      max-width: 100%;
      min-height: 100vh;
      overflow-y: hidden;
+     z-index: -1;
 }
 
 .listout-body{
@@ -14,3 +15,41 @@
      text-align: center;
      text-shadow: 2px 2px 8px var(--black);
 }
+
+.listout-grid {
+     display: grid;
+     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+     gap: 1.6rem;
+     margin: 1rem;
+   }
+   
+   .listout-card {
+     cursor: pointer;
+     background-color: var(--hover-color);
+     padding: 1em;
+     border: 2px solid var(--light-background);
+     border-radius: 20px;
+     box-shadow: 5px 2px 3px var(--light-background);
+   }
+   
+   .listout-card p {
+     color: var(--light-background);
+   }
+   
+   .listout-card h5 {
+     color: var(--dark-grey);
+   }
+   
+   @media only screen and (max-width: 954px) {
+     .listout-grid {
+       grid-template-columns: 1fr 1fr;
+       gap: 1.4rem;
+     }
+   }
+   
+   @media only screen and (max-width: 764px) {
+     .listout-grid {
+       grid-template-columns: 1fr;
+       gap: 1.4rem;
+     }
+   }

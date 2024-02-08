@@ -57,57 +57,85 @@ const Login = () => {
         }
       } else if (role === "faculty") {
         url = "http://localhost:3000/faculty/login";
-        res = await fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
+        // res = await fetch(url, {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify({ id: data.id, password: data.password }),
+        // });
+
+        // res = await res.json();
+
+        res = await axios.post(
+          url,
+          {
+            id: data.id,
+            password: data.password,
           },
-          body: JSON.stringify({ id: data.id, password: data.password }),
-        });
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
-        res = await res.json();
-
-        if (res.success === true) {
-          console.log(role);
+        if (res.data.success === true) {
+          navigate("../askfaculty");
           const facultyobj = {
             role,
             isFaculty: true,
             id: data.id,
             token: res.token,
           };
-
+          
+          console.log(res.data);
           localStorage.clear();
-          localStorage.setItem("isFaculty", JSON.stringify(facultyobj));
-
-          navigate("../askfaculty");
+          localStorage.setItem("isFaculty", JSON.stringify(facultyobj)); 
         } else {
-          setError(res.message);
+          setError(res.data.message);
         }
-      } else if (role === "admin") {
+      } 
+      else if (role === "admin") {
         url = "http://localhost:3000/admin/login";
 
-        res = await fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
+        // res = await fetch(url, {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify({ email: data.email, password: data.password }),
+        // });
+        // res = await res.json();
+
+        res = await axios.post(
+          url,
+          {
+            email: data.email,
+            password: data.password,
           },
-          body: JSON.stringify({ email: data.email, password: data.password }),
-        });
-        res = await res.json();
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
-        const adminobj = {
-          role,
-          isAdmin: true,
-          email: data.email,
-          token: res.token,
-        };
+        if (res.data.success === true) {
+          navigate("../create");
+          const adminobj = {
+            role,
+            isAdmin: true,
+            email: data.email,
+            token: res.token,
+          };
 
-        if (res.success === true) {
+          console.log(res.data);
           localStorage.clear();
           localStorage.setItem("isAdmin", JSON.stringify(adminobj));
-          navigate("../create");
+          
         } else {
-          setError(res.message);
+          setError(res.data.message);
         }
       }
     } catch (error) {
@@ -137,9 +165,9 @@ const Login = () => {
                 <option disabled={true} value="">
                   Select Role
                 </option>
-                <option value="student">Student</option>
-                <option value="faculty">Faculty</option>
-                <option value="admin">Admin</option>
+                <option value="student">student</option>
+                <option value="faculty">faculty</option>
+                <option value="admin">admin</option>
               </select>
 
               {role === "admin" ? (
