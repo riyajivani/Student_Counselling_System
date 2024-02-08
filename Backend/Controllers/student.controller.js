@@ -1,4 +1,5 @@
 const studentSchema = require("../Models/student.model")
+const facultySchema = require("../Models/faculty.model")
 const message = require("../utils/message.json")
 const enums = require("../utils/enums.json")
 const bcrypt = require("bcryptjs")
@@ -8,7 +9,6 @@ require("dotenv").config();
 module.exports = {
     createstudent : async(req,res) => {
 
-        //console.log(req.body)
         const { id, name, email, password} = req.body;
         
         try{
@@ -21,7 +21,6 @@ module.exports = {
                         .json({success : false , message : message.ID_NOT_EXIST})
             }
             
-            console.log(studentExist[0].password)
             if(studentExist[0].password)
             {
                return res
@@ -41,13 +40,14 @@ module.exports = {
             }
 
             const studentdata = await studentSchema.updateOne({id: studentExist[0].id},{$set: create})
-            //const studentdata = await studentSchema.create(create)
-            console.log(studentdata)
+            const student = await studentSchema.findOne({id : id})
+            const faculty = await facultySchema.findOne({ _id : student.facultyId})
+
             if(studentdata)
             {
                 return res
                         .status(enums.HTTP_CODE.OK)
-                        .json({success: true , message : message.SIGNUP_SUCCESS})
+                        .json({success: true , message : message.SIGNUP_SUCCESS, student : student, faculty : faculty})
             }
             else{
                 return res
@@ -65,7 +65,6 @@ module.exports = {
     studentLogin : async (req,res) => {
         
         const {id, password} = req.body;
-        // console.log(req.body);
         try{
             const studentExist = await studentSchema.find({id : id})
 
@@ -76,7 +75,6 @@ module.exports = {
                         .status(enums.HTTP_CODE.BAD_REQUEST)
                         .json({success : false , message : message.USER_NOT_FOUND})
             }
-            //console.log(studentExist[0].password)
             if(!studentExist[0].password)
             {
                 console.log(studentExist);
@@ -102,12 +100,14 @@ module.exports = {
                 id : studentExist[0].id,
                 semester : studentExist[0].semester
             }
+            
+           const token = jwt.sign(data, process.env.JWT_SECRET);
 
-           const token = jwt.sign(data, process.env.JWT_SECRET)
+           const faculty = await facultySchema.findOne({ _id : studentExist[0].facultyId})
 
             return res
 				.status(enums.HTTP_CODE.OK)
-				.json({ success: true, message: message.LOGIN_SUCCESS, token, student: studentExist });
+				.json({ success: true, message: message.LOGIN_SUCCESS, token, student: studentExist, faculty: faculty});
 
         }catch(err)
         {
