@@ -1,0 +1,16 @@
+.assign-container{
+     background: var(--dark-silver);
+     max-width: 100%;
+     min-height: 100vh;
+     overflow-y: hidden;
+}
+
+.assign-body{
+     margin-top: 14vh;
+   }
+
+.assign-body h1{
+     color: var(--light-background);
+     text-align: center;
+     text-shadow: 2px 2px 8px var(--black);
+}

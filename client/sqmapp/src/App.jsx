@@ -17,6 +17,12 @@ import AskFaculty from './Faculty/AskFaculty/askFaculty'
 import SolvedByYou from './Faculty/SolvedByYou/solvedByYou'
 import FProfile from './Faculty/FProfile/fprofile'
 
+//admin
+import Create from './Admin/create/create'
+import ListoutAll from './Admin/listoutAll/listoutAll'
+import DeleteOne from './Admin/delete/delete';
+import Assign from './Admin/assign/assign';
+
 function App() {
   
   return ( 
@@ -38,6 +44,11 @@ function App() {
           <Route exact path='/askfaculty' element={<AskFaculty/>}></Route>
           <Route exact path='/solvedbyyou' element={<SolvedByYou />}></Route>
           <Route exact path='/fprofile' element={<FProfile />}></Route>
+
+          <Route exact path='/create' element={<Create />}></Route>
+          <Route exact path='/delete' element={<DeleteOne/>}></Route>
+          <Route exact path='/assign' element={<Assign/>}></Route>
+          <Route exact path='/listoutall' element={<ListoutAll />}></Route>
         </Routes>
           
       </div>

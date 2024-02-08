@@ -1,9 +1,77 @@
-.myque-container{
-     background: var(--dark-silver);
-     max-width: 100%;
-     min-height: 100vh;
+.myque-container {
+  background: var(--dark-silver);
+  max-width: fit-content;
+  min-height: 100vh;
 }
 
 .myque-body {
-     margin: 14vh 2rem 0 7rem;
-   }
+  margin: 14vh 2rem 0 7rem;
+}
+
+.myque-body h1 {
+  color: var(--light-background);
+  text-shadow: 2px 2px 8px var(--black);
+  text-align: center;
+}
+
+.myque-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.6rem;
+  margin: 1rem;
+}
+
+.myque-card {
+  position: relative;
+  cursor: pointer;
+  background-color: var(--hover-color);
+  padding: 1em;
+  border: 2px solid var(--light-background);
+  border-radius: 20px;
+  box-shadow: 5px 2px 3px var(--light-background);
+}
+
+.myque-card p {
+  color: var(--light-background);
+}
+
+.myque-card h5 {
+  color: var(--dark-grey);
+}
+
+.mode_btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 120px;
+  height: 30px;
+  color: var(--light-green);
+  align-items: center;
+  background-color: var(--black);
+  border: 2px solid var(--light-background);
+  border-radius: 10px;
+  box-shadow: 2px 2px rgba(255, 255, 255, 0.4);
+}
+
+.mode_btn:hover {
+  cursor: pointer;
+  background-color: var(--light-background);
+}
+
+.mode_btn:active {
+  transform: translateY(0.5px);
+}
+
+@media only screen and (max-width: 954px) {
+  .myque-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+  }
+}
+
+@media only screen and (max-width: 764px) {
+  .myque-grid {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+}

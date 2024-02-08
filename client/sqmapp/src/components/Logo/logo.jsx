@@ -1,4 +1,3 @@
-import React from 'react';
 import SchoolIcon from '@mui/icons-material/School';
 import './logo.css'
 const Logo = () => {

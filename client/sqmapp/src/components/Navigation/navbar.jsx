@@ -1,71 +1,69 @@
 import './navbar.css'
-import { useState} from 'react';
-import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import SearchIcon from '@mui/icons-material/Search';
-import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';     
+import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';    
 import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import GroupsIcon from "@mui/icons-material/Groups";
+import { Tooltip } from "antd";
 
 const Navbar = () => {
-     const [active, setActive] = useState("nav__menu");
-     const isStudent = JSON.parse(localStorage.getItem("isStudent"))?.role;
-     const isFaculty = JSON.parse(localStorage.getItem("isFaculty"))?.role;
-     
-     const navToggle = () => {
-          active === 'nav__menu'
-               ? setActive('nav__menu nav__active')
-               : setActive('nav__menu')
-     };
+     // const isStudent = JSON.parse(localStorage.getItem("isStudent"))?.role;
+     // const isFaculty = JSON.parse(localStorage.getItem("isFaculty"))?.role;
+      const role = JSON.parse(localStorage.getItem("isAdmin"))?.role;
+
 
      return(
                <nav className="navbar">
 
-                    <div className='nav__search'>
-                         <input type='text' name='search-input' className='search__input' placeholder='search question...' />
-                         <SearchIcon className='search__icon'/>
-                    </div>
+                    {role !== 'admin' &&
+                         <div className='nav__search'>
+                              <input type='text' name='search-input' className='search__input' placeholder='search question...' />
+                              <SearchIcon className='search__icon'/>
+                         </div>
+                    }
+                    <ul>
+                         {role === 'admin' 
+                              ?<>
+                              <Tooltip title="Add Member" color='#7fad9e'>
+                                   <li className="nav__item">
+                                        <a href={"./create"} className="nav__link">{<PersonAddIcon/>}</a>
+                                   </li>
+                              </Tooltip>
 
-                    <ul className={active}>
+                              <Tooltip title="Delete Member" color='#7fad9e'>
+                                   <li className="nav__item">
+                                        <a href={"./delete"} className="nav__link">{<PersonRemoveIcon/>}</a>
+                                   </li>
+                              </Tooltip>
 
-                         {isStudent === "student" && <>
-                              <li className="nav__item">
-                                   <a href={"./sprofile"} className="nav__link">
-                                   {active == "nav__menu nav__active" && < Person2OutlinedIcon className='active-icon'/>} Profile</a>
-                              </li>
-                              <li className="nav__item">
-                                   <a href="#" className="nav__link">
-                                   {active == "nav__menu nav__active" && <EmailOutlinedIcon className='active-icon'/>} Inbox</a>
-                              </li>
-                              <li className="nav__item">
-                                   <a href="./login" className="nav__link">
-                                   {active == "nav__menu nav__active" && <ExitToAppRoundedIcon className='active-icon'/>} Logout</a>
-                              </li></>
+                              <Tooltip title="Assign Faculty" color='#7fad9e'>
+                                   <li className="nav__item">
+                                        <a href={"./assign"} className="nav__link">{<SupervisorAccountIcon/>}</a>
+                                   </li>
+                              </Tooltip>
+
+                              <Tooltip title="ListOut All" color='#7fad9e'>
+                                   <li className="nav__item">
+                                        <a href={"./listoutall"} className="nav__link">{<GroupsIcon/>}</a>
+                                   </li>
+                              </Tooltip>
+                              </> 
+
+                              :<Tooltip title="profile" color='#7fad9e'>
+                                   <li className="nav__item">
+                                        <a href={"./profile"} className="nav__link">{<Person2OutlinedIcon/>}</a>
+                                   </li>
+                              </Tooltip>
                          }
 
-                         {isFaculty === "faculty" && <>
-                         <li className="nav__item">
-                              <a href="./fprofile" className="nav__link">
-                              {active == "nav__menu nav__active" && < Person2OutlinedIcon className='active-icon'/>} Profile</a>
-                         </li>
-                         <li className="nav__item">
-                              <a href="#" className="nav__link">
-                              {active == "nav__menu nav__active" && <EmailOutlinedIcon className='active-icon'/>} Inbox</a>
-                         </li>
-                         <li className="nav__item">
-                              <a href="./login" className="nav__link">
-                              {active == "nav__menu nav__active" && <ExitToAppRoundedIcon className='active-icon'/>} Logout</a>
-                         </li></>
-                         }
-
+                         <Tooltip title="logout" color='#7fad9e'>
+                              <li className="nav__item">
+                                   <a href="./login" className="nav__link">{<ExitToAppRoundedIcon/>}</a>
+                              </li>                       
+                         </Tooltip>
                     </ul>
-               
-                    <div className='nav__toggler' onClick={navToggle}>
-                         <div className='line-1'></div>
-                         <div className='line-2'></div>
-                         <div className='line-3'></div>
-                    </div>
-
-                    <DarkModeRoundedIcon className='theme-btn'/>
                
                </nav>
           )

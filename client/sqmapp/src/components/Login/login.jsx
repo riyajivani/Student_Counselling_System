@@ -1,7 +1,7 @@
 import "./login.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import loginImg from "../../assets/login.png";
+import loginImg from "../../assets/picture1.png";
 import axios from "axios";
 
 const Login = () => {
@@ -96,6 +96,7 @@ const Login = () => {
         res = await res.json();
 
         const adminobj = {
+          role,
           isAdmin: true,
           email: data.email,
           token: res.token,
@@ -104,7 +105,7 @@ const Login = () => {
         if (res.success === true) {
           localStorage.clear();
           localStorage.setItem("isAdmin", JSON.stringify(adminobj));
-          navigate("../askmentor");
+          navigate("../create");
         } else {
           setError(res.message);
         }
@@ -181,7 +182,7 @@ const Login = () => {
             </form>
           </div>
           <div className="login-right">
-            <img src={loginImg} style={{ width: "200px" }}></img>
+            <img src={loginImg} style={{ width: "200px"}}></img>
             <h1>New Here!?</h1>
             <Link to="/signup">
               <button type="button" className="login-white-btn">

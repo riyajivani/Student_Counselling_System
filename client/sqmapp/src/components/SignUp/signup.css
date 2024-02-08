@@ -28,7 +28,7 @@
 	color: var(--light-background);
 	font-size: 30px;
 	text-align: center;
-	margin-top: 100px;
+	margin: 0;
 }
 
 .r-form-container {
@@ -76,6 +76,7 @@
 	align-self: center;
 	color: var(--light-green);
 	width: 150px;	
+	margin-top: 5px;
 }
 
 .signup-white-btn:hover {
@@ -146,6 +147,10 @@
 	.signup-right {
 		margin-top: 10px;
 	}
+
+	.signup-left img{
+		display: none;
+	} 
 }
 
 @media only screen and (max-width:412px) {

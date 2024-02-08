@@ -7,3 +7,9 @@
 .note-body {
      margin: 14vh 2rem 0 7rem;
    }
+
+.note-body h1{
+     color: var(--light-background);
+  text-shadow: 2px 2px 8px var(--black);
+  text-align: center;
+}

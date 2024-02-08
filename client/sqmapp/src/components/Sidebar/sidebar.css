@@ -1,8 +1,8 @@
 .ant-layout .ant-layout-sider {
      color: var(--black);
-     background: var(--light-green);
+     /* background: var(--light-green); */
      transition: 0.7s;
      position: fixed;
      height: 100%;
-     z-index: 2;
+     z-index: 1;
 }
