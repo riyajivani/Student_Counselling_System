@@ -24,5 +24,7 @@
 	"ASIGN_SUCCESS":"Faculty asigned.",
 	"CREATE_SUCCESS":"User created successfully.",
 	"USER_NOT_EXIST":"User not exist.",
-	"NOT_ASSIGNED":"You are not assigned."
+	"NOT_ASSIGNED":"You are not assigned.",
+	"QUERY_NOT_FOUND":"Not asked any query.",
+	"QUERY_FOUND":"Query List "
 }

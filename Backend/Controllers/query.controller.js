@@ -57,6 +57,40 @@ module.exports = {
 
     },
 
+    displayQueryToFaculty : async (req, res) => {
+
+        const { fid } = await req.body
+        try{
+            const faculty = await facultySchema.findOne({ id : fid })
+            const query = await querySchema.find({ facultyId : faculty._id })
+           
+            if(query.length == 0)
+            {
+                return res
+                        .status(enums.HTTP_CODE.BAD_REQUEST)
+                        .json({success : false , message : message.QUERY_NOT_FOUND})
+            }
+            else{
+
+                const queriesWithStudents = await Promise.all(query.map(async (query) => {
+                    const student = await studentSchema.findOne({ _id: query.querybystudent });
+                    const queryWithStudent = {...query.toObject(), student};
+                
+                    return queryWithStudent;
+                }));
+                return res
+                        .status(enums.HTTP_CODE.OK)
+                        .json({success : true , message : message.QUERY_FOUND , query : queriesWithStudents})
+            }
+        }
+        catch(err){
+            return res
+                    .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
+                    .json({success : false , message : err.message})
+        }
+
+    },
+
     changeMode : async (req, res) => {
         
     }

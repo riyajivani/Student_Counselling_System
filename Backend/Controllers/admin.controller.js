@@ -75,7 +75,6 @@ module.exports = {
         }
     },
 
-<<<<<<< HEAD
     assignFaculty: async (req, res) => {
 
         const { sid, fid } = await req.body
@@ -83,24 +82,6 @@ module.exports = {
             const facultyExist = await facultySchema.findOne({ id: fid })
 
             if (!facultyExist) {
-=======
-    assignFaculty : async (req, res) => {
-        
-        const { batch , fid} = await req.body
-        try{
-            const facultyExist = await facultySchema.findOne({ id : fid })
-
-            if(!facultyExist)
-            {
-                return res      
-                        .status(enums.HTTP_CODE.BAD_REQUEST)
-                        .json({success : false , message : message.FACULTY_NOT_EXIST})
-            }
-            // const student = await studentSchema.updateOne({id : sid}, {$set : { facultyId : facultyExist._id}})
-            const student = await studentSchema.updateMany({batch : batch}, {$set : { facultyId : facultyExist._id}})
-            if(student)
-            {
->>>>>>> e38f0f3a4577896f69e468cd738af4c71c63cea9
                 return res
                     .status(enums.HTTP_CODE.BAD_REQUEST)
                     .json({ success: false, message: message.FACULTY_NOT_EXIST })
