@@ -254,7 +254,7 @@ module.exports = {
     getAllStudent: async (req, res) => {
 
         try {
-            const students = await studentSchema.find()
+            const students = await studentSchema.find().sort({ id: 1 }).exec()
             if (students.length != 0) {
                 return res
                     .status(enums.HTTP_CODE.OK)
