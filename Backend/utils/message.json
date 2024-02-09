@@ -26,5 +26,7 @@
 	"USER_NOT_EXIST":"User not exist.",
 	"NOT_ASSIGNED":"You are not assigned.",
 	"QUERY_NOT_FOUND":"Not asked any query.",
-	"QUERY_FOUND":"Query List "
+	"NO_QUERY_FOUND":"There is no query.",
+	"QUERY_FOUND":"Query List",
+	"MODE_CHANGED":"Mode changed successfully."
 }

@@ -58,7 +58,7 @@ module.exports = {
     },
 
     validate4askQuery : (req,res,next) => {
-        const schema = Joi.object().keys({
+        let schema = Joi.object().keys({
             question : Joi.string().required(),
             sid : Joi.string().required()
         })
@@ -77,7 +77,7 @@ module.exports = {
 
     validate4createstudent : (req, res, next) => {
 
-        const schema = Joi.object().keys({
+        let schema = Joi.object().keys({
             id : Joi.string().required(),
             semester : Joi.number().required(),
             batch : Joi.string().required()
@@ -98,7 +98,7 @@ module.exports = {
     
     validate4createfaculty : (req, res, next) => {
 
-        const schema = Joi.object().keys({
+        let schema = Joi.object().keys({
             id : Joi.string().required()
         })
 
@@ -117,7 +117,7 @@ module.exports = {
 
     validate4delete : (req, res, next) => {
 
-        const schema = Joi.object().keys({
+        let schema = Joi.object().keys({
             id : Joi.string().required()
         })
 
@@ -132,6 +132,26 @@ module.exports = {
         else{
             next()
         }
+    },
+
+    validate4changeMode : (req, res, next) => {
+            
+            let schema = Joi.object().keys({
+                qid : Joi.string().required(),
+                mode : Joi.string().required()
+            })
+    
+            let { error } = schema.validate(req.body)
+    
+            if(error)
+            {
+                return res
+                        .status(enums.HTTP_CODE.BAD_REQUEST)
+                        .json({success : false , message : error.details[0].message})
+            }
+            else{
+                next()
+            }
     }
 
     
