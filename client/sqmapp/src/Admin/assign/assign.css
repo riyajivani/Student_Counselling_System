@@ -5,10 +5,6 @@
      overflow-y: hidden;
 }
 
-.assign-body{
-     margin-top: 14vh;
-   }
-
 .assign-body h1{
      color: var(--light-background);
      text-align: center;

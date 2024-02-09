@@ -9,10 +9,9 @@ import GroupsIcon from "@mui/icons-material/Groups";
 import { Tooltip } from "antd";
 
 const Navbar = () => {
-     // const isStudent = JSON.parse(localStorage.getItem("isStudent"))?.role;
-     // const isFaculty = JSON.parse(localStorage.getItem("isFaculty"))?.role;
+     //const isStudent = JSON.parse(localStorage.getItem("isStudent"))?.role;
+     //const isFaculty = JSON.parse(localStorage.getItem("isFaculty"))?.role;
       const role = JSON.parse(localStorage.getItem("isAdmin"))?.role;
-
 
      return(
                <nav className="navbar">

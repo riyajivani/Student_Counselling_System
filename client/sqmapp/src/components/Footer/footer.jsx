@@ -2,7 +2,6 @@ import "./footer.css";
 import { Footer } from "antd/es/layout/layout";
 import GroupsIcon from "@mui/icons-material/Groups";
 import QuizIcon from "@mui/icons-material/Quiz";
-import EditNoteIcon from "@mui/icons-material/EditNote";
 import EmailIcon from "@mui/icons-material/Email";
 import { Tooltip } from "antd";
 
@@ -28,12 +27,6 @@ const MyFooter = () => {
             <Tooltip title="Ask Mentor" arrow={false}>
               <a href="/askmentor" className="footer__link">
                 <QuizIcon />
-              </a>
-            </Tooltip>
-
-            <Tooltip title="Note" arrow={false}>
-              <a href="/note" className="footer__link">
-                <EditNoteIcon />
               </a>
             </Tooltip>
 

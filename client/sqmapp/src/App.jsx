@@ -1,12 +1,13 @@
 import {Route, Routes} from 'react-router-dom';
 import SignUp from './components/SignUp/signup';
 import Login from './components/Login/login';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 //student
 import GroupProfile from './Student/GroupProfile/groupProfile';
 import AskMentor from './Student/AskMentor/askmentor'
 import MyQuestion from './Student/MyQuestion/myquestion'
-import Note from './Student/Note/note'
 import PublicQuestion from './Student/publicQuestion/publicque'
 import SProfile from './Student/SProfile/sprofile'
 
@@ -35,22 +36,22 @@ function App() {
           <Route exact path='/groupprofile' element={<GroupProfile />}></Route>
           <Route exact path='/askmentor' element={<AskMentor />}></Route>
           <Route exact path='/myquestion' element={<MyQuestion />}></Route>
-          <Route exact path='/note' element={<Note/>}></Route>
           <Route exact path='/publicquestion' element={<PublicQuestion/>}></Route>
-          <Route exact path='/sprofile' element={<SProfile />}></Route>
+          <Route exact path='/profile' element={<SProfile />}></Route>
         
           <Route exact path='/studentlist' element={<StudentList />}></Route>
           <Route exact path='/askedquestion' element={<AskedQue/>}></Route>
           <Route exact path='/askfaculty' element={<AskFaculty/>}></Route>
           <Route exact path='/solvedbyyou' element={<SolvedByYou />}></Route>
-          <Route exact path='/fprofile' element={<FProfile />}></Route>
+          <Route exact path='/profile' element={<FProfile />}></Route>
 
           <Route exact path='/create' element={<Create />}></Route>
           <Route exact path='/delete' element={<DeleteOne/>}></Route>
           <Route exact path='/assign' element={<Assign/>}></Route>
           <Route exact path='/listoutall' element={<ListoutAll />}></Route>
         </Routes>
-          
+
+        <ToastContainer position='top-left' theme='dark' autoClose={1000} icon={false}/>
       </div>
   )
 }
