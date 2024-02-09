@@ -5,10 +5,12 @@ const { validate4signup ,validate4login } = require("../utils/joi.validate")
 const queryController = require("../Controllers/query.controller")
 
 
-router.put("/createfaculty",validate4signup,facultyController.createFaculty)
-router.post("/login",validate4login,facultyController.facultyLogin)
-router.get("/getstudents",facultyController.getStudentsByBatch)
-router.get("/getquery",queryController.displayQueryToFaculty)
+router.put("/createfaculty", validate4signup, facultyController.createFaculty)
+router.post("/login", validate4login, facultyController.facultyLogin)
+router.get("/getstudents", facultyController.getStudentsByBatch)
+router.get("/getquery", queryController.displayQueryToFaculty)
+router.get("/publicquery", queryController.publicQuery)
+router.get("/querybystatus", queryController.queryByStatusForFaculty)
 
 
 module.exports = router
