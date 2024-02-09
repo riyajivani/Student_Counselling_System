@@ -6,10 +6,6 @@
      z-index: -1;
 }
 
-.listout-body{
-     margin-top: 14vh;
-}
-
 .listout-body h1{
      color: var(--light-background);
      text-align: center;

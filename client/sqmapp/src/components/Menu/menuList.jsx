@@ -59,14 +59,6 @@ const MenuList = () => {
           >
             <Link to="/askmentor">Ask Mentor</Link>
           </Menu.Item>
-
-          <Menu.Item
-            key="/note"
-            icon={<ChecklistRtlIcon />}
-            className="custom-menu-item"
-          >
-            <Link to="/note">Note</Link>
-          </Menu.Item>
         </>
       )}
 
