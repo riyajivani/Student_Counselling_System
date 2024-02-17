@@ -10,6 +10,7 @@ router.post("/login",validate4login,studentController.studentLogin)
 router.post("/askmentor",validate4askQuery,queryController.askMentor)
 router.put("/changemode",validate4changeMode,queryController.changeMode)
 router.get("/publicquery",queryController.publicQuery)
+router.post("/getquery",queryController.queryBySatusForStudent)
 
 
 
