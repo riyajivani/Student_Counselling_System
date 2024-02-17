@@ -407,7 +407,7 @@ module.exports = {
     }
   },
 
-  sharedQueryForFaculty : (req,res) => {
+  sharedQueryForFaculty : async (req,res) => {
     const {fid} = req.body;
     try {
       const faculty = await facultySchema.findOne({id : fid});
@@ -420,7 +420,12 @@ module.exports = {
                 .json({success : true, message : message.NO_QUERY_FOUND})
       }
       //remaing to build
+  }catch(err){
+    return res
+        .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
+        .json({ success: false, message: err.message });
   }
+}
 
   //remove shared query
   //solve shared query
