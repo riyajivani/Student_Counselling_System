@@ -202,7 +202,7 @@ module.exports = {
         .json({ success: false, message: err.message });
     }
   },
-  queryByStatusForFaculty: async (req, res) => {
+  displayQueryByStatusForFaculty: async (req, res) => {
     const { fid, status } = await req.body;
     try {
       const faculty = await facultySchema.findOne({ id: fid });
@@ -244,7 +244,7 @@ module.exports = {
         .json({ success: false, message: err.message });
     }
   },
-  queryBySatusForStudent: async (req, res) => {
+  displayQueryBySatusForStudent: async (req, res) => {
     const { sid, status } = await req.body;
     try {
       const student = await studentSchema.findOne({ id: sid });
@@ -294,17 +294,28 @@ module.exports = {
     const { qid, fid } = await req.body;
     try {
       const faculty = await facultySchema.findOne({ id: fid });
-      const querydata = await querySchema.findOne({ _id: qid });
+      const querydata = await querySchema.findOne({ _id: qid }); 
+
+      if(querydata.status === "Solved")
+      {
+        return res
+                .status(enums.HTTP_CODE.BAD_REQUEST)
+                .json({success : false, message : message.QUERY_ALREADY_SOLVED})
+      }
       if (querydata.sharetofaculty) {
         return res
           .status(enums.HTTP_CODE.BAD_REQUEST)
           .json({ success: false, message: message.QUERY_ALREADY_SHARED });
       }
+      const totalQuery = parseInt(faculty.total_query);
+      const remaingQuery = parseInt(faculty.remaining_query);
+
+      const data = await querySchema.updateOne({id: fid },{$set : {total_query : totalQuery + 1, remaining_query : remaingQuery + 1}})
       const query = await querySchema.updateOne(
         { _id: qid },
         { $set: { sharetofaculty: faculty._id } }
       );
-      if (query) {
+      if (query && data) {
         return res
           .status(enums.HTTP_CODE.OK)
           .json({ success: true, message: message.QUERY_SHARED });
@@ -320,7 +331,7 @@ module.exports = {
     }
   },
 
-  sharedQuery: async (req, res) => {
+  displaySharedQueryToOtherFaculty: async (req, res) => {
     const { fid } = await req.body;
     try {
       const faculty = await facultySchema.findOne({ id: fid });
@@ -374,7 +385,12 @@ module.exports = {
     try {
       const facultydata = await facultySchema.findOne({ id: fid });
       const query = await querySchema.findOne({ _id: qid });
-      if(query.facultyId!=facultydata._id)
+      const querydata = await querySchema.findOne({ _id: qid , facultyId : facultydata._id});
+      // console.log(query.facultyId);
+      // console.log(facultydata._id);
+      // console.log(querydata);-
+      // console.log(query.facultyId == facultydata._id);
+      if(!querydata)
       {
         return res
         .status(enums.HTTP_CODE.BAD_REQUEST)
@@ -386,9 +402,15 @@ module.exports = {
           .json({ success: false, message: message.QUERY_NOT_SHARED });
       }
 
+      const faculty = await facultySchema.findOne({ _id: query.sharetofaculty});
+      const remaingQuery = parseInt(faculty.remaining_query);
+      const totalQuery = parseInt(faculty.total_query);
+
+      const data = await facultySchema.updateOne({ id: faculty.id }, {$set : {remaining_query : remaingQuery - 1, total_query : totalQuery - 1}});
+
       const update = await querySchema.updateOne({_id : qid},{$set : {sharetofaculty : null}})
 
-      if(update)
+      if(update && data)
       {
         return res
                 .status(enums.HTTP_CODE.OK)
@@ -407,7 +429,7 @@ module.exports = {
     }
   },
 
-  sharedQueryForFaculty : async (req,res) => {
+  displaySharedQueryForFaculty : async (req,res) => {
     const {fid} = req.body;
     try {
       const faculty = await facultySchema.findOne({id : fid});
@@ -419,15 +441,79 @@ module.exports = {
                 .status(enums.HTTP_CODE.BAD_REQUEST)
                 .json({success : true, message : message.NO_QUERY_FOUND})
       }
-      //remaing to build
+      const queriesWithStudents = await Promise.all(
+        query.map(async (query) => {
+          const studentdata = await studentSchema.findOne({
+            _id: query.querybystudent,
+          });
+          const student = {
+            id: studentdata.id,
+            name: studentdata.name,
+            email: studentdata.email,
+            batch: studentdata.batch,
+          };
+          const facultydata = await facultySchema.findOne({
+            _id: query.facultyId,
+          });
+          const faculty = {
+            id: facultydata.id,
+            name: facultydata.name,
+            email: facultydata.email,
+          };
+          const queryWithStudent = { ...query.toObject(), student, faculty};
+
+          return queryWithStudent;
+        })
+      );
+
+      return res
+              .status(enums.HTTP_CODE.OK)
+              .json({success : true, message : message.QUERY_FOUND, query : queriesWithStudents})
   }catch(err){
     return res
         .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
         .json({ success: false, message: err.message });
   }
+},
+solveSharedQuery : async (req,res) => {
+  const { fid , qid , solution} = req.body;
+  try{
+    const faculty = await facultySchema.findOne({id :fid});
+    if(!faculty) {
+      return res
+              .status(enums.HTTP_CODE.BAD_REQUEST)
+              .json({success : false, message : message.FACULTY_NOT_EXIST})
+    }
+    const query = await querySchema.findOne({_id : qid, sharetofaculty : faculty._id});
+    if(!query)
+    {
+      return res
+              .status(enums.HTTP_CODE.BAD_REQUEST)
+              .json({success : false, message : message.NOT_ALLOW_TO_ANS})
+    }
+    const querydata = await querySchema.updateOne({_id : qid},{$set : {solution : solution, status : "Solved", solvebyfaculty : faculty._id}});
+
+    const remaingQuery = parseInt(faculty.remaining_query);
+    const solveQuery = parseInt(faculty.solve_query);
+
+    const facultydata = await facultySchema.updateOne({id : faculty.id},{$set : {remaining_query : remaingQuery - 1, solve_query : solveQuery + 1}});
+
+    if(querydata && facultydata)
+    {
+      return res
+              .status(enums.HTTP_CODE.OK)
+              .json({success : true, message : message.QUERY_SOLVED})
+    }else{
+      return res
+              .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
+              .json({success : false, message : message.FAILED})
+    }
+    
+  } catch(error){
+    return res
+        .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
+        .json({ success: false, message: error.message });
+  }
 }
 
-  //remove shared query
-  //solve shared query
-  //display shared query to faculty
 };
