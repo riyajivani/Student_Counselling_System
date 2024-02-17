@@ -36,6 +36,7 @@
      border-radius: 50%;
      align-self: center;
      margin: 0 10px;
+     box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
 }
    
 .faculty-detail {

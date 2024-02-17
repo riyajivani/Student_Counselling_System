@@ -1,20 +1,33 @@
 import Sidebar from '../../components/Sidebar/sidebar'
 import Footer from '../../components/Footer/footer'
 import './studentList.css'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
-const studentList = () => {
-  const student = [
-    { id: "21ITUOS001", name: "riya", email: "riyajivani@gmail.com" },
-    { id: "21ITUOS002", name: "riya", email: "riyajivani@gmail.com" },
-    { id: "21ITUOS003", name: "riya", email: "riyajivani@gmail.com" },
-    { id: "21ITUOS004", name: "riya", email: "riyajivani@gmail.com" },
-    { id: "21ITUOS005", name: "riya", email: "riyajivani@gmail.com" },
-    { id: "21ITUOS006", name: "riya", email: "riyajivani@gmail.com" },
-    { id: "21ITUOS007", name: "riya", email: "riyajivani@gmail.com" },
-    { id: "21ITUOS008", name: "riya", email: "riyajivani@gmail.com" },
-    { id: "21ITUOS009", name: "riya", email: "riyajivani@gmail.com" },
-    { id: "21ITUOS010", name: "riya", email: "riyajivani@gmail.com" },
-  ];
+const StudentList = () => {
+  const [student, setStudent] = useState([]);
+  const fid = JSON.parse(localStorage.getItem("isFaculty")).id;
+  const token = JSON.parse(localStorage.getItem("isFaculty")).token;
+  
+  const getStudents = async () => {
+    let res = await axios.post(
+      "http://localhost:3000/faculty/getstudents", 
+      {id : fid},
+      {
+        headers:{
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+      }
+    );
+    console.log(res.data);
+  setStudent(res.data.students);
+  }
+
+  useEffect(()=>{
+    getStudents()
+  },[])
+
   return (
      <div className='studentlist-container'>
      <Sidebar />
@@ -34,11 +47,11 @@ const studentList = () => {
               </thead>
 
               <tbody>
-                {student.map((studentInfo, index) => (
+                {student.map((student, index) => (
                   <tr key={index}>
-                    <td>{studentInfo.id}</td>
-                    <td>{studentInfo.name}</td>
-                    <td>{studentInfo.email}</td>
+                    <td>{student.id}</td>
+                    <td>{student.name}</td>
+                    <td>{student.email}</td>
                   </tr>
                 ))}
               </tbody>
@@ -46,9 +59,9 @@ const studentList = () => {
           </div>
      </div>
 
-     <Footer />
+     <div className='bottom-footer'><Footer /></div>
      </div>
   )
 }
 
-export default studentList
+export default StudentList

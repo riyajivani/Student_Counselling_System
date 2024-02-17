@@ -1,9 +1,0 @@
-.sprofile-container{
-     background: var(--dark-silver);
-     max-width: 100%;
-     min-height: 100vh;
-}
-
-.sprofile-body {
-     margin: 0 2rem 0 7rem;
-   }

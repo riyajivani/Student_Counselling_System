@@ -6,12 +6,24 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import GroupsIcon from "@mui/icons-material/Groups";
-import { Tooltip } from "antd";
+import { Tooltip, Modal } from "antd";
+import { useState } from 'react';
+import Img from "../../assets/profile.jpg";
 
 const Navbar = () => {
-     //const isStudent = JSON.parse(localStorage.getItem("isStudent"))?.role;
-     //const isFaculty = JSON.parse(localStorage.getItem("isFaculty"))?.role;
+     const studentDetail = JSON.parse(localStorage.getItem("isStudent"));
+     //const facultyDetail = JSON.parse(localStorage.getItem("isFaculty"));
       const role = JSON.parse(localStorage.getItem("isAdmin"))?.role;
+      const [modalVisible, setModalVisible] = useState(false);
+
+      const handleProfileClick = () => {
+          setModalVisible(true);
+        };
+      
+     const handleCloseModal = () => {
+          setModalVisible(false);
+     };
+
 
      return(
                <nav className="navbar">
@@ -52,7 +64,7 @@ const Navbar = () => {
 
                               :<Tooltip title="profile" color='#7fad9e'>
                                    <li className="nav__item">
-                                        <a href={"./profile"} className="nav__link">{<Person2OutlinedIcon/>}</a>
+                                        <a href={"#"} className="nav__link"  onClick={handleProfileClick}>{<Person2OutlinedIcon/>}</a>
                                    </li>
                               </Tooltip>
                          }
@@ -64,6 +76,54 @@ const Navbar = () => {
                          </Tooltip>
                     </ul>
                
+
+                    {/* Modal for displaying student or faculty info */}
+                    <Modal open={modalVisible} onCancel={handleCloseModal} footer={null} centered className="custom-modal">
+                    
+                         {studentDetail ?.role === 'student' ? (
+                              <div className='profile'>
+                                   <h1 style={{textAlign:'center'}}>Profile</h1>
+
+                                   <div className='profile-grid'>
+                                        <div className='profile-left'>
+                                             <img className="profile-img" src={Img}></img>
+                                             <h2>Riya Jivani</h2>
+                                        </div>
+                                        <div className='profile-right'>
+                                             <table>
+                                                  <tr><td>ID:</td><td>21ITUOS001</td></tr>
+                                                  <tr><td>Email:</td><td>riya@gmail.com</td></tr>
+                                                  <tr><td>Sem:</td><td>6</td></tr>
+                                                  <tr><td>Batch:</td><td>A</td></tr>
+                                                  <tr><td>Total Query:</td><td>25</td></tr>
+                                             </table>
+                                        </div>
+                                   </div>  
+                              </div>
+                         )
+                         :(
+                              <div className='profile'>
+                                   <h1 style={{textAlign:'center'}}>Profile</h1>
+
+                                   <div className='profile-grid'>
+                                        <div className='profile-left'>
+                                             <img className="profile-img" src={Img}></img>
+                                             <h2>Riya Jivani</h2>
+                                        </div>
+                                        <div className='profile-right'>
+                                             <table>
+                                                  <tr><td>ID:</td><td>ITFAC101</td></tr>
+                                                  <tr><td>Email:</td><td>rav@ddu.ac.in</td></tr>
+                                                  <tr><td>Batch:</td><td>A</td></tr>
+                                                  <tr><td>Total Query:</td><td>25</td></tr>
+                                                  <tr><td>Solved Query:</td><td>20</td></tr>
+
+                                             </table>
+                                        </div>
+                                   </div>  
+                              </div>
+                         )}
+                    </Modal>
                </nav>
           )
 }

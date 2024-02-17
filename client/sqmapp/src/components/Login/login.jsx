@@ -43,29 +43,23 @@ const Login = () => {
 
         if (res.data.success === true) {
           navigate("../askmentor");
+
           const studentobj = {
             role,
-            isStudent: true,
+            // isStudent: true,
             id: data.id,
             token: res.data.token,
           };
+
           console.log(res.data);
           localStorage.clear();
           localStorage.setItem("isStudent", JSON.stringify(studentobj));
         } else {
           setError(res.data.message);
         }
-      } else if (role === "faculty") {
+      } 
+      else if (role === "faculty") {
         url = "http://localhost:3000/faculty/login";
-        // res = await fetch(url, {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify({ id: data.id, password: data.password }),
-        // });
-
-        // res = await res.json();
 
         res = await axios.post(
           url,
@@ -82,11 +76,12 @@ const Login = () => {
 
         if (res.data.success === true) {
           navigate("../askfaculty");
+
           const facultyobj = {
             role,
-            isFaculty: true,
+            // isFaculty: true,
             id: data.id,
-            token: res.token,
+            token: res.data.token,
           };
           
           console.log(res.data);
@@ -98,15 +93,6 @@ const Login = () => {
       } 
       else if (role === "admin") {
         url = "http://localhost:3000/admin/login";
-
-        // res = await fetch(url, {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify({ email: data.email, password: data.password }),
-        // });
-        // res = await res.json();
 
         res = await axios.post(
           url,
@@ -125,9 +111,9 @@ const Login = () => {
           navigate("../create");
           const adminobj = {
             role,
-            isAdmin: true,
+            // isAdmin: true,
             email: data.email,
-            token: res.token,
+            token: res.data.token,
           };
 
           console.log(res.data);

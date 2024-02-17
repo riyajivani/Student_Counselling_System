@@ -7,10 +7,10 @@ const queryController = require("../Controllers/query.controller")
 
 router.put("/createfaculty", validate4signup, facultyController.createFaculty)
 router.post("/login", validate4login, facultyController.facultyLogin)
-router.get("/getstudents", facultyController.getStudentsByBatch)
+router.post("/getstudents", facultyController.getStudentsByBatch)
 router.post("/getquery", queryController.displayQueryToFaculty)
 router.get("/publicquery", queryController.publicQuery)
-router.get("/querybystatus", queryController.queryByStatusForFaculty)
+router.post("/querybystatus", queryController.queryByStatusForFaculty)
 
 
 module.exports = router
