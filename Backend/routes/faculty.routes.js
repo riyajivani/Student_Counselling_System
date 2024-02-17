@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const facultyController = require("../Controllers/faculty.controller")
-const { validate4signup, validate4login } = require("../utils/joi.validate")
+const { validate4signup, validate4login, validation4solvequery } = require("../utils/joi.validate")
 const queryController = require("../Controllers/query.controller")
 
 
@@ -11,6 +11,9 @@ router.post("/getstudents", facultyController.getStudentsByBatch)
 router.post("/getquery", queryController.displayQueryToFaculty)
 router.get("/publicquery", queryController.publicQuery)
 router.get("/querybystatus", queryController.queryByStatusForFaculty)
+router.put("/solvequery", validation4solvequery, queryController.solveQuery)
+router.put("/sharequery", queryController.shareQueryToFaculty)
+router.post("/getsharedquery", queryController.sharedQuery)
 
 
 module.exports = router
