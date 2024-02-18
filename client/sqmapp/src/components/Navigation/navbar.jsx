@@ -39,39 +39,39 @@ const Navbar = () => {
                               ?<>
                               <Tooltip title="Add Member" color='#7fad9e'>
                                    <li className="nav__item">
-                                        <a href={"./create"} className="nav__link">{<PersonAddIcon/>}</a>
+                                        <a href={"./create"} className="nav__link">{<PersonAddIcon style={{fontSize:'30px'}}/>}</a>
                                    </li>
                               </Tooltip>
 
                               <Tooltip title="Delete Member" color='#7fad9e'>
                                    <li className="nav__item">
-                                        <a href={"./delete"} className="nav__link">{<PersonRemoveIcon/>}</a>
+                                        <a href={"./delete"} className="nav__link">{<PersonRemoveIcon style={{fontSize:'30px'}}/>}</a>
                                    </li>
                               </Tooltip>
 
                               <Tooltip title="Assign Faculty" color='#7fad9e'>
                                    <li className="nav__item">
-                                        <a href={"./assign"} className="nav__link">{<SupervisorAccountIcon/>}</a>
+                                        <a href={"./assign"} className="nav__link">{<SupervisorAccountIcon style={{fontSize:'30px'}}/>}</a>
                                    </li>
                               </Tooltip>
 
                               <Tooltip title="ListOut All" color='#7fad9e'>
                                    <li className="nav__item">
-                                        <a href={"./listoutall"} className="nav__link">{<GroupsIcon/>}</a>
+                                        <a href={"./listoutall"} className="nav__link">{<GroupsIcon style={{fontSize:'30px'}}/>}</a>
                                    </li>
                               </Tooltip>
                               </> 
 
                               :<Tooltip title="profile" color='#7fad9e'>
                                    <li className="nav__item">
-                                        <a href={"#"} className="nav__link"  onClick={handleProfileClick}>{<Person2OutlinedIcon/>}</a>
+                                        <a href={"#"} className="nav__link"  onClick={handleProfileClick}>{<Person2OutlinedIcon style={{fontSize:'30px'}}/>}</a>
                                    </li>
                               </Tooltip>
                          }
 
                          <Tooltip title="logout" color='#7fad9e'>
                               <li className="nav__item">
-                                   <a href="./login" className="nav__link">{<ExitToAppRoundedIcon/>}</a>
+                                   <a href="./login" className="nav__link">{<ExitToAppRoundedIcon style={{fontSize:'30px'}}/>}</a>
                               </li>                       
                          </Tooltip>
                     </ul>
