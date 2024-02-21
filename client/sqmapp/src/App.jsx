@@ -9,12 +9,14 @@ import GroupProfile from './Student/GroupProfile/groupProfile';
 import AskMentor from './Student/AskMentor/askmentor'
 import MyQuestion from './Student/MyQuestion/myquestion'
 import PublicQuestion from './Student/publicQuestion/publicque'
+import SProfile from './Student/SProfile/sprofile'
 
 //faculty
 import StudentList from './Faculty/StudentList/studentList'
 import AskedQue from './Faculty/AskedQue/askedQue'
 import AskFaculty from './Faculty/AskFaculty/askFaculty'
 import SolvedByYou from './Faculty/SolvedByYou/solvedByYou'
+import FProfile from './Faculty/FProfile/fprofile'
 
 //admin
 import Create from './Admin/create/create'
@@ -35,11 +37,13 @@ function App() {
           <Route exact path='/askmentor' element={<AskMentor />}></Route>
           <Route exact path='/myquestion' element={<MyQuestion />}></Route>
           <Route exact path='/publicquestion' element={<PublicQuestion/>}></Route>
+          <Route exact path='/profile' element={<SProfile />}></Route>
         
           <Route exact path='/studentlist' element={<StudentList />}></Route>
           <Route exact path='/askedquestion' element={<AskedQue/>}></Route>
           <Route exact path='/askfaculty' element={<AskFaculty/>}></Route>
           <Route exact path='/solvedbyyou' element={<SolvedByYou />}></Route>
+          <Route exact path='/profile' element={<FProfile />}></Route>
 
           <Route exact path='/create' element={<Create />}></Route>
           <Route exact path='/delete' element={<DeleteOne/>}></Route>

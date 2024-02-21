@@ -2,20 +2,14 @@
      background: var(--dark-silver);
      max-width: 100%;
      min-height: 100vh;
-     position: relative;
 }
+
 .studentlist-body {
      margin: 0 2rem 0 7rem;
-}
+   }
 
 .studentlist-body h1{
      color: var(--light-background);
      text-align: center;
      text-shadow: 2px 2px 8px var(--black);
-}
-
-.bottom-footer{
- position: absolute;
- bottom: 0;
- width: 100%;    
 }

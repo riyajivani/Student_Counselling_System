@@ -1,33 +1,20 @@
 import Sidebar from '../../components/Sidebar/sidebar'
 import Footer from '../../components/Footer/footer'
 import './studentList.css'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
 
-const StudentList = () => {
-  const [student, setStudent] = useState([]);
-  const fid = JSON.parse(localStorage.getItem("isFaculty")).id;
-  const token = JSON.parse(localStorage.getItem("isFaculty")).token;
-  
-  const getStudents = async () => {
-    let res = await axios.post(
-      "http://localhost:3000/faculty/getstudents", 
-      {id : fid},
-      {
-        headers:{
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
-        },
-      }
-    );
-    console.log(res.data);
-  setStudent(res.data.students);
-  }
-
-  useEffect(()=>{
-    getStudents()
-  },[])
-
+const studentList = () => {
+  const student = [
+    { id: "21ITUOS001", name: "riya", email: "riyajivani@gmail.com" },
+    { id: "21ITUOS002", name: "riya", email: "riyajivani@gmail.com" },
+    { id: "21ITUOS003", name: "riya", email: "riyajivani@gmail.com" },
+    { id: "21ITUOS004", name: "riya", email: "riyajivani@gmail.com" },
+    { id: "21ITUOS005", name: "riya", email: "riyajivani@gmail.com" },
+    { id: "21ITUOS006", name: "riya", email: "riyajivani@gmail.com" },
+    { id: "21ITUOS007", name: "riya", email: "riyajivani@gmail.com" },
+    { id: "21ITUOS008", name: "riya", email: "riyajivani@gmail.com" },
+    { id: "21ITUOS009", name: "riya", email: "riyajivani@gmail.com" },
+    { id: "21ITUOS010", name: "riya", email: "riyajivani@gmail.com" },
+  ];
   return (
      <div className='studentlist-container'>
      <Sidebar />
@@ -47,11 +34,11 @@ const StudentList = () => {
               </thead>
 
               <tbody>
-                {student.map((student, index) => (
+                {student.map((studentInfo, index) => (
                   <tr key={index}>
-                    <td>{student.id}</td>
-                    <td>{student.name}</td>
-                    <td>{student.email}</td>
+                    <td>{studentInfo.id}</td>
+                    <td>{studentInfo.name}</td>
+                    <td>{studentInfo.email}</td>
                   </tr>
                 ))}
               </tbody>
@@ -59,9 +46,9 @@ const StudentList = () => {
           </div>
      </div>
 
-     <div className='bottom-footer'><Footer /></div>
+     <Footer />
      </div>
   )
 }
 
-export default StudentList
+export default studentList

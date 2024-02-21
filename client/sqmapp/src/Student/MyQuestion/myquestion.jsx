@@ -1,8 +1,6 @@
 import "./myquestion.css";
 import Sidebar from "../../components/Sidebar/sidebar";
 import Footer from "../../components/Footer/footer";
-// import { useEffect, useState } from "react";
-// import axios from "axios";
 
 const MyQuestion = () => {
   const question = [
@@ -77,28 +75,6 @@ const MyQuestion = () => {
       mode: "private",
     },
   ];
-
-  // const [question, setQuestion] = useState([]);
-  // const sid = JSON.parse(localStorage.getItem("isStudent")).id;
-
-  // const fetchMyQue = async () => {
-
-  //   let res = await axios.post(
-  //     "http://localhost:3000/student/getquery", 
-  //     {sid : sid},
-  //     {
-  //       headers:{
-  //          "Content-Type": "application/json",
-  //          "Authorization": `Bearer ${token}`
-  //       },
-  //     }
-  //   );
-  // setQuestion(res.data.query);
-  // }
-
-  // useEffect(()=>{fetchMyQue()},[])
-
-  // useEffect(()=>{console.log(question)},[question])
 
   return (
     <>

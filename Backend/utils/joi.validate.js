@@ -152,7 +152,47 @@ module.exports = {
             else{
                 next()
             }
-    }
+    },
+
+    validation4solvequery : (req, res, next) => {
+        let schema = Joi.object().keys({
+            qid : Joi.string().required(),
+            fid : Joi.string().required(),
+            solution : Joi.string().required()
+        })
+
+        let { error } = schema.validate(req.body)
+
+        if(error)
+        {
+            return res
+                    .status(enums.HTTP_CODE.BAD_REQUEST)
+                    .json({success : false , message : error.details[0].message})
+        }
+        else{
+            next()
+        }
+    },
+    validate4solveSharedQuery : (req, res, next) => {
+        let schema = Joi.object().keys({
+            qid : Joi.string().required(),
+            fid : Joi.string().required(),
+            solution : Joi.string().required()
+        })
+
+        let { error } = schema.validate(req.body)
+
+        if(error)
+        {
+            return res
+                    .status(enums.HTTP_CODE.BAD_REQUEST)
+                    .json({success : false , message : error.details[0].message})
+        }
+        else{
+            next()
+        }
+    },
+
 
     
 
