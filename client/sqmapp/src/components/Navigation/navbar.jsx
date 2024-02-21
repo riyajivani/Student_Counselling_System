@@ -52,7 +52,8 @@ const Navbar = () => {
 
                               :<Tooltip title="profile" color='#7fad9e'>
                                    <li className="nav__item">
-                                        <a href={"#"} className="nav__link"  onClick={handleProfileClick}>{<Person2OutlinedIcon/>}</a>
+                                        {/* <a href={"#"} className="nav__link"  onClick={handleProfileClick}>{<Person2OutlinedIcon/>}</a> */}
+                                        <a href={"./profile"} className="nav__link">{<Person2OutlinedIcon/>}</a>
                                    </li>
                               </Tooltip>
                          }
