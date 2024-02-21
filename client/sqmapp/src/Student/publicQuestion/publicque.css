@@ -5,5 +5,44 @@
 }
 
 .publicque-body {
-     margin: 0s 2rem 0 7rem;
+     margin: 0 2rem 2rem 7rem;
    }
+
+.publicque-body h1 {
+     color: var(--light-background);
+     text-shadow: 2px 2px 8px var(--black);
+     text-align: center;
+}
+
+.que-accordian-detail{
+     color: var(--black);
+}
+
+#sub-accordian{
+     background-color: rgba(127, 173, 158,0.4);
+     margin-top: 10px;
+}
+
+.sub-detail{
+     background-color: var(--input-color);
+}
+
+.sub-card{
+     background-color: var(--light-background);
+     padding: 10px;
+     margin: 10px;
+}
+
+.sub-card-text{
+     display: flex;
+     align-items: center;
+     gap: 1rem;
+}
+
+.comment-text{
+     border: none;
+     outline: none;
+     border-bottom: 2px solid var(--hover-color);
+     margin: 0 20px 0 20px;
+     font-size: 15px;
+}
