@@ -1,11 +1,11 @@
 .myque-container {
   background: var(--dark-silver);
-  max-width: fit-content;
+  max-width: 100%;
   min-height: 100vh;
 }
 
 .myque-body {
-  margin: 0 2rem 0 7rem;
+  margin: 0 2rem 2rem 7rem;
 }
 
 .myque-body h1 {
@@ -13,7 +13,7 @@
   text-shadow: 2px 2px 8px var(--black);
   text-align: center;
 }
-
+/* 
 .myque-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -74,4 +74,4 @@
     grid-template-columns: 1fr;
     gap: 1.4rem;
   }
-}
+} */

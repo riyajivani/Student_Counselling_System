@@ -1,6 +1,12 @@
 import "./myquestion.css";
 import Sidebar from "../../components/Sidebar/sidebar";
 import Footer from "../../components/Footer/footer";
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ArrowDropDownSharpIcon from '@mui/icons-material/ArrowDropDownSharp';
+import AccordionActions from '@mui/material/AccordionActions';
+import Button from '@mui/material/Button';
 // import { useEffect, useState } from "react";
 // import axios from "axios";
 
@@ -108,7 +114,7 @@ const MyQuestion = () => {
         <div className="myque-body">
           <h1>your questions</h1>
 
-          <div className="myque-grid">
+          {/* <div className="myque-grid">
             {question.map((que) => {
               let { question, answer, status, mode } = que;
 
@@ -136,7 +142,41 @@ const MyQuestion = () => {
                 </div>
               );
             })}
-          </div>
+          </div> */}
+
+          {question.map((que,index) => {
+              let { question, answer, status, mode } = que;
+
+              return (
+                <Accordion key={index}>
+
+                  <AccordionSummary
+                    expandIcon={<ArrowDropDownSharpIcon />}>
+                      {question}
+                  </AccordionSummary>
+
+                  <AccordionDetails className='sub-detail'>
+                    {/* <div className='sub-card'> */}
+                    <div style={{display:'flex',flexDirection:'column',gap:'0'}}>
+                      <h4 style={{margin:'0'}}>Status: {status} {status==="solved" && " ✅ "}</h4>
+                      <p >Mode: {mode}</p>
+                      <p>
+                        <b style={{marginRight:'20px',borderBottom:'2px solid black'}}>Faculty Answer:</b>
+                          {answer}
+                      </p>
+                    </div>
+                    {/* </div> */}
+                  </AccordionDetails>
+
+                  <AccordionActions>
+                    <Button style={{color:'black'}}>make it {mode == "public" ? "private" : "public"}</Button>
+                  </AccordionActions>
+
+                </Accordion>
+              )
+          })}
+         
+
         </div>
 
         <Footer />
