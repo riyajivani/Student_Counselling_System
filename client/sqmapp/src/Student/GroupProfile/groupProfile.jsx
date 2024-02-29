@@ -48,27 +48,6 @@ const GroupProfile = () => {
             </div>
           </div>
 
-          {/* <div className="student-detail">
-            <table className="student-table">
-              <thead>
-                <tr>
-                  <th>id</th>
-                  <th>name</th>
-                  <th>email</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {student.map((studentInfo, index) => (
-                  <tr key={index}>
-                    <td>{studentInfo.id}</td>
-                    <td>{studentInfo.name}</td>
-                    <td>{studentInfo.email}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div> */}
           {student.map((studentInfo, index) => (
             <div key={index} className="student-card">
                 

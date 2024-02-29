@@ -1,38 +1,18 @@
 import "./myquestion.css";
 import Sidebar from "../../components/Sidebar/sidebar";
 // import Footer from "../../components/Footer/footer";
-// import Accordion from '@mui/material/Accordion';
-// import AccordionSummary from '@mui/material/AccordionSummary';
-// import AccordionDetails from '@mui/material/AccordionDetails';
-// import ArrowDropDownSharpIcon from '@mui/icons-material/ArrowDropDownSharp';
-// import AccordionActions from '@mui/material/AccordionActions';
-// import Button from '@mui/material/Button';
-import { useEffect, useState } from "react";
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ArrowDropDownSharpIcon from '@mui/icons-material/ArrowDropDownSharp';
+import AccordionActions from '@mui/material/AccordionActions';
+import Button from '@mui/material/Button';
+import {toast} from 'react-toastify'
+import { useState } from "react";
 import axios from "axios";
 
 const MyQuestion = () => {
-//   const [status,setStatus] = useState('');
-//   const [question,setQuestion] = useState([]);
-//   const sid = JSON.parse(localStorage.getItem("isStudent")).id;
-
-//   const handleStatus = async (e) => {
-//     const newStatus = e.target.value;
-//     setStatus(newStatus);
-
-//     let res = await axios.post(
-//       "http://localhost:3000/student//getquery", 
-//       {sid:sid, status: newStatus},
-//       {
-//         headers:{
-//           "Content-Type": "application/json",
-//         },
-//       }
-//     );
-
-//     console.log(res.data.query);
-//     setQuestion(res.data.query);
-// }
-  // const [question, setQuestion] = useState([]);
+  const [question,setQuestion] = useState([]);
   const [status,setStatus] = useState('');
   const sid = JSON.parse(localStorage.getItem("isStudent")).id;
   const token = JSON.parse(localStorage.getItem("isStudent")).token;
@@ -55,16 +35,47 @@ const MyQuestion = () => {
         }
       );
       console.log(res.data);
-      // setQuestion(res.data.query);
+      if(res.data.success===false){
+        toast(res.data.message);
+      }else{
+        setQuestion(res.data.query);
+      }
+
     }catch(error){
       console.log(error);
-      // console.log(res.data.message);
-      
     }
 
   }
+  // useEffect(()=>{console.log(question[0]._id)},[question])
 
-  // useEffect(()=>{console.log(question)},[question])
+  const handleMode = async (id,mode) => {
+    console.log(id, mode);
+    let newMode;
+      mode === "public" ? (newMode = "private") : (newMode = "public");
+
+    try {
+      const response = await axios.put(
+        "http://localhost:3000/student/changemode",
+        { qid: id, mode: newMode },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log(response.data);
+
+      setQuestion((prevQuestions) =>
+        prevQuestions.map((que) =>
+          que._id === id ? { ...que, mode: newMode } : que
+        )
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -80,35 +91,41 @@ const MyQuestion = () => {
             <option value="Not solved">unsolved</option>
           </select>
 
-          {/* {question.map((que,index) => {
-              let { question, answer, status, mode } = que;
+          {question && question.map((que,index) => {
+              let { query, solution, status, mode, faculty, _id } = que;
 
               return (
                 <Accordion key={index}>
 
                   <AccordionSummary
                     expandIcon={<ArrowDropDownSharpIcon />}>
-                      {question}
+                      {query}
                   </AccordionSummary>
 
                   <AccordionDetails className='sub-detail'>
                     <div style={{display:'flex',flexDirection:'column',gap:'0'}}>
-                      <h4 style={{margin:'0'}}>Status: {status} {status==="solved" && " ✅ "}</h4>
+                      <h4 style={{margin:'0'}}>Status: {status} {status==="Solved" && " ✅ "}</h4>
                       <p >Mode: {mode}</p>
-                      <p>
-                        <b style={{marginRight:'20px',borderBottom:'2px solid black'}}>Faculty Answer:</b>
-                          {answer}
-                      </p>
+                      {status==="Solved" 
+                      ?<>
+                        <h4 style={{margin:'0'}}>Solved By: {faculty.name}</h4> 
+                        <p>
+                          <b style={{marginRight:'20px',borderBottom:'2px solid black'}}>Faculty Answer:</b>
+                            {solution}
+                        </p>
+                      </>
+                      :<></>}
+                      
                     </div>
                   </AccordionDetails>
 
                   <AccordionActions>
-                    <Button style={{color:'black'}}>make it {mode == "public" ? "private" : "public"}</Button>
+                    <Button onClick={()=>handleMode(_id,mode)} style={{color:'black'}}>make it {mode === "public" ? "private" : "public"}</Button>
                   </AccordionActions>
 
                 </Accordion>
               )
-          })} */}
+          })}
 
         </div>
 
