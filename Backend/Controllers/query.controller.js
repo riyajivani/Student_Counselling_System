@@ -86,7 +86,7 @@ module.exports = {
 
       if (query.length == 0) {
         return res
-          .status(enums.HTTP_CODE.BAD_REQUEST)
+          .status(enums.HTTP_CODE.OK)
           .json({ success: false, message: message.QUERY_NOT_FOUND });
       } else {
         const queriesWithStudents = await Promise.all(
@@ -130,7 +130,7 @@ module.exports = {
       const query = await querySchema.findOne({ _id: qid });
       if (!query) {
         return res
-          .status(enums.HTTP_CODE.BAD_REQUEST)
+          .status(enums.HTTP_CODE.OK)
           .json({ success: false, message: message.QUERY_NOT_FOUND });
       } else {
         const querydata = await querySchema.updateOne(
@@ -159,7 +159,7 @@ module.exports = {
       const query = await querySchema.find({ mode: "public" });
       if (query.length == 0) {
         return res
-          .status(enums.HTTP_CODE.BAD_REQUEST)
+          .status(enums.HTTP_CODE.OK)
           .json({ success: false, message: message.NO_QUERY_FOUND });
       } else {
         const queriesWithStudents = await Promise.all(
@@ -212,7 +212,7 @@ module.exports = {
       });
       if (query.length == 0) {
         return res
-          .status(enums.HTTP_CODE.BAD_REQUEST)
+          .status(enums.HTTP_CODE.OK)
           .json({ success: false, message: message.NO_QUERY_FOUND });
       } else {
         const queriesWithStudents = await Promise.all(
@@ -255,8 +255,8 @@ module.exports = {
 
       if (queries.length == 0) {
         return res
-          .status(enums.HTTP_CODE.BAD_REQUEST)
-          .json({ success: false, message: message.QUERY_NOT_FOUND });
+          .status(enums.HTTP_CODE.OK)
+          .json({ success: false, message: message.NO_SOLVED_QUERY});
       }
 
       const queriesWithFaculty = await Promise.all(
@@ -299,12 +299,12 @@ module.exports = {
       if(querydata.status === "Solved")
       {
         return res
-                .status(enums.HTTP_CODE.BAD_REQUEST)
+                .status(enums.HTTP_CODE.OK)
                 .json({success : false, message : message.QUERY_ALREADY_SOLVED})
       }
       if (querydata.sharetofaculty) {
         return res
-          .status(enums.HTTP_CODE.BAD_REQUEST)
+          .status(enums.HTTP_CODE.OK)
           .json({ success: false, message: message.QUERY_ALREADY_SHARED });
       }
       const totalQuery = parseInt(faculty.total_query);
@@ -338,7 +338,7 @@ module.exports = {
       const query = await querySchema.find({ sharetofaculty: faculty._id });
       if (query.length == 0) {
         return res
-          .status(enums.HTTP_CODE.BAD_REQUEST)
+          .status(enums.HTTP_CODE.OK)
           .json({ success: false, message: message.NO_QUERY_FOUND });
       } else {
         const queriesWithStudents = await Promise.all(
@@ -398,7 +398,7 @@ module.exports = {
       }
       if (!query.sharetofaculty) {
         return res
-          .status(enums.HTTP_CODE.BAD_REQUEST)
+          .status(enums.HTTP_CODE.OK)
           .json({ success: false, message: message.QUERY_NOT_SHARED });
       }
 
@@ -438,7 +438,7 @@ module.exports = {
       if(query.length == 0)
       {
         return res
-                .status(enums.HTTP_CODE.BAD_REQUEST)
+                .status(enums.HTTP_CODE.OK)
                 .json({success : true, message : message.NO_QUERY_FOUND})
       }
       const queriesWithStudents = await Promise.all(
@@ -481,14 +481,14 @@ solveSharedQuery : async (req,res) => {
     const faculty = await facultySchema.findOne({id :fid});
     if(!faculty) {
       return res
-              .status(enums.HTTP_CODE.BAD_REQUEST)
+              .status(enums.HTTP_CODE.OK)
               .json({success : false, message : message.FACULTY_NOT_EXIST})
     }
     const query = await querySchema.findOne({_id : qid, sharetofaculty : faculty._id});
     if(!query)
     {
       return res
-              .status(enums.HTTP_CODE.BAD_REQUEST)
+              .status(enums.HTTP_CODE.OK)
               .json({success : false, message : message.NOT_ALLOW_TO_ANS})
     }
     const querydata = await querySchema.updateOne({_id : qid},{$set : {solution : solution, status : "Solved", solvebyfaculty : faculty._id}});

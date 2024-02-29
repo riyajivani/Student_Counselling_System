@@ -35,5 +35,6 @@
 	"QUERY_NOT_SHARED":"Query not shared.",
 	"QUERY_REMOVED":"Query removed.",
 	"NOT_ALLOW_TO_ANS":"You are not allowed to answer.",
-	"QUERY_ALREADY_SOLVED":"Query already solved."
+	"QUERY_ALREADY_SOLVED":"Query already solved.",
+	"NO_SOLVED_QUERY":"There is no solved query."
 }
