@@ -256,7 +256,7 @@ module.exports = {
       if (queries.length == 0) {
         return res
           .status(enums.HTTP_CODE.OK)
-          .json({ success: false, message: message.NO_SOLVED_QUERY});
+          .json({ success: false, message: message.QUERY_NOT_FOUND});
       }
 
       const queriesWithFaculty = await Promise.all(
@@ -273,6 +273,9 @@ module.exports = {
             const queryWithFaculty = { ...query.toObject(), faculty };
 
             return queryWithFaculty;
+          } 
+          else {
+            return query;
           }
         })
       );
