@@ -131,11 +131,34 @@ module.exports = {
                     .status(enums.HTTP_CODE.BAD_REQUEST)
                     .json({success : false , message : message.NOT_ASSIGNED})
         }
+        // const studentsWithInfo = await Promise.all(students.map(async (student) => {
+        //    const studentdata = await studentSchema.findOne({id : student.id})
         else{
             return res
                     .status(enums.HTTP_CODE.OK)
                     .json({success : true , message : message.SUCCESS , students : students})
         }
     },
-    shareQuery : (req, res) => {}
+    getAllfaculty: async (req, res) => {
+
+        try {
+            const faculty = await facultySchema.find()
+
+            if (faculty) {
+                return res
+                    .status(enums.HTTP_CODE.OK)
+                    .json({ success: true, faculty: faculty })
+            }
+            else {
+                return res
+                    .status(enums.HTTP_CODE.BAD_REQUEST)
+                    , json({ success: false, message: message.USER_NOT_FOUND })
+            }
+        } catch (err) {
+            return res
+                .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
+                .json({ success: false, message: err.message })
+        }
+    }
+
 }
