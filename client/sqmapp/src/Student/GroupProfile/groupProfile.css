@@ -2,6 +2,7 @@
      background: var(--dark-silver);
      max-width: 100%;
      min-height: 100vh;
+     overflow-y: hidden;
 }
 
 .group-profile-body {
