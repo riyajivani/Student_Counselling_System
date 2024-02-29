@@ -1,6 +1,6 @@
 import './publicque.css';
 import Sidebar from '../../components/Sidebar/sidebar'
-import Footer from '../../components/Footer/footer'
+// import Footer from '../../components/Footer/footer'
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -212,7 +212,7 @@ const PublicQuestion = () => {
 
                </div>
 
-               <Footer/>
+               {/* <Footer/> */}
                </div>
                
           </>

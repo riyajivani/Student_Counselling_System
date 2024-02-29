@@ -1,8 +1,8 @@
 import "./groupProfile.css";
 import Sidebar from "../../components/Sidebar/sidebar";
-import Footer from "../../components/Footer/footer";
+// import Footer from "../../components/Footer/footer";
 import Avatar from '@mui/material/Avatar';
-import { useState } from "react";
+// import { useState } from "react";
 
 const GroupProfile = () => {
   const student = [
@@ -86,7 +86,7 @@ const GroupProfile = () => {
           ))}
         </div>
 
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </>
   );

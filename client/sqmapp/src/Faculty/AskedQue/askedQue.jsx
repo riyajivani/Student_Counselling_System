@@ -1,6 +1,6 @@
 import './askedQue.css'
 import Sidebar from '../../components/Sidebar/sidebar'
-import Footer from '../../components/Footer/footer'
+// import Footer from '../../components/Footer/footer'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
@@ -57,7 +57,7 @@ useEffect(()=>{console.log(status)},[status])
 
         <select onChange={handleStatus} value={status} className='askedque-select'>
           <option value="" disabled>select status</option>
-          <option value="solved">solved</option>
+          <option value="Solved">solved</option>
           <option value="Not solved">unsolved</option>
           {/* <option value="">Solved by you</option> */}
         </select>
@@ -68,7 +68,7 @@ useEffect(()=>{console.log(status)},[status])
               return (
                 <div className="askedque-card" key={_id}>
                   <h2>{query}</h2>
-                    <h3>{status}{status==="solved" && " ✅ "}</h3>
+                    <h3>{status}{status==="Solved" && " ✅ "}</h3>
                     <h4>{mode}</h4>
                   <ul>
                     <li>Student ID: <b>{student.id}</b></li>
@@ -81,7 +81,7 @@ useEffect(()=>{console.log(status)},[status])
         </div>
       </div>
 
-    <Footer/>
+    {/* <Footer/> */}
     </div>
   );
 }

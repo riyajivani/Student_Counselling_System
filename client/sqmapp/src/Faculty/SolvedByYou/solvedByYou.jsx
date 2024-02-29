@@ -1,5 +1,5 @@
 import Sidebar from '../../components/Sidebar/sidebar'
-import Footer from '../../components/Footer/footer'
+// import Footer from '../../components/Footer/footer'
 import './solvedByYou.css'
 
 const solvedByYou = () => {
@@ -12,7 +12,7 @@ const solvedByYou = () => {
      <h1>solvedByYou</h1>
      </div>
 
-     <Footer />
+     {/* <Footer /> */}
      </div>
   )
 }

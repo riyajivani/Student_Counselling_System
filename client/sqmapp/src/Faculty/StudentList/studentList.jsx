@@ -1,8 +1,9 @@
 import Sidebar from '../../components/Sidebar/sidebar'
-import Footer from '../../components/Footer/footer'
+// import Footer from '../../components/Footer/footer'
 import './studentList.css'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import Avatar from '@mui/material/Avatar';
 
 const StudentList = () => {
   const [student, setStudent] = useState([]);
@@ -30,13 +31,13 @@ const StudentList = () => {
 
   return (
      <div className='studentlist-container'>
-     <Sidebar />
+      <Sidebar />
 
-     <div className='studentlist-body'>
-               
-     <h1>studentList</h1>
+      <div className='studentlist-body'>
+                
+      <h1>studentList</h1>
 
-     <div className="student-detail">
+          {/* <div className="student-detail">
             <table className="student-table">
               <thead>
                 <tr>
@@ -56,12 +57,28 @@ const StudentList = () => {
                 ))}
               </tbody>
             </table>
-          </div>
+          </div> */}
+
+          {student.map((studentInfo, index) => (
+            <div key={index} className="student-card">
+                
+              <div className='sub-card-text'>
+                  <Avatar sx={{ bgcolor: 'orange' }} alt={studentInfo.name} src={studentInfo.name[0]}/>
+                   <h4>{studentInfo.email}</h4>
+              </div>
+
+                <div style={{display:'flex',flexDirection:'column'}}>
+                    <p style={{margin:'0'}}>id: {studentInfo.id}</p>
+                    <p style={{margin:'0'}}>name: {studentInfo.name}</p>
+               </div>
+              
+            </div>
+          ))}  
+
      </div>
 
-     <div className='bottom-footer'><Footer /></div>
+     {/* <Footer /> */}
      </div>
   )
 }
-
 export default StudentList

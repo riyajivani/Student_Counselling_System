@@ -1,5 +1,5 @@
 import Sidebar from '../../components/Sidebar/sidebar'
-import Footer from '../../components/Footer/footer'
+// import Footer from '../../components/Footer/footer'
 import './askFaculty.css'
 
 const askFaculty = () => {
@@ -12,7 +12,7 @@ const askFaculty = () => {
       <h1>ask Faculty</h1>
       </div>
 
-      <Footer />
+      {/* <Footer /> */}
      </div>
   )
 }

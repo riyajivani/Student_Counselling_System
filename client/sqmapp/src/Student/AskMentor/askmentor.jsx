@@ -1,6 +1,6 @@
 import './askmentor.css';
 import Sidebar from '../../components/Sidebar/sidebar'
-import Footer from '../../components/Footer/footer'
+// import Footer from '../../components/Footer/footer'
 import SendIcon from '@mui/icons-material/Send';
 import { useState } from 'react';
 import axios from 'axios';
@@ -48,7 +48,7 @@ const AskMentor = () => {
                          </div>
                     </div>
 
-                    <Footer />
+                    {/* <Footer /> */}
                </div>
      )
 }
