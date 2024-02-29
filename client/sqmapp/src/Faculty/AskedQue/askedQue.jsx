@@ -10,11 +10,21 @@ const AskedQue = () => {
   const [status,setStatus] = useState('');
   const [question,setQuestion] = useState([]);
   const [selectedFaculty, setSelectedFaculty] = useState(null);
+  const [faculties, setFaculties] = useState([]);
   const [solve,setSolve]=useState(false);
   const [share,setShare]=useState(false);
   const [answer,setAnswer]=useState('');
   const fid = JSON.parse(localStorage.getItem("isFaculty")).id;
   const token = JSON.parse(localStorage.getItem("isFaculty")).token;
+
+  const getFaculties = async () => {
+    const res = await axios.get("http://localhost:3000/faculty/getfaculties")
+    console.log(res.data.faculty);
+    setFaculties(res.data.faculty);
+  }
+  useEffect(() => {
+    getFaculties();
+  }, [])
 
   const facultyList = [
     'Faculty 1',
@@ -102,7 +112,6 @@ useEffect(()=>{console.log(status)},[status])
           <option value="" disabled>select status</option>
           <option value="Solved">solved</option>
           <option value="Not solved">unsolved</option>
-          {/* <option value="">Solved by you</option> */}
         </select>
 
         <div className="askedque-grid">
@@ -139,7 +148,7 @@ useEffect(()=>{console.log(status)},[status])
 
                   <Modal open={share} onCancel={()=>{setShare(false)}} footer={null} centered className="custom-modal">
                   <div>
-                    <h2>Share with Faculty</h2>
+                      <h2>Share with these Faculty Members</h2>
                     <form className='share-form'>
                       {facultyList.map((faculty, index) => (
                         <div key={index}>

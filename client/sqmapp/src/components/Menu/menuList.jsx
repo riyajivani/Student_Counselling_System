@@ -69,7 +69,7 @@ const MenuList = () => {
             icon={<GroupsIcon />}
             className="custom-menu-item"
           >
-            <Link to="/studentlist">Your Student</Link>
+            <Link to="/studentlist">Students</Link>
           </Menu.Item>
 
           <Menu.Item
@@ -77,7 +77,7 @@ const MenuList = () => {
             icon={<QuestionAnswerIcon />}
             className="custom-menu-item"
           >
-            <Link to="/askedquestion">Asked Question</Link>
+            <Link to="/askedquestion">Your Question</Link>
           </Menu.Item>
 
           <Menu.Item
@@ -85,15 +85,15 @@ const MenuList = () => {
             icon={<PublicIcon />}
             className="custom-menu-item"
           >
-            <Link to="/askfaculty">Ask Faculty</Link>
+            <Link to="/askfaculty">Asked to Faculty</Link>
           </Menu.Item>
 
           <Menu.Item
-            key="/solvedbyyou"
+            key="/sharedbyother"
             icon={<ChecklistRtlIcon />}
             className="custom-menu-item"
           >
-            <Link to="/solvedbyyou">Solved By You</Link>
+            <Link to="/sharedbyother">Shared by other</Link>
           </Menu.Item>
         </>
       )}
