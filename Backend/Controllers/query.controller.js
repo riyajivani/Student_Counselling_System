@@ -62,10 +62,24 @@ module.exports = {
   solveQuery: async (req, res) => {
     const { qid, fid, solution } = req.body;
 
+    const faculty = await facultySchema.findOne({ id: fid });
+
     const data = await querySchema.updateOne(
       { _id: qid },
       { $set: { solution: solution, solvebyfaculty: fid, status: "Solved" } }
     );
+    if (data) {
+      const total_query = parseInt(faculty.total_query);
+      const solve_query = parseInt(faculty.solve_query);
+      const remaining_query = parseInt(faculty.remaining_query);
+
+      solve_query = solve_query + 1;
+      remaining_query = remaining_query - 1;
+
+      const update = await facultySchema.updateOne(
+        { id: fid },
+        {$set : {solve_query : solve_query, remaining_query : remaining_query}})
+    }
 
     if (data) {
       return res
@@ -83,7 +97,6 @@ module.exports = {
     try {
       const faculty = await facultySchema.findOne({ id: fid });
       const query = await querySchema.find({ facultyId: faculty._id });
-
       if (query.length == 0) {
         return res
           .status(enums.HTTP_CODE.OK)
@@ -94,7 +107,15 @@ module.exports = {
             const studentdata = await studentSchema.findOne({
               _id: query.querybystudent,
             });
-            const queryWithStudent = { ...query.toObject(), student };
+            const student ={
+              id : studentdata.id,
+              name : studentdata.name,
+              email: studentdata.email,
+              batch : studentdata.batch,
+              semester : studentdata.semester,
+              total_query : studentdata.total_query
+            }
+            let queryWithStudent = { ...query.toObject(), student };
 
             if (query.sharetofaculty) {
               const facultydata = await facultySchema.findOne({
@@ -105,7 +126,7 @@ module.exports = {
                 name: facultydata.name,
                 email: facultydata.email,
               };
-              const queryWithStudent = { ...query.toObject(), faculty };
+              queryWithStudent = { ...queryWithStudent, faculty };
             }
 
             return queryWithStudent;
@@ -172,6 +193,8 @@ module.exports = {
               name: studentdata.name,
               email: studentdata.email,
               batch: studentdata.batch,
+              sem: studentdata.sem,
+              total_query: studentdata.total_query,
             };
             const queryWithStudent = { ...query.toObject(), student };
 
@@ -224,6 +247,7 @@ module.exports = {
               id: studentdata.id,
               name: studentdata.name,
               email: studentdata.email,
+              batch : studentdata.batch,
               sem: studentdata.sem,
               total_query: studentdata.total_query,
             };
