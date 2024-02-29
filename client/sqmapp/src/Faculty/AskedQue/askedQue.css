@@ -54,6 +54,8 @@
      border: 2px solid var(--black);
      border-radius: 10px;
      box-shadow: 5px 5px 1px var(--black);
+     position: relative;
+     height: fit-content;
 }
 
 .askedque-card h2{
@@ -69,6 +71,56 @@
 
 .askedque-card p{
      line-height: 10px;
+}
+
+.buttons{
+     display: flex;
+     gap:.5rem;
+     right: 10px;
+     bottom: 8px;
+     position: absolute;
+     margin-top: 5px;
+}
+.fac-button{
+     width: fit-content;
+     height: fit-content;
+     background-color: transparent;
+     font-size: medium;
+     border: 2px solid var(--black);
+     box-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+.fac-button:hover{
+     background-color: var(--black);
+     color: white;
+}
+
+.solve-model{
+     display: flex;
+     flex-direction: column;
+     padding: 20px;
+}
+
+.answer-ta{
+     background-color:transparent;
+     width:100%;
+     margin-top:10px;
+     outline:none;
+     border:2px solid var(--black);
+     box-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+}
+.share-form{
+     display: flex;
+     flex-direction: column;
+     gap: 0.5rem;
+     font-size: x-large;
+     align-items: center;
+     justify-content: center;
+}
+
+input[type="radio"] {
+     margin-right: 20px;
+     transform: scale(1.5);
 }
 
 @media only screen and (max-width: 850px) {
