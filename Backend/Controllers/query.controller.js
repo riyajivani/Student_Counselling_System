@@ -66,19 +66,15 @@ module.exports = {
 
     const data = await querySchema.updateOne(
       { _id: qid },
-      { $set: { solution: solution, solvebyfaculty: fid, status: "Solved" } }
+      { $set: { solution: solution, solvebyfaculty: faculty._id, status: "Solved" } }
     );
     if (data) {
-      const total_query = parseInt(faculty.total_query);
       const solve_query = parseInt(faculty.solve_query);
       const remaining_query = parseInt(faculty.remaining_query);
 
-      solve_query = solve_query + 1;
-      remaining_query = remaining_query - 1;
-
       const update = await facultySchema.updateOne(
         { id: fid },
-        {$set : {solve_query : solve_query, remaining_query : remaining_query}})
+        {$set : {solve_query : solve_query + 1, remaining_query : remaining_query + 1}})
     }
 
     if (data) {
