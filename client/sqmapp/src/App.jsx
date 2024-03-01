@@ -34,6 +34,7 @@ function App() {
           <Route exact path='/groupprofile' element={<GroupProfile />}></Route>
           <Route exact path='/askmentor' element={<AskMentor />}></Route>
           <Route exact path='/myquestion' element={<MyQuestion />}></Route>
+
           <Route exact path='/publicquestion' element={<PublicQuestion/>}></Route>
         
           <Route exact path='/studentlist' element={<StudentList />}></Route>

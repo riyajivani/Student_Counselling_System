@@ -72,13 +72,28 @@ const MenuList = () => {
             <Link to="/studentlist">Students</Link>
           </Menu.Item>
 
-          <Menu.Item
+          <Menu.SubMenu
+            key="questions"
+            icon={<QuestionAnswerIcon />}
+            title="Questions"
+            className="custom-menu-item"
+          >
+            <Menu.Item key="/askedquestion">
+              <Link to="/askedquestion">Your Question</Link>
+            </Menu.Item>
+
+            <Menu.Item key="/publicquestion">
+              <Link to="/publicquestion">Public Questions</Link>
+            </Menu.Item>
+          </Menu.SubMenu>
+
+          {/* <Menu.Item
             key="/askedquestion"
             icon={<QuestionAnswerIcon />}
             className="custom-menu-item"
           >
             <Link to="/askedquestion">Your Question</Link>
-          </Menu.Item>
+          </Menu.Item> */}
 
           <Menu.Item
             key="/askfaculty"

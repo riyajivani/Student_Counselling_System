@@ -11,19 +11,6 @@ const GroupProfile = () => {
   const token = JSON.parse(localStorage.getItem("isStudent")).token;
   const [students, setStudents] = useState([]);
 
-  // const student = [
-  //   { id: "21ITUOS001", name: "ariya", email: "riyajivani@gmail.com" },
-  //   { id: "21ITUOS002", name: "briya", email: "riyajivani@gmail.com" },
-  //   { id: "21ITUOS003", name: "criya", email: "riyajivani@gmail.com" },
-  //   { id: "21ITUOS004", name: "driya", email: "riyajivani@gmail.com" },
-  //   { id: "21ITUOS005", name: "eriya", email: "riyajivani@gmail.com" },
-  //   { id: "21ITUOS006", name: "friya", email: "riyajivani@gmail.com" },
-  //   { id: "21ITUOS007", name: "griya", email: "riyajivani@gmail.com" },
-  //   { id: "21ITUOS008", name: "hriya", email: "riyajivani@gmail.com" },
-  //   { id: "21ITUOS009", name: "jriya", email: "riyajivani@gmail.com" },
-  //   { id: "21ITUOS010", name: "rriya", email: "riyajivani@gmail.com" },
-  // ];
-
   const fetchData = async () => {
     try {
       const res = await axios.post("http://localhost:3000/student/getstudentsbybatch",

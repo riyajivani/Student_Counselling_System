@@ -90,12 +90,13 @@ useEffect(()=>{console.log(status)},[status])
     }
   }
 
-  const handleSend = async (id) => {
+  const handleSend = async (e, id) => {
+    e.preventDefault();
     if (selectedFaculty) {
-      console.log(`Sending question to ${selectedFaculty}`);
+      // console.log(`Sending question to ${JSON.stringify(selectedFaculty)}`);
 
       const res = await axios.put("http://localhost:3000/faculty/sharequery",
-        { qid: id },
+        { qid: id, fid: selectedFaculty.id },
         {
           headers: {
             "Content-Type": "application/json",
@@ -157,17 +158,19 @@ useEffect(()=>{console.log(status)},[status])
                   <div>
                       <h2>Share with these Faculty Members</h2>
                     <form className='share-form'>
-                        {faculties && faculties.map((faculty, index) => (
-                        <div key={index}>
-                          <input type='radio'
-                              value={faculty.name}
-                              checked={selectedFaculty === faculty.name}
-                              onChange={() => setSelectedFaculty(faculty.name)}
-                          />
-                            {faculty.name}
-                        </div>
-                      ))}
-                        <button className='fac-button' onClick={() => handleSend(_id)} style={{ width: '100%', fontSize: 'large', marginTop: '20px' }}>
+                        {faculties && faculties.map((faculty, index) =>
+                          faculty.id !== fid &&
+                          (
+                            <div key={index}>
+                              <input type='radio'
+                                value={faculty.name}
+                                checked={selectedFaculty === faculty}
+                                onChange={() => setSelectedFaculty(faculty)}
+                              />
+                              {faculty.name}
+                            </div>
+                          ))}
+                        <button className='fac-button' onClick={(e) => handleSend(e, _id)} style={{ width: '100%', fontSize: 'large', marginTop: '20px' }}>
                           share query
                         </button>
                     </form>

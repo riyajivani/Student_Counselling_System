@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Sidebar from '../../components/Sidebar/sidebar'
 // import Footer from '../../components/Footer/footer'
 import './sharedByOtherFaculty.css'
@@ -9,63 +9,45 @@ import ArrowDropDownSharpIcon from '@mui/icons-material/ArrowDropDownSharp';
 import AccordionActions from '@mui/material/AccordionActions';
 import Button from '@mui/material/Button';
 import { toast } from 'react-toastify'
+import axios from 'axios'
 
 const SharedByOtherFaculty = () => {
 
-  // const [questions,setQuestions] = useState([])
-  // const token = JSON.parse(localStorage.getItem("isFaculty")).token;
-  // const fid = JSON.parse(localStorage.getItem("isFaculty")).id;
+  const [questions, setQuestions] = useState([])
+  const token = JSON.parse(localStorage.getItem("isFaculty")).token;
+  const fid = JSON.parse(localStorage.getItem("isFaculty")).id;
   const [answer, setAnswer] = useState('');
 
-  // const sharedQuery = async () => {
-  //   const res = await axios.post("http://localhost:3000/faculty/getsharedquery",
-  //     { fid: fid },
-  //     {
-  //       headers: {
-  // "Content-Type": "application/json",
-  // "Authorization": `Bearer ${token}`,
-  //       }
-  //     }
-  //   );
-  //   console.log(res);
-  //   setQuestions(res.data);
-  // }
+  const sharedQuery = async () => {
+    const res = await axios.post("http://localhost:3000/faculty/getsharedquery",
+      { fid: fid },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        }
+      }
+    );
+    console.log(res);
+    console.log(res);
+    setQuestions(res.data);
+  }
 
-  // useEffect(() => { sharedQuery() }, [])
+  useEffect(() => { sharedQuery() }, [])
 
   const handleSharedSolve = async (id) => {
     console.log(id, answer);
-    // const res = await axios.put("http://localhost:3000/faculty/solvesharedquery",
-    //   {fid:fid, qid:id, solution:answer},
-    //   {
-    //     "Content-Type": "application/json",
-    //     "Authorization": `Bearer ${token}`,
-    //   }
-    //   );
-    //   console.log(res);
+    const res = await axios.put("http://localhost:3000/faculty/solvesharedquery",
+      { fid: fid, qid: id, solution: answer },
+      {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      }
+    );
+    console.log(res);
     setAnswer('');
     toast('answer sent successfully');
   }
-
-
-  const questions = [
-    {
-      id: 1,
-      query: 'what is this?',
-    },
-    {
-      id: 2,
-      query: 'what?',
-    },
-    {
-      id: 3,
-      query: 'what is this?',
-    },
-    {
-      id: 4,
-      query: 'why?',
-    },
-  ]
 
   return (
     <div className='sby-container'>
@@ -75,7 +57,8 @@ const SharedByOtherFaculty = () => {
 
         <h1>Shared by other faculties</h1>
 
-        {questions && questions.map((question, index) => {
+        {Array.isArray(questions)
+          ? questions.map((question, index) => {
           let { id, query } = question;
 
           return (
@@ -107,7 +90,11 @@ const SharedByOtherFaculty = () => {
               </Accordion>
             </div>
           );
-        })}
+
+
+          })
+          : <h2 style={{ textAlign: 'center', color: 'red', marginTop: '10px' }}>no questions are shared to you yet...</h2>
+        }
 
       </div>
 
