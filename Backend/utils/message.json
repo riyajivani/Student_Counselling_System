@@ -24,6 +24,7 @@
 	"CREATE_SUCCESS":"User created successfully.",
 	"USER_NOT_EXIST":"User not exist.",
 	"NOT_ASSIGNED":"You are not assigned.",
+	"NO_STUDENTS":"There is no students in your batch.",
 	"NO_QUERY_FOUND":"There is no query.",
 	"QUERY_FOUND":"Query List",
 	"MODE_CHANGED":"Mode changed successfully.",
