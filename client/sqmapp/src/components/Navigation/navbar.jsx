@@ -12,7 +12,7 @@ import Img from "../../assets/profile.jpg";
 
 const Navbar = () => {
      const studentDetail = JSON.parse(localStorage.getItem("isStudent"));
-     const facultyDetail = JSON.parse(localStorage.getItem("isFaculty"));
+     //const facultyDetail = JSON.parse(localStorage.getItem("isFaculty"));
       const role = JSON.parse(localStorage.getItem("isAdmin"))?.role;
       const [modalVisible, setModalVisible] = useState(false);
 
@@ -87,15 +87,15 @@ const Navbar = () => {
                                    <div className='profile-grid'>
                                         <div className='profile-left'>
                                              <img className="profile-img" src={Img}></img>
-                                        <h2>{studentDetail.student.name}</h2>
+                                             <h2>Riya Jivani</h2>
                                         </div>
                                         <div className='profile-right'>
                                              <table>
-                                             <tr><td>ID:</td><td>{studentDetail.student.id}</td></tr>
-                                             <tr><td>Email:</td><td>{studentDetail.student.email}</td></tr>
-                                             <tr><td>Sem:</td><td>{studentDetail.student.sem}</td></tr>
-                                             <tr><td>Batch:</td><td>{studentDetail.student.batch}</td></tr>
-                                             <tr><td>Total Query:</td><td>{studentDetail.student.total_query}</td></tr>
+                                                  <tr><td>ID:</td><td>21ITUOS001</td></tr>
+                                                  <tr><td>Email:</td><td>riya@gmail.com</td></tr>
+                                                  <tr><td>Sem:</td><td>6</td></tr>
+                                                  <tr><td>Batch:</td><td>A</td></tr>
+                                                  <tr><td>Total Query:</td><td>25</td></tr>
                                              </table>
                                         </div>
                                    </div>  
@@ -108,15 +108,15 @@ const Navbar = () => {
                                    <div className='profile-grid'>
                                         <div className='profile-left'>
                                              <img className="profile-img" src={Img}></img>
-                                             <h2>{facultyDetail.faculty.name}</h2>
+                                             <h2>Riya Jivani</h2>
                                         </div>
                                         <div className='profile-right'>
                                              <table>
-                                                  <tr><td>ID:</td><td>{facultyDetail.faculty.id}</td></tr>
-                                                  <tr><td>Email:</td><td>{facultyDetail.faculty.email}</td></tr>
-                                                  <tr><td>Total Query:</td><td>{facultyDetail.faculty.total_query}</td></tr>
-                                                  <tr><td>Solved:</td><td>{facultyDetail.faculty.solved_query}</td></tr>
-                                                  <tr><td>Unsolved:</td><td>{facultyDetail.faculty.remaining_query}</td></tr>
+                                                  <tr><td>ID:</td><td>ITFAC101</td></tr>
+                                                  <tr><td>Email:</td><td>rav@ddu.ac.in</td></tr>
+                                                  <tr><td>Batch:</td><td>A</td></tr>
+                                                  <tr><td>Total Query:</td><td>25</td></tr>
+                                                  <tr><td>Solved Query:</td><td>20</td></tr>
 
                                              </table>
                                         </div>
