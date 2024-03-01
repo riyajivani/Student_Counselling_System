@@ -150,5 +150,24 @@ module.exports = {
 
     changePassword : async (req,res) => {
         
-    }
+    },
+    displayAllStudentsByBatch : async (req,res) => {
+        const { batch } = req.body
+       try{
+            const students = await studentSchema.find({batch : batch})
+            if(students.length==0)
+            {
+                return res
+                        .status(enums.HTTP_CODE.OK)
+                        .json({success : false , message : message.NO_STUDENTS})
+            }
+            return res
+                    .status(enums.HTTP_CODE.OK)
+                    .json({success : true , message : message.SUCCESS, students})
+       } catch(error){
+            return res
+                    .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
+                    .json({success:false , message: error.message})
+       }  
+    },
 }
