@@ -55,7 +55,6 @@
      border-radius: 10px;
      box-shadow: 5px 5px 1px var(--black);
      position: relative;
-     height: fit-content;
 }
 
 .askedque-card h2{

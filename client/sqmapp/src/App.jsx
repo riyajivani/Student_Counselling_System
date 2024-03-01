@@ -14,7 +14,7 @@ import PublicQuestion from './Student/publicQuestion/publicque'
 import StudentList from './Faculty/StudentList/studentList'
 import AskedQue from './Faculty/AskedQue/askedQue'
 import AskFaculty from './Faculty/AskFaculty/askFaculty'
-import SolvedByYou from './Faculty/SolvedByYou/solvedByYou'
+import SharedByOtherFaculty from './Faculty/SharedByOtherFaculty/sharedByOtherFaculty'
 
 //admin
 import Create from './Admin/create/create'
@@ -39,7 +39,7 @@ function App() {
           <Route exact path='/studentlist' element={<StudentList />}></Route>
           <Route exact path='/askedquestion' element={<AskedQue/>}></Route>
           <Route exact path='/askfaculty' element={<AskFaculty/>}></Route>
-          <Route exact path='/solvedbyyou' element={<SolvedByYou />}></Route>
+          <Route exact path='/sharedbyother' element={<SharedByOtherFaculty />}></Route>
 
           <Route exact path='/create' element={<Create />}></Route>
           <Route exact path='/delete' element={<DeleteOne/>}></Route>

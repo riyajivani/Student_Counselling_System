@@ -17,7 +17,7 @@ router.post("/getsharedquery", queryController.displaySharedQueryToOtherFaculty)
 router.post("/sharedquery", queryController.displaySharedQueryForFaculty)
 router.put("/removesharequery", queryController.removeSharedQuery)
 router.put("/solvesharedquery", validate4solveSharedQuery, queryController.solveSharedQuery)
-router.post("/getfaculties", facultyController.getAllfaculty)
+router.get("/getfaculties", facultyController.getAllfaculty)
 
 
 module.exports = router
