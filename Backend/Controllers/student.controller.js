@@ -96,7 +96,7 @@ module.exports = {
             const data = {
                 _id : studentExist[0]._id,
                 id : studentExist[0].id,
-                semester : studentExist[0].semester
+                semester: studentExist[0].sem
             }
             
            const token = jwt.sign(data, process.env.JWT_SECRET);
