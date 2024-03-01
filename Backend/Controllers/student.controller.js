@@ -117,7 +117,7 @@ module.exports = {
                id : studentExist[0].id,
                name : studentExist[0].name,
                batch : studentExist[0].batch,
-               semester : studentExist[0].semester,
+               semester : studentExist[0].sem,
                email : studentExist[0].email,
                facultyId : studentExist[0].facultyId,
                total_query : studentExist[0].total_query

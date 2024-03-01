@@ -5,7 +5,7 @@ const studentschema = new mongoose.Schema({
         name: {type : String},
         email :{type : String},
         password: { type: String },
-        semester : {type : Number},
+        sem : {type : Number},
         batch : {type : String},
         total_query : {type : Number,default : 0},
         facultyId : {type : mongoose.Schema.Types.ObjectId, ref : "faculty"},

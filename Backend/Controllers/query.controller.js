@@ -108,7 +108,7 @@ module.exports = {
               name : studentdata.name,
               email: studentdata.email,
               batch : studentdata.batch,
-              semester : studentdata.semester,
+              semester : studentdata.sem,
               total_query : studentdata.total_query
             }
             let queryWithStudent = { ...query.toObject(), student };
@@ -374,6 +374,8 @@ module.exports = {
               name: studentdata.name,
               email: studentdata.email,
               batch: studentdata.batch,
+              semester: studentdata.sem,
+              total_query : studentdata.total_query
             };
             const facultydata = await facultySchema.findOne({
               _id: query.facultyId,
@@ -474,6 +476,8 @@ module.exports = {
             name: studentdata.name,
             email: studentdata.email,
             batch: studentdata.batch,
+            semester: studentdata.sem,
+            total_query : studentdata.total_query
           };
           const facultydata = await facultySchema.findOne({
             _id: query.facultyId,
