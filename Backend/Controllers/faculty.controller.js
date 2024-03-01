@@ -131,8 +131,6 @@ module.exports = {
                     .status(enums.HTTP_CODE.BAD_REQUEST)
                     .json({success : false , message : message.NOT_ASSIGNED})
         }
-        // const studentsWithInfo = await Promise.all(students.map(async (student) => {
-        //    const studentdata = await studentSchema.findOne({id : student.id})
         else{
             return res
                     .status(enums.HTTP_CODE.OK)
@@ -142,7 +140,7 @@ module.exports = {
     getAllfaculty: async (req, res) => {
 
         try {
-            const faculty = await facultySchema.find()
+            const faculty = await facultySchema.find({ password: { $ne: "" } })
 
             if (faculty) {
                 return res

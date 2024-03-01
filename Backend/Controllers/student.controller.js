@@ -39,15 +39,30 @@ module.exports = {
                 role : "student"
             }
 
-            const studentdata = await studentSchema.updateOne({id: studentExist[0].id},{$set: create})
-            const student = await studentSchema.findOne({id : id})
-            const faculty = await facultySchema.findOne({ _id : student.facultyId})
+            const studentd = await studentSchema.updateOne({id: studentExist[0].id},{$set: create})
+            const studentdata = await studentSchema.findOne({id : id})
+            const facultydata = await facultySchema.findOne({ _id : student.facultyId})
 
-            if(studentdata)
+            const faculty = {
+                id : facultydata.id,
+                name : facultydata.name,
+                email : facultydata.email
+            }
+            const student = {
+                id : studentdata.id,
+                name : studentdata.name,
+                batch : studentdata.batch,
+                semester : studentdata.semester,
+                email : studentdata.email,
+                facultyId : studentdata.facultyId,
+                total_query : studentdata.total_query
+            }
+
+            if(studentd)
             {
                 return res
                         .status(enums.HTTP_CODE.OK)
-                        .json({success: true , message : message.SIGNUP_SUCCESS, student : student, faculty : faculty})
+                        .json({success: true , message : message.SIGNUP_SUCCESS, student , faculty })
             }
             else{
                 return res
@@ -103,11 +118,26 @@ module.exports = {
             
            const token = jwt.sign(data, process.env.JWT_SECRET);
 
-           const faculty = await facultySchema.findOne({ _id : studentExist[0].facultyId})
+           const facultydata = await facultySchema.findOne({ _id : studentExist[0].facultyId})
+
+           const faculty = {
+               id : facultydata.id,
+               name : facultydata.name,
+               email : facultydata.email
+           }
+           const student = {
+               id : studentExist[0].id,
+               name : studentExist[0].name,
+               batch : studentExist[0].batch,
+               semester : studentExist[0].semester,
+               email : studentExist[0].email,
+               facultyId : studentExist[0].facultyId,
+               total_query : studentExist[0].total_query
+           } 
 
             return res
 				.status(enums.HTTP_CODE.OK)
-				.json({ success: true, message: message.LOGIN_SUCCESS, token, student: studentExist, faculty: faculty});
+				.json({ success: true, message: message.LOGIN_SUCCESS, token, student, faculty});
 
         }catch(err)
         {
@@ -116,6 +146,7 @@ module.exports = {
                     .json({success:false , message: err.message})
         }
     },
+    
 
     changePassword : async (req,res) => {
         
