@@ -9,6 +9,7 @@ const ListoutAll = () => {
   const [student,setStudent]=useState([]);
   const [faculty,setFaculty]=useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const token = JSON.parse(localStorage.getItem("isAdmin"))?.token;
 
   const fetchData = async () => {
     try {
@@ -16,8 +17,8 @@ const ListoutAll = () => {
       let facultyUrl = "http://localhost:3000/admin/getallfaculties";
 
       const [studentResponse, facultyResponse] = await Promise.all([
-        axios.get(studentUrl),
-        axios.get(facultyUrl),
+        axios.get(studentUrl), { headers: { "Authorization": `Bearer ${token}` } },
+        axios.get(facultyUrl, { headers: { "Authorization": `Bearer ${token}` } }),
       ]);
       
       setStudent(studentResponse.data.student);

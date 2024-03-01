@@ -6,6 +6,7 @@ import axios from "axios";
 const Create = () => {
 
   const [role, setRole] = useState("");
+  const token = JSON.parse(localStorage.getItem("isAdmin"))?.token;
   const [data, setData] = useState({
     id: "",
     batch: "",
@@ -38,6 +39,7 @@ const Create = () => {
             {
               headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
               },
             }
           );
@@ -56,6 +58,7 @@ const Create = () => {
             {
               headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
               },
             }
           );
