@@ -113,7 +113,7 @@ module.exports = {
             const data = {
                 _id : studentExist[0]._id,
                 id : studentExist[0].id,
-                semester : studentExist[0].semester
+                semester: studentExist[0].sem
             }
             
            const token = jwt.sign(data, process.env.JWT_SECRET);
@@ -129,7 +129,7 @@ module.exports = {
                id : studentExist[0].id,
                name : studentExist[0].name,
                batch : studentExist[0].batch,
-               semester : studentExist[0].semester,
+               semester: studentExist[0].sem,
                email : studentExist[0].email,
                facultyId : studentExist[0].facultyId,
                total_query : studentExist[0].total_query

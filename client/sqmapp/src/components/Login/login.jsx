@@ -40,7 +40,7 @@ const Login = () => {
             },
           }
         );
-
+        console.log(res.data);
         if (res.data.success === true) {
           navigate("../askmentor");
 
@@ -48,10 +48,11 @@ const Login = () => {
             role,
             // isStudent: true,
             id: data.id,
+            student: res.data.student,
+            faculty: res.data.faculty,
             token: res.data.token,
           };
 
-          console.log(res.data);
           localStorage.clear();
           localStorage.setItem("isStudent", JSON.stringify(studentobj));
         } else {
@@ -82,6 +83,7 @@ const Login = () => {
             // isFaculty: true,
             id: data.id,
             token: res.data.token,
+            faculty: res.data.faculty
           };
           
           console.log(res.data);
