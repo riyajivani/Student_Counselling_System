@@ -154,7 +154,7 @@ module.exports = {
     displayAllStudentsByBatch : async (req,res) => {
         const { batch } = req.body
        try{
-            const students = await studentSchema.find({batch : batch})
+            const students = await studentSchema.find({batch : batch}).sort({ id: 1 }).exec()
             if(students.length==0)
             {
                 return res
