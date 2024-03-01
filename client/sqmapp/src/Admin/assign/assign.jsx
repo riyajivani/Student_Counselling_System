@@ -4,6 +4,7 @@ import { useState } from 'react';
 import axios from 'axios';
 
 const Assign = () => {
+  const token = JSON.parse(localStorage.getItem("isAdmin"))?.token;
   const [data, setData] = useState({
     sid: "",
     fid:"",
@@ -30,6 +31,7 @@ const Assign = () => {
             {
               headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
               },
             }
           );

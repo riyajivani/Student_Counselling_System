@@ -5,6 +5,7 @@ import axios from "axios";
 
 const DeleteOne = () => {
 
+  const token = JSON.parse(localStorage.getItem("isAdmin"))?.token;
   const [role, setRole] = useState("");
   const [data, setData] = useState({
     id: "",
@@ -29,6 +30,7 @@ const DeleteOne = () => {
             data: { id: data.id },
             headers: {
               "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
             },
           });
 
@@ -43,6 +45,7 @@ const DeleteOne = () => {
             data: { id: data.id },
             headers: {
               "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
             },
           });
 
