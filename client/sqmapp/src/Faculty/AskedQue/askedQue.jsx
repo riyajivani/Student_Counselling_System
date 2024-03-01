@@ -26,14 +26,7 @@ const AskedQue = () => {
     getFaculties();
   }, [])
 
-  const facultyList = [
-    'Faculty 1',
-    'Faculty 2',
-    'Faculty 3',
-    // Add more faculty names as needed
-  ];
-
-  const sendData = async () => {
+  const receiveData = async () => {
       let res = await axios.post(
         "http://localhost:3000/faculty/getquery", 
         {fid : fid},
@@ -48,7 +41,7 @@ const AskedQue = () => {
 };
   
 useEffect(() => {
-   sendData();
+  receiveData();
 },[])
 
   const handleStatus = async (e) => {
@@ -74,9 +67,9 @@ useEffect(() => {
       toast(res.data.message);
     }
     
-}
-
+  }
 useEffect(()=>{console.log(status)},[status])
+
 
   const handleSubmitAnswer = async (e,id)=> {
     if (answer) {
@@ -97,9 +90,21 @@ useEffect(()=>{console.log(status)},[status])
     }
   }
 
-  const handleSend = () => {
+  const handleSend = async (id) => {
     if (selectedFaculty) {
       console.log(`Sending question to ${selectedFaculty}`);
+
+      const res = await axios.put("http://localhost:3000/faculty/sharequery",
+        { qid: id, fid: },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+          }
+        }
+      );
+      console.log(res);
+      setShare(false);
     }
   };
 
@@ -152,18 +157,18 @@ useEffect(()=>{console.log(status)},[status])
                   <div>
                       <h2>Share with these Faculty Members</h2>
                     <form className='share-form'>
-                      {facultyList.map((faculty, index) => (
+                        {faculties && faculties.map((faculty, index) => (
                         <div key={index}>
                           <input type='radio'
-                            value={faculty}
-                            checked={selectedFaculty === faculty}
-                            onChange={() => setSelectedFaculty(faculty)}
+                              value={faculty.name}
+                              checked={selectedFaculty === faculty.name}
+                              onChange={() => setSelectedFaculty(faculty.name)}
                           />
-                           {faculty}
+                            {faculty.name}
                         </div>
                       ))}
-                        <button className='fac-button' onClick={handleSend} style={{width:'100%',fontSize:'large'}}>
-                          share
+                        <button className='fac-button' onClick={() => handleSend(_id)} style={{ width: '100%', fontSize: 'large', marginTop: '20px' }}>
+                          share query
                         </button>
                     </form>
                   </div>
