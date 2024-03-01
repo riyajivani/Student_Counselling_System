@@ -95,7 +95,7 @@ const MyQuestion = () => {
               let { query, solution, status, mode, faculty, _id } = que;
 
               return (
-                <Accordion key={index}>
+                <Accordion key={index} style={{ marginBottom: '20px' }}>
 
                   <AccordionSummary
                     expandIcon={<ArrowDropDownSharpIcon />}>

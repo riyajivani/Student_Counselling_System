@@ -95,7 +95,7 @@ useEffect(()=>{console.log(status)},[status])
       console.log(`Sending question to ${selectedFaculty}`);
 
       const res = await axios.put("http://localhost:3000/faculty/sharequery",
-        { qid: id, fid: },
+        { qid: id },
         {
           headers: {
             "Content-Type": "application/json",

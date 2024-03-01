@@ -63,7 +63,7 @@ const StudentList = () => {
             <div key={index} className="student-card">
                 
               <div className='sub-card-text'>
-                  <Avatar sx={{ bgcolor: 'orange' }} alt={studentInfo.name} src={studentInfo.name[0]}/>
+                <Avatar sx={{ bgcolor: 'orange' }} alt={studentInfo.email} src={studentInfo.email[0]} />
                    <h4>{studentInfo.email}</h4>
               </div>
 
