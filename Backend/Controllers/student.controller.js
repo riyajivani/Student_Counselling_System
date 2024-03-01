@@ -40,29 +40,12 @@ module.exports = {
             }
 
             const studentd = await studentSchema.updateOne({id: studentExist[0].id},{$set: create})
-            const studentdata = await studentSchema.findOne({id : id})
-            const facultydata = await facultySchema.findOne({ _id : student.facultyId})
-
-            const faculty = {
-                id : facultydata.id,
-                name : facultydata.name,
-                email : facultydata.email
-            }
-            const student = {
-                id : studentdata.id,
-                name : studentdata.name,
-                batch : studentdata.batch,
-                semester : studentdata.semester,
-                email : studentdata.email,
-                facultyId : studentdata.facultyId,
-                total_query : studentdata.total_query
-            }
 
             if(studentd)
             {
                 return res
                         .status(enums.HTTP_CODE.OK)
-                        .json({success: true , message : message.SIGNUP_SUCCESS, student , faculty })
+                        .json({success: true , message : message.SIGNUP_SUCCESS})
             }
             else{
                 return res
@@ -117,14 +100,19 @@ module.exports = {
             }
             
            const token = jwt.sign(data, process.env.JWT_SECRET);
+           let faculty = {};
+           if(studentExist[0].facultyId)
+           {
+            const facultydata = await facultySchema.findOne({ _id : studentExist[0].facultyId})
 
-           const facultydata = await facultySchema.findOne({ _id : studentExist[0].facultyId})
-
-           const faculty = {
-               id : facultydata.id,
-               name : facultydata.name,
-               email : facultydata.email
+            faculty = {
+                id : facultydata.id,
+                name : facultydata.name,
+                email : facultydata.email
+            }
            }
+        
+
            const student = {
                id : studentExist[0].id,
                name : studentExist[0].name,
