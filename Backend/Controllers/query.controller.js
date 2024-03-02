@@ -247,7 +247,14 @@ module.exports = {
               sem: studentdata.sem,
               total_query: studentdata.total_query,
             };
-            const queryWithStudent = { ...query.toObject(), student };
+
+            const facultydata = await facultySchema.findOne({_id : query.solvebyfaculty})
+            const faculty = {
+              id: facultydata.id,
+              name: facultydata.name,
+              email: facultydata.email,
+            };
+            const queryWithStudent = { ...query.toObject(), student, faculty };
 
             return queryWithStudent;
           })
