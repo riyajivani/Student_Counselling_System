@@ -458,8 +458,7 @@ module.exports = {
     const {fid} = req.body;
     try {
       const faculty = await facultySchema.findOne({id : fid});
-      const query = await querySchema.find({sharetofaculty : faculty._id});
-
+      const query = await querySchema.find({facultyId : faculty._id, sharetofaculty: { $exists: true }, sharetofaculty : { $ne: null }})
       if(query.length == 0)
       {
         return res
@@ -480,7 +479,7 @@ module.exports = {
             total_query : studentdata.total_query
           };
           const facultydata = await facultySchema.findOne({
-            _id: query.facultyId,
+            _id: query.sharetofaculty,
           });
           const faculty = {
             id: facultydata.id,
