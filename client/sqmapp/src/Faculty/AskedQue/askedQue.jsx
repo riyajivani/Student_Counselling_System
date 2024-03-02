@@ -116,7 +116,7 @@ useEffect(() => {
       <Sidebar />
 
       <div className='askedque-body'>          
-        <h1>asked question</h1>
+        <h1>question asked by students</h1>
 
         <select onChange={handleStatus} value={status} className='askedque-select'>
           <option value="" disabled>select status</option>
