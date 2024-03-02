@@ -1,4 +1,4 @@
-import {Route, Routes} from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import SignUp from './components/SignUp/signup';
 import Login from './components/Login/login';
 import { ToastContainer } from 'react-toastify';
@@ -22,6 +22,7 @@ import ListoutAll from './Admin/listoutAll/listoutAll'
 import DeleteOne from './Admin/delete/delete';
 import Assign from './Admin/assign/assign';
 
+
 function App() {
   
   return ( 
@@ -35,8 +36,8 @@ function App() {
           <Route exact path='/askmentor' element={<AskMentor />}></Route>
           <Route exact path='/myquestion' element={<MyQuestion />}></Route>
 
-          <Route exact path='/publicquestion' element={<PublicQuestion/>}></Route>
-        
+        <Route exact path='/publicquestion' element={<PublicQuestion />}></Route>
+
           <Route exact path='/studentlist' element={<StudentList />}></Route>
           <Route exact path='/askedquestion' element={<AskedQue/>}></Route>
           <Route exact path='/askfaculty' element={<AskFaculty/>}></Route>
@@ -46,8 +47,7 @@ function App() {
           <Route exact path='/delete' element={<DeleteOne/>}></Route>
           <Route exact path='/assign' element={<Assign/>}></Route>
           <Route exact path='/listoutall' element={<ListoutAll />}></Route>
-        </Routes>
-
+      </Routes>
         <ToastContainer position='top-left' theme='dark' autoClose={1000} icon={false}/>
       </div>
   )

@@ -8,48 +8,21 @@ const AskFaculty = () => {
 
   const token = JSON.parse(localStorage.getItem("isFaculty")).token;
   const fid = JSON.parse(localStorage.getItem("isFaculty")).id;
-  const [questions, setQuestions] = useState([])
-
-  // const questions = [
-  //   {
-  //     id: 1,
-  //     query: 'what is this?',
-  //     status: 'Not solved',
-  //     sharedto: 'abc'
-  //   },
-  //   {
-  //     id: 2,
-  //     query: 'what?',
-  //     status: 'Solved',
-  //     sharedto: 'def'
-  //   },
-  //   {
-  //     id: 3,
-  //     query: 'what is this?',
-  //     status: 'Solved',
-  //     sharedto: 'xyz'
-  //   },
-  //   {
-  //     id: 4,
-  //     query: 'why?',
-  //     status: 'Not solved',
-  //     sharedto: 'pqr'
-  //   },
-  // ]
+  const [questions, setQuestions] = useState([]);
 
   const handleRemove = async (id) => {
     console.log(`id removed ${id}`);
 
-    const res = await axios.put("http://localhost:3000/faculty/removesharequery",
-      { qid: id, fid: fid },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-        }
-      }
-    );
-    console.log(res);
+    // const res = await axios.put("http://localhost:3000/faculty/removesharequery",
+    //   { qid: id, fid: fid },
+    //   {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       "Authorization": `Bearer ${token}`,
+    //     }
+    //   }
+    // );
+    // console.log(res);
   }
 
   const sharedQuery = async () => {
@@ -63,7 +36,7 @@ const AskFaculty = () => {
       }
     );
     console.log(res);
-    setQuestions(res.data);
+    setQuestions(res.data.query);
   }
 
   useEffect(() => { sharedQuery() }, [])
@@ -76,7 +49,7 @@ const AskFaculty = () => {
 
         <h1>Asked to another Faculty</h1>
 
-        {Array.isArray(questions)
+        {questions
           ? questions.map((que, index) => {
           const { id, query, status, sharedto } = que;
 

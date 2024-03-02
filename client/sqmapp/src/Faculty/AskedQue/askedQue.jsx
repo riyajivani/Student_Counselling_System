@@ -9,6 +9,7 @@ import {Modal} from 'antd'
 const AskedQue = () => {
   const [status,setStatus] = useState('');
   const [question,setQuestion] = useState([]);
+  const [selectedQuestionId, setSelectedQuestionId] = useState(null);
   const [selectedFaculty, setSelectedFaculty] = useState(null);
   const [faculties, setFaculties] = useState([]);
   const [solve,setSolve]=useState(false);
@@ -19,7 +20,7 @@ const AskedQue = () => {
 
   const getFaculties = async () => {
     const res = await axios.get("http://localhost:3000/faculty/getfaculties")
-    console.log(res.data.faculty);
+    // console.log(res.data.faculty);
     setFaculties(res.data.faculty);
   }
   useEffect(() => {
@@ -37,6 +38,7 @@ const AskedQue = () => {
           },
         }
       );
+    console.log(res.data.query);
     setQuestion(res.data.query);
 };
   
@@ -68,7 +70,7 @@ useEffect(() => {
     }
     
   }
-useEffect(()=>{console.log(status)},[status])
+  // useEffect(()=>{console.log(status)},[status])
 
 
   const handleSubmitAnswer = async (e,id)=> {
@@ -90,13 +92,13 @@ useEffect(()=>{console.log(status)},[status])
     }
   }
 
-  const handleSend = async (e, id) => {
+  const handleSend = async (e) => {
     e.preventDefault();
     if (selectedFaculty) {
       // console.log(`Sending question to ${JSON.stringify(selectedFaculty)}`);
-
+      console.log(selectedQuestionId, selectedFaculty.id)
       const res = await axios.put("http://localhost:3000/faculty/sharequery",
-        { qid: id, fid: selectedFaculty.id },
+        { qid: selectedQuestionId, fid: selectedFaculty.id },
         {
           headers: {
             "Content-Type": "application/json",
@@ -123,10 +125,10 @@ useEffect(()=>{console.log(status)},[status])
         </select>
 
         <div className="askedque-grid">
-            {question && question.map((que) => {
+          {question && question.map((que, index) => {
               let {_id,query,mode,status,student} = que;
               return (
-                <div className="askedque-card" key={_id}>
+                <div className="askedque-card" key={index}>
                   <h2>{query}</h2>
                     <h3>{status}{status==="Solved" && " ✅ "}</h3>
                     <h4>Mode: {mode}</h4>
@@ -139,7 +141,7 @@ useEffect(()=>{console.log(status)},[status])
                   {status==="Not solved" &&
                       <div className='buttons'>
                           <button className='fac-button' onClick={()=>{setSolve(true)}}>Solve</button>
-                          <button className='fac-button' onClick={()=>{setShare(true)}}>Share</button>
+                      <button className='fac-button' onClick={() => { setShare(true); setSelectedQuestionId(_id); }}>Share</button>
                       </div>
                   }
 
@@ -170,7 +172,7 @@ useEffect(()=>{console.log(status)},[status])
                               {faculty.name}
                             </div>
                           ))}
-                        <button className='fac-button' onClick={(e) => handleSend(e, _id)} style={{ width: '100%', fontSize: 'large', marginTop: '20px' }}>
+                        <button className='fac-button' onClick={(e) => handleSend(e)} style={{ width: '100%', fontSize: 'large', marginTop: '20px' }}>
                           share query
                         </button>
                     </form>
