@@ -15,12 +15,15 @@ import { toast } from 'react-toastify';
 
 const PublicQuestion = () => {
 
+     const role = JSON.parse(localStorage.getItem("isStudent"))?.role;
      const [questions,setQuestions] = useState([]);
-     const [answer,setAnswer] = useState(false);
-     const [comment,setComment] = useState('');
+     const [respond, setRespond] = useState(false);
+     const [answer, setAnswer] = useState('');
+     const [comment, setComment] = useState([]);
      const selectedQue = localStorage.getItem("searchedQue");
      const ref = useRef();
      const [filteredQuestions, setFilteredQuestions] = useState([]);
+     const [expandedQuestionId, setExpandedQuestionId] = useState(null);
 
      // const filteredQuestions = selectedQue!==null
      //      && questions.filter(question => question.query.includes(selectedQue));
@@ -34,10 +37,23 @@ const PublicQuestion = () => {
      }, [selectedQue, questions])
 
 
-     const handleSend = (e) => {
-          if(e.key==='Enter' && comment){
-               toast("comment added");
-               setComment('');
+     const handleSend = async (e, qid, sid) => {
+          if (e.key === 'Enter' && answer) {
+               try {
+                    const res = await axios.post("http://localhost:3000/student/comment",
+                         { qid: qid, sid: sid, comment: answer },
+                         {
+                              headers: {
+                                   "Content-Type": "application/json",
+                              }
+                         }
+                    );
+                    console.log(res);
+                    toast("comment added");
+                    setAnswer('');
+               } catch (e) {
+                    console.log(e);
+               }
           }
      }
      
@@ -64,6 +80,37 @@ const PublicQuestion = () => {
           fetchPublicQue();
      }, [])
 
+     const fetchComment = async (id) => {
+          console.log(id)
+          try {
+               const res = await axios.post("http://localhost:3000/student/comments",
+                    { qid: id },
+                    {
+                         headers: {
+                              "Content-Type": "application/json"
+                              // "Authorization": `Bearer ${token}`
+                         },
+                    }
+               );
+               console.log(res.data);
+               setComment(res.data.comment);
+          } catch (e) {
+               console.log(e);
+          }
+     }
+
+     const handleAccordionChange = (questionId) => {
+          if (questionId === expandedQuestionId) {
+               // Collapse the question
+               setExpandedQuestionId(null);
+               setComment([]); // Clear comments when collapsing
+          } else {
+               // Expand the question
+               setExpandedQuestionId(questionId);
+               fetchComment(questionId);
+          }
+     }
+
 
      return (
           <>
@@ -75,9 +122,8 @@ const PublicQuestion = () => {
                     <h1>Public Question</h1>
 
                          {
-                         // ?selectedQue !== null &&
                               filteredQuestions.map((question, index) => {
-                                   let { query, solution, status } = question;
+                                   let { _id, query, solution, status, student } = question;
                                    return (
                                         <div key={index} style={{ marginBottom: '10px' }}>
                                              <Accordion>
@@ -96,7 +142,7 @@ const PublicQuestion = () => {
                                                             </p>
                                                        }
 
-                                                       <Accordion className='sub-accordian' id='sub-accordian'>
+                                                       <Accordion className='sub-accordian' id='sub-accordian' expanded={_id === expandedQuestionId} onChange={() => handleAccordionChange(_id)}>
 
                                                             <AccordionSummary
                                                                  className='sub-summary'
@@ -108,179 +154,50 @@ const PublicQuestion = () => {
 
                                                             <AccordionDetails className='sub-detail'>
 
-                                                                 <AvatarGroup total={4} style={{ right: '0' }}>
-                                                                      <Avatar sx={{ bgcolor: 'pink' }} alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                                                                      <Avatar sx={{ bgcolor: 'blue' }} alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+                                                                 <AvatarGroup total={comment.length} style={{ right: '0' }}>
+                                                                      {comment && comment.map((cmt, index) => {
+                                                                           return (<Avatar key={index} sx={{ bgcolor: 'purple' }} alt={cmt.student.name} src="/static/images/avatar/1.jpg" />)
+                                                                      })}
                                                                  </AvatarGroup>
 
-                                                                 <div className='sub-card'>
-                                                                      <div className='sub-card-text'>
-                                                                           <Avatar sx={{ bgcolor: 'pink' }} alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                                                                           <h4>Remy Sharp</h4>
-                                                                      </div>
-                                                                      <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendissemalesuada lacus ex, sit amet blandit leo lobortis eget.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                                                           malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                                                           malesuada lacus ex, sit amet blandit leo lobortis eget.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendissemalesuada lacus ex, sit amet blandit leo lobortis eget.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                                                           malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                                                           malesuada lacus ex, sit amet blandit leo lobortis eget.</p>
-                                                                 </div>
-
-                                                                 <div className='sub-card'>
-                                                                      <div className='sub-card-text'>
-                                                                           <Avatar sx={{ bgcolor: 'purple' }} alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-                                                                           <h4>Remy Sharp</h4>
-                                                                      </div>
-                                                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendissemalesuada lacus ex, sit amet blandit leo lobortis eget.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                                                           malesuada lacus ex.</p>
-                                                                 </div>
-
-                                                                 <div className='sub-card'>
-                                                                      <div className='sub-card-text'>
-                                                                           <Avatar sx={{ bgcolor: 'pink' }} alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                                                                           <h4>Remy Sharp</h4>
-                                                                      </div>
-                                                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                                 </div>
-
-                                                                 <div className='sub-card'>
-                                                                      <div className='sub-card-text'>
-                                                                           <Avatar sx={{ bgcolor: 'purple' }} alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-                                                                           <h4>Remy Sharp</h4>
-                                                                      </div>
-                                                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendissemalesuada lacus ex, sit amet blandit leo lobortis eget.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                                                           malesuada lacus ex, sit amet blandit leo lobortis eget.</p>
-                                                                 </div>
+                                                                 {comment && comment.map((cmt, index) => {
+                                                                      const { Comment, student } = cmt;
+                                                                      return (<div className='sub-card' key={index}>
+                                                                           <div className='sub-card-text'>
+                                                                                <Avatar sx={{ bgcolor: 'pink' }} alt={student.name} src="/static/images/avatar/1.jpg" />
+                                                                                <h4>{student.name}</h4>
+                                                                           </div>
+                                                                           <p >{Comment}</p>
+                                                                      </div>)
+                                                                 })}
                                                             </AccordionDetails>
 
                                                        </Accordion>
 
                                                   </AccordionDetails>
 
-                                                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                                  {role === 'student' && <div style={{ display: 'flex', flexDirection: 'column' }}>
 
-                                                       {answer === true &&
+                                                       {respond === true &&
                                                             <input type='text'
-                                                                 placeholder='submit your answer'
-                                                                 ref={ref}
-                                                                 name='comment'
-                                                                 value={comment}
-                                                                 onChange={(e) => { setComment(e.target.value); console.log(comment) }}
-                                                                 onKeyDown={handleSend}
+                                                            placeholder='submit your answer'
+                                                            ref={ref}
+                                                            name='answer'
+                                                            value={answer}
+                                                            onChange={(e) => { setAnswer(e.target.value); console.log(answer) }}
+                                                            onKeyDown={(e) => handleSend(e, _id, student.id)}
                                                                  className='comment-text' />}
 
                                                        <AccordionActions>
-                                                            <Button onClick={() => { setAnswer(!answer) }} style={{ color: '#7fad9e' }}>Respond</Button>
+                                                            <Button onClick={() => { setRespond(!respond) }} style={{ color: '#7fad9e' }}>Respond</Button>
                                                        </AccordionActions>
-                                                  </div>
+                                                  </div>}
 
                                              </Accordion>
                                         </div>
                                    )
                               }
                               )
-                              // :
-                              // questions.map((question, index) => {
-                              //      let { query, solution, status } = question;
-                              //      return (
-                              //           <div key={index} style={{ marginBottom: '10px' }}>
-                              //                <Accordion>
-                              //                     <AccordionSummary
-                              //                          expandIcon={<ArrowDropDownSharpIcon />}
-                              //                          aria-controls="panel3-content">
-                              //                          <p>{query}</p>
-                              //                     </AccordionSummary>
-
-                              //                     <AccordionDetails className='que-accordian-detail'>
-
-                              //                          {status === "Solved" &&
-                              //                               <p>
-                              //                                    <b style={{ marginRight: '20px', borderBottom: '2px solid black' }}>Faculty Answer:</b>
-                              //                                    {solution}
-                              //                               </p>
-                              //                          }
-
-                              //                          <Accordion className='sub-accordian' id='sub-accordian'>
-
-                              //                               <AccordionSummary
-                              //                                    className='sub-summary'
-                              //                                    aria-controls="panel3-content"
-                              //                                    expandIcon={<ArrowDropDownSharpIcon />}
-                              //                                    id="panel3-header">
-                              //                                    Student Answers
-                              //                               </AccordionSummary>
-
-                              //                               <AccordionDetails className='sub-detail'>
-
-                              //                                    <AvatarGroup total={4} style={{ right: '0' }}>
-                              //                                         <Avatar sx={{ bgcolor: 'pink' }} alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                              //                                         <Avatar sx={{ bgcolor: 'blue' }} alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-                              //                                    </AvatarGroup>
-
-                              //                                    <div className='sub-card'>
-                              //                                         <div className='sub-card-text'>
-                              //                                              <Avatar sx={{ bgcolor: 'pink' }} alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                              //                                              <h4>Remy Sharp</h4>
-                              //                                         </div>
-                              //                                         <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendissemalesuada lacus ex, sit amet blandit leo lobortis eget.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                              //                                              malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                              //                                              malesuada lacus ex, sit amet blandit leo lobortis eget.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendissemalesuada lacus ex, sit amet blandit leo lobortis eget.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                              //                                              malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                              //                                              malesuada lacus ex, sit amet blandit leo lobortis eget.</p>
-                              //                                    </div>
-
-                              //                                    <div className='sub-card'>
-                              //                                         <div className='sub-card-text'>
-                              //                                              <Avatar sx={{ bgcolor: 'purple' }} alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-                              //                                              <h4>Remy Sharp</h4>
-                              //                                         </div>
-                              //                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendissemalesuada lacus ex, sit amet blandit leo lobortis eget.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                              //                                              malesuada lacus ex.</p>
-                              //                                    </div>
-
-                              //                                    <div className='sub-card'>
-                              //                                         <div className='sub-card-text'>
-                              //                                              <Avatar sx={{ bgcolor: 'pink' }} alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                              //                                              <h4>Remy Sharp</h4>
-                              //                                         </div>
-                              //                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                              //                                    </div>
-
-                              //                                    <div className='sub-card'>
-                              //                                         <div className='sub-card-text'>
-                              //                                              <Avatar sx={{ bgcolor: 'purple' }} alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-                              //                                              <h4>Remy Sharp</h4>
-                              //                                         </div>
-                              //                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendissemalesuada lacus ex, sit amet blandit leo lobortis eget.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                              //                                              malesuada lacus ex, sit amet blandit leo lobortis eget.</p>
-                              //                                    </div>
-                              //                               </AccordionDetails>
-
-                              //                          </Accordion>
-
-                              //                     </AccordionDetails>
-
-                              //                     <div style={{ display: 'flex', flexDirection: 'column' }}>
-
-                              //                          {answer === true &&
-                              //                               <input type='text'
-                              //                                    placeholder='submit your answer'
-                              //                                    ref={ref}
-                              //                                    name='comment'
-                              //                                    value={comment}
-                              //                               onChange={(e) => { setComment(e.target.value); console.log(comment) }}
-                              //                               onKeyDown={handleSend}
-                              //                                    className='comment-text' />}
-
-                              //                          <AccordionActions>
-                              //                               <Button onClick={() => { setAnswer(!answer) }} style={{ color: '#7fad9e' }}>Respond</Button>
-                              //                          </AccordionActions>
-                              //                     </div>
-
-                              //                </Accordion>
-                              //           </div>
-                              //      )
-                              // })
-
                          }
 
 

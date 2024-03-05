@@ -52,7 +52,7 @@ const ListoutAll = () => {
               <h1>faculty details</h1>
                 
                 <div className="listout-grid">
-                  { faculty.map((data) => {
+                {faculty && faculty.map((data) => {
                     let { id, name, email, total_query} = data;
   
                   return(
@@ -73,7 +73,7 @@ const ListoutAll = () => {
               <h1>student details</h1>
 
               <div className="listout-grid">
-                { student.map((data) => {
+                {student && student.map((data) => {
                   let { id, name, email, total_query} = data;
 
                 return(

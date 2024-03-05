@@ -6,6 +6,7 @@
 
 .publicque-body {
      margin: 0 2rem 2rem 7rem;
+     overflow-y: hidden;
    }
 
 .publicque-body h1 {

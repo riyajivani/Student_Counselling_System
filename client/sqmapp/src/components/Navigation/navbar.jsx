@@ -184,7 +184,7 @@ const Navbar = () => {
                     {/* Modal for displaying student or faculty info */}
                     <Modal open={modalVisible} onCancel={handleCloseModal} footer={null} centered className="custom-modal">
                     
-                         {studentDetail ?.role === 'student' ? (
+                    {studentDetail && studentDetail?.role === 'student' ? (
                               <div className='profile'>
                                    <h1 style={{textAlign:'center'}}>Profile</h1>
 
@@ -215,7 +215,7 @@ const Navbar = () => {
                                    </div>  
                               </div>
                          )
-                         :(
+                         : facultyDetail && studentDetail?.role === 'faculty' ? (
                               <div className='profile'>
                                    <h1 style={{textAlign:'center'}}>Profile</h1>
 
@@ -245,7 +245,7 @@ const Navbar = () => {
                                         </div>
                                    </div>  
                               </div>
-                         )}
+                         ) : <></>}
                     </Modal>
 
                </nav>
