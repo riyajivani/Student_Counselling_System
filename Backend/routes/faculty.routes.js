@@ -3,6 +3,7 @@ const router = express.Router()
 const facultyController = require("../Controllers/faculty.controller")
 const { validate4signup, validate4login, validation4solvequery, validate4solveSharedQuery } = require("../utils/joi.validate")
 const queryController = require("../Controllers/query.controller")
+const commentController = require("../Controllers/comment.controller")
 
 
 router.put("/createfaculty", validate4signup, facultyController.createFaculty)
@@ -18,6 +19,7 @@ router.post("/sharedquery", queryController.displaySharedQueryForFaculty)
 router.put("/removesharequery", queryController.removeSharedQuery)
 router.put("/solvesharedquery", validate4solveSharedQuery, queryController.solveSharedQuery)
 router.get("/getfaculties", facultyController.getAllfaculty)
+router.post("/comments",commentController.getComments)
 
 
 module.exports = router

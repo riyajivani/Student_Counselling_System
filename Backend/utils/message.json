@@ -37,5 +37,6 @@
 	"QUERY_REMOVED":"Query removed.",
 	"NOT_ALLOW_TO_ANS":"You are not allowed to answer.",
 	"QUERY_ALREADY_SOLVED":"Query already solved.",
-	"NO_SOLVED_QUERY":"There is no solved query."
+	"NO_SOLVED_QUERY":"There is no solved query.",
+	"COMMENT_SUCCESS":"Comment successfully."
 }
