@@ -30,7 +30,7 @@ const SharedByOtherFaculty = () => {
     );
     console.log(res);
     console.log(res);
-    setQuestions(res.data);
+    setQuestions(res.data.query);
   }
 
   useEffect(() => { sharedQuery() }, [])
@@ -59,7 +59,7 @@ const SharedByOtherFaculty = () => {
 
         {Array.isArray(questions)
           ? questions.map((question, index) => {
-          let { id, query } = question;
+            let { _id, query, solution, status } = question;
 
           return (
             <div key={index} style={{ marginBottom: '10px' }}>
@@ -72,7 +72,8 @@ const SharedByOtherFaculty = () => {
 
                 <AccordionDetails className='que-accordian-detail'>
 
-                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  {status !== "Solved"
+                    ? <div style={{ display: 'flex', flexDirection: 'column' }}>
 
                     <input type='text'
                       placeholder='submit your answer'
@@ -81,9 +82,11 @@ const SharedByOtherFaculty = () => {
                       className='comment-text' />
 
                     <AccordionActions>
-                      <Button onClick={() => handleSharedSolve(id)} style={{ color: '#7fad9e' }}>Respond</Button>
+                        <Button onClick={() => handleSharedSolve(_id)} style={{ color: '#7fad9e' }}>Respond</Button>
                     </AccordionActions>
-                  </div>
+                    </div> 
+                    : <p> <b>Your Answer:</b> {solution} </p>
+                  }
 
                 </AccordionDetails>
 
