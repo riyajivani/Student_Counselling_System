@@ -2,6 +2,7 @@ import './assign.css'
 import Navbar from '../../components/Navigation/navbar'
 import { useState } from 'react';
 import axios from 'axios';
+import {toast} from 'react-toastify';
 
 const Assign = () => {
   const token = JSON.parse(localStorage.getItem("isAdmin"))?.token;
@@ -35,11 +36,12 @@ const Assign = () => {
               },
             }
           );
-          console.log(res.data);
-          window.alert("successfully assigned");
+          ///console.log(res.data);
+          toast("successfully assigned");
 
     } catch (error) {
         console.log(error);
+        toast(error.response.data.message)
     }
   }
 

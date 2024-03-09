@@ -15,9 +15,8 @@ const ListoutAll = () => {
     try {
       let studentUrl = "http://localhost:3000/admin/getallstudents";
       let facultyUrl = "http://localhost:3000/admin/getallfaculties";
-
       const [studentResponse, facultyResponse] = await Promise.all([
-        axios.get(studentUrl), { headers: { "Authorization": `Bearer ${token}` } },
+        axios.get(studentUrl, { headers: { "Authorization": `Bearer ${token}` } }),
         axios.get(facultyUrl, { headers: { "Authorization": `Bearer ${token}` } }),
       ]);
       

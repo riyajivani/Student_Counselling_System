@@ -2,6 +2,7 @@ import'./delete.css'
 import Navbar from '../../components/Navigation/navbar'
 import { useState } from 'react';
 import axios from "axios";
+import {toast} from 'react-toastify'
 
 const DeleteOne = () => {
 
@@ -35,7 +36,7 @@ const DeleteOne = () => {
           });
 
           console.log(res.data);
-          window.alert("successfully delete student");
+          toast("successfully delete student");
         }   
         else if (role === "faculty") 
         {
@@ -55,6 +56,7 @@ const DeleteOne = () => {
 
     } catch (error) {
         console.log(error);
+        toast(error.response.data.message)
     }
 
   }
