@@ -1,7 +1,7 @@
 import "./login.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import loginImg from "../../assets/picture1.png";
+import loginImg from "../../assets/picture1.png";
 import axios from "axios";
 
 const Login = () => {
