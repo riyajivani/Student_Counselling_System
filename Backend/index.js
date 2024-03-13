@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const cloudinary = require("cloudinary").v2;
 
-
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -38,6 +38,6 @@ app.use("/admin",adminrouter)
 
 
 
-app.listen(3000, () => {
-    console.log("server is Started!!")
+app.listen(PORT, () => {
+    console.log(`server is Started on ${PORT} !!`)
 })
