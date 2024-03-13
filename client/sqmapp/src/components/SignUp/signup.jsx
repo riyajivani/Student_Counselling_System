@@ -2,7 +2,7 @@ import "./signup.css";
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import loginImg from "../../assets/picture1.png";
+import loginImg from "../../../public/assets/picture1.png";
 
 const SignUp = () => {
   const [role, setRole] = useState("");
