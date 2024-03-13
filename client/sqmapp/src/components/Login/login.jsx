@@ -1,7 +1,7 @@
 import "./login.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import loginImg from "../../../public/assets/picture1.png";
+import loginImg from "/assets/picture1.png";
 import axios from "axios";
 
 const Login = () => {
@@ -198,7 +198,7 @@ const Login = () => {
             </form>
           </div>
           <div className="login-right">
-            <img src="/assets\picture1.png" style={{ width: "200px"}}></img>
+            <img src={loginImg} style={{ width: "200px"}}></img>
             <h1>New Here!?</h1>
             <Link to="/signup">
               <button type="button" className="login-white-btn">
