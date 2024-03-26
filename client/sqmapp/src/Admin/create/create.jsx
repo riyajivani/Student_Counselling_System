@@ -2,6 +2,7 @@ import './create.css'
 import Navbar from '../../components/Navigation/navbar'
 import { useState } from 'react';
 import axios from "axios";
+import {toast} from 'react-toastify'
 
 const Create = () => {
 
@@ -12,6 +13,7 @@ const Create = () => {
     batch: "",
     semester: "",
   });
+  let res;
 
   const handleChange = (e) => {
     console.log(data);
@@ -24,7 +26,7 @@ const Create = () => {
 
     try {
         let url;
-        let res;
+        
         if (role === "student") 
         {
           url = "http://localhost:3000/admin/createstudent";
@@ -63,12 +65,14 @@ const Create = () => {
             }
           );
           console.log(res.data);
-          window.alert("success faculty");
+          toast("success faculty");
         }
 
     } catch (error) {
-        console.log(error);
-    }
+      console.log(error);
+      toast(error.response.data.message)
+        //toast(res.data.message);    
+      }
 
   }
 
