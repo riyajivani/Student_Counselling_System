@@ -5,14 +5,8 @@ const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const cloudinary = require("cloudinary").v2;
 
-<<<<<<< HEAD
-
-app.use(express.json({ limit: "50mb" }));
-app.use(express.urlencoded({ extended: true, limit: "50mb" }));
-=======
 const PORT = process.env.PORT || 3000;
 
->>>>>>> 38eb09c87e5b3f1ef0f3006c6b14284d09e75154
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(fileUpload({ useTempFiles: true }));
@@ -37,11 +31,6 @@ app.get('/',(req, res)=>{
 app.use("/student",studentroutes)  
 app.use("/faculty",facultyrouter)
 app.use("/admin",adminrouter)
-
-
-
-
-
 
 
 app.listen(PORT, () => {
