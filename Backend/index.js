@@ -6,7 +6,8 @@ const fileUpload = require("express-fileupload");
 const cloudinary = require("cloudinary").v2;
 
 
-
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(fileUpload({ useTempFiles: true }));

@@ -2,7 +2,7 @@ import "./signup.css";
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import loginImg from "../../assets/picture1.png";
+import loginImg from "../../assets/vector.png";
 
 const SignUp = () => {
   const [role, setRole] = useState("");
@@ -51,7 +51,7 @@ const SignUp = () => {
         <div className="signup-form-container">
           <div className="signup-left">
           <img src={loginImg} style={{ width: "300px" }}></img>
-            <h1>Welcome Back!</h1>
+            <h1>New Here!?</h1>
             <Link to="/login">
               <button type="button" className="signup-white-btn">
                 {" "}

@@ -4,16 +4,24 @@
      gap: 50px;
      font-size: 1rem;
      position: relative;
-     background: var(--input-color);
+     background: var(--light-green);
 }
    
+
+.custom-menu-item{
+     color: var(--light-background) !important;
+     background-color: var(--light-green) !important;
+}
+
 .ant-menu-light .ant-menu-item-selected,
 .ant-menu-light .ant-menu-item-selected a,
 .ant-menu-light .ant-menu-submenu-selected > .ant-menu-submenu-title,
 .ant-menu-light .ant-menu-submenu-selected > .ant-menu-submenu-title a,
 .ant-menu-light > .ant-menu .ant-menu-item-selected,
-.ant-menu-light > .ant-menu .ant-menu-item-selected a {
-     color: var(--black) !important;
-     background-color: var(--light-green) !important;
+.ant-menu-light > .ant-menu .ant-menu-item-selected a
+{
+     color: var(--light-background) !important;
+     background-color: var(--hover-color) !important;
 }
+
    

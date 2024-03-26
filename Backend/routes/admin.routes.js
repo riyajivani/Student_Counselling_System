@@ -10,7 +10,7 @@ router.post("/createstudent", authAdmin, validate4createstudent, adminController
 router.delete("/deletestudent",authAdmin, validate4delete, adminController.deleteStudent)
 router.post("/createfaculty",authAdmin, validate4createfaculty, adminController.createFaculty)
 router.delete("/deletefaculty",authAdmin, validate4delete, adminController.deleteFaculty)
-router.get("/getallstudents",authAdmin, adminController.getAllStudent)
-router.get("/getallfaculties",authAdmin, adminController.getAllfaculty)
+router.get("/getallstudents", adminController.getAllStudent)
+router.get("/getallfaculties", adminController.getAllfaculty)
 
 module.exports = router

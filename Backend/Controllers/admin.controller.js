@@ -254,7 +254,7 @@ module.exports = {
     getAllStudent: async (req, res) => {
 
         try {
-            const students = await studentSchema.find().sort({ id: 1 }).exec()
+            const students = await studentSchema.find({ name: { $exists: true, $ne: "" } }).sort({ id: 1 }).exec()
             if (students.length != 0) {
                 return res
                     .status(enums.HTTP_CODE.OK)
@@ -275,7 +275,7 @@ module.exports = {
     getAllfaculty: async (req, res) => {
 
         try {
-            const faculty = await facultySchema.find()
+            const faculty = await facultySchema.find({ name: { $exists: true, $ne: "" } }).sort({ id: 1 }).exec()
 
             if (faculty) {
                 return res

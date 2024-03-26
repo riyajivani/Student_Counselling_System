@@ -157,6 +157,38 @@ module.exports = {
                 .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
                 .json({ success: false, message: err.message })
         }
-    }
+    },
 
+    setProfileImage: async (req, res) => {
+        const { id, image } = req.body
+
+        try {
+            const facultyExist = await facultySchema.find({ id: id })
+
+            if (!facultyExist) {
+                console.log(facultyExist);
+                return res
+                    .status(enums.HTTP_CODE.BAD_REQUEST)
+                    .json({ success: false, message: message.USER_NOT_FOUND })
+            }
+
+            const update = await facultySchema.updateOne({ id: id }, { $set: { image: image } });
+
+            if (update) {
+                return res
+                    .status(enums.HTTP_CODE.OK)
+                    .json({ success: true, message: message.SUCCESS })
+            }
+            else {
+                return res
+                    .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
+                    .json({ success: false, message: message.FAILED })
+            }
+        }
+        catch (error) {
+            return res
+                .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
+                .json({ success: false, message: error.message })
+        }
+    },
 }

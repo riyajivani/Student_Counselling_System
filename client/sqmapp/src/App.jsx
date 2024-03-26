@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import SignUp from './components/SignUp/signup';
 import Login from './components/Login/login';
 import { ToastContainer } from 'react-toastify';

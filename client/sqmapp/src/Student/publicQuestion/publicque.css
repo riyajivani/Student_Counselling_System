@@ -5,14 +5,14 @@
 }
 
 .publicque-body {
-     margin: 0 2rem 2rem 7rem;
-     overflow-y: hidden;
+     margin: 0 2rem 0 7rem;
+     padding-bottom: 2rem;
    }
 
 .publicque-body h1 {
-     color: var(--light-background);
-     text-shadow: 2px 2px 8px var(--black);
+     color: var(--light-green);
      text-align: center;
+     margin: 50px auto;
 }
 
 .que-accordian-detail{
@@ -20,18 +20,22 @@
 }
 
 #sub-accordian{
-     background-color: rgba(127, 173, 158,0.4);
+     background-color: #3572af;
+     color: var(--light-background);
      margin-top: 10px;
+     box-shadow: none;
 }
 
 .sub-detail{
-     background-color: var(--input-color);
+     background-color: var(--light-background);
 }
 
 .sub-card{
-     background-color: var(--light-background);
+     background-color: #eee;
      padding: 10px;
      margin: 10px;
+     color: var(--black);
+     /* box-shadow: 1px 1px 9px lightgray; */
 }
 
 .sub-card-text{
@@ -46,4 +50,14 @@
      border-bottom: 2px solid var(--hover-color);
      margin: 0 20px 0 20px;
      font-size: 15px;
+}
+
+.publicque-body p img {
+     max-width: 50rem;
+     max-height: 30rem; 
+}
+   
+.publicque-body p img{
+     overflow: auto;
+     white-space: nowrap;
 }

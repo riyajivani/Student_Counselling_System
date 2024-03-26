@@ -20,6 +20,7 @@ router.put("/removesharequery", queryController.removeSharedQuery)
 router.put("/solvesharedquery", validate4solveSharedQuery, queryController.solveSharedQuery)
 router.get("/getfaculties", facultyController.getAllfaculty)
 router.post("/comments",commentController.getComments)
+router.put("/setprofileimage", facultyController.setProfileImage)
 
 
 module.exports = router

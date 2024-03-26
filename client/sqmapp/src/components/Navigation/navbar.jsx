@@ -1,13 +1,12 @@
 import './navbar.css'
-import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';    
-import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
+import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import GroupsIcon from "@mui/icons-material/Groups";
 import { Tooltip, Modal } from "antd";
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
@@ -24,8 +23,7 @@ const Navbar = () => {
      const [searchQuery, setSearchQuery] = useState(''); //what user enters in textfield
      const [search, setSearch] = useState([]); // questions in list based on user search
      const [questions, setQuestions] = useState([]);//public questions from backend
-     const [studentImage, setStudentImage] = useState('');
-     const [facultyImage, setFacultyImage] = useState('');
+     const navigate = useNavigate();
 
 
      const fetchQue = async () => {
@@ -50,28 +48,69 @@ const Navbar = () => {
           setModalVisible(true);
      };
 
-     const studentImgUpload = (event) => {
-          const file = event.target.files[0];
-          if (file) {
-               const reader = new FileReader();
-               reader.onloadend = () => {
-                    setStudentImage(reader.result);
-               };
-               reader.readAsDataURL(file);
+     const convertToBase64 = async (file) => {
+          const reader = new FileReader();
+          await reader.readAsDataURL(file);
+          return new Promise((resolve, reject) => {
+               reader.onload = () => resolve(reader.result);
+               reader.onerror = (error) => reject(error);
+          });
+     };
+
+     const studentImgUpload = async (e) => {
+          let base64 = null;
+
+          if (e.target.files && e.target.files.length > 0)
+               base64 = await convertToBase64(e.target.files[0]);
+
+          try {
+               const res = await axios.put("http://localhost:3000/student/setprofileimage",
+                    { id: studentDetail.id, image: base64 },
+                    {
+                         headers: {
+                              "Content-Type": "application/json"
+                         },
+                    }
+               );
+
+               if (res.data.success) {
+                    console.log(res.data.message);
+                    studentDetail.student.image = base64
+                    localStorage.setItem("isStudent", JSON.stringify(studentDetail));
+                    window.location.reload(true);
+               }
+
+          } catch (e) {
+               console.log(e);
           }
-          console.log(studentImage);
      }
 
-     const facultyImgUpload = (event) => {
-          const file = event.target.files[0];
-          if (file) {
-               const reader = new FileReader();
-               reader.onloadend = () => {
-                    setFacultyImage(reader.result);
-               };
-               reader.readAsDataURL(file);
+     const facultyImgUpload = async (e) => {
+          let base64 = null;
+
+          if (e.target.files && e.target.files.length > 0)
+               base64 = await convertToBase64(e.target.files[0]);
+
+          try {
+               const res = await axios.put("http://localhost:3000/faculty/setprofileimage",
+                    { id: facultyDetail.id, image: base64 },
+                    {
+                         headers: {
+                              "Content-Type": "application/json"
+                         },
+                    }
+               );
+
+               if (res.data.success) {
+                    console.log(res.data.message);
+                    facultyDetail.faculty.image = base64
+                    localStorage.setItem("isFaculty", JSON.stringify(facultyDetail));
+                    window.location.reload(true);
+               }
+
+          } catch (e) {
+               console.log(e);
           }
-          console.log(facultyImage);
      }
 
      const handleCloseModal = () => {
@@ -80,6 +119,7 @@ const Navbar = () => {
 
      const handleSignOut = () => {
           localStorage.clear();
+          navigate("/login");
      }
 
      const handleSearchInputChange = (e) => {
@@ -131,9 +171,20 @@ const Navbar = () => {
                          {search.length > 0
                               ? (
                                    <div className='search-results-list'>
-                                        {search.map((question, index) => (
-                                             <div key={index} className='search-result' onClick={() => handleSearchItemClick(question)}>{question}</div>
-                                        ))}
+                                        {search.map((question, index) => {
+                                             const words = question.split(" ");
+                                             const shortenedQuery = words.length > 10 ? words.slice(0, 5).join(" ") + "..." : question;
+
+                                             return (
+                                                  <div
+                                                       dangerouslySetInnerHTML={{ __html: shortenedQuery }}
+                                                       key={index}
+                                                       className='search-result'
+                                                       onClick={() => handleSearchItemClick(question)}
+                                                  >
+                                                  </div>
+                                             );
+                                        })}
                                    </div>
                               ) : <></>}
                     </div>
@@ -142,43 +193,48 @@ const Navbar = () => {
                <ul>
                          {role === 'admin' 
                               ?<>
-                              <Tooltip title="Add Member" color='#7fad9e'>
+                              <Tooltip title="Add Member" color='#3F72AF'>
                                    <li className="nav__item">
-                                        <a href={"./create"} className="nav__link">{<PersonAddIcon style={{fontSize:'30px'}}/>}</a>
+                                        <Link to={"./create"} className="nav__link">{<PersonAddIcon style={{ fontSize: '30px' }} />}</Link>
                                    </li>
                               </Tooltip>
 
-                              <Tooltip title="Delete Member" color='#7fad9e'>
+                              <Tooltip title="Delete Member" color='#3F72AF'>
                                    <li className="nav__item">
-                                        <a href={"./delete"} className="nav__link">{<PersonRemoveIcon style={{fontSize:'30px'}}/>}</a>
+                                        <Link to={"./delete"} className="nav__link">{<PersonRemoveIcon style={{ fontSize: '30px' }} />}</Link>
                                    </li>
                               </Tooltip>
 
-                              <Tooltip title="Assign Faculty" color='#7fad9e'>
+                              <Tooltip title="Assign Faculty" color='#3F72AF'>
                                    <li className="nav__item">
-                                        <a href={"./assign"} className="nav__link">{<SupervisorAccountIcon style={{fontSize:'30px'}}/>}</a>
+                                        <Link to={"./assign"} className="nav__link">{<SupervisorAccountIcon style={{ fontSize: '30px' }} />}</Link>
                                    </li>
                               </Tooltip>
 
-                              <Tooltip title="ListOut All" color='#7fad9e'>
+                              <Tooltip title="ListOut All" color='#3F72AF'>
                                    <li className="nav__item">
-                                        <a href={"./listoutall"} className="nav__link">{<GroupsIcon style={{fontSize:'30px'}}/>}</a>
+                                        <Link to={"./listoutall"} className="nav__link">{<GroupsIcon style={{ fontSize: '30px' }} />}</Link>
                                    </li>
                               </Tooltip>
                               </> 
 
-                              :<Tooltip title="profile" color='#7fad9e'>
+                         : <Tooltip title="profile" color='#3F72AF'>
                                    <li className="nav__item">
                                         <a href={"#"} className="nav__link"  onClick={handleProfileClick}>{<Person2OutlinedIcon style={{fontSize:'30px'}}/>}</a>
                                    </li>
                               </Tooltip>
                          }
 
-                         <Tooltip title="logout" color='#7fad9e'>
+                    {/* <Tooltip title="logout" color='#3F72AF'>
                               <li className="nav__item">
                               <a href="./login" className="nav__link" onClick={handleSignOut}>{<ExitToAppRoundedIcon style={{ fontSize: '30px' }} />}</a>
-                              </li>                       
-                         </Tooltip>
+                              </li>
+                         </Tooltip> */}
+
+                    <li className="nav__button" onClick={handleSignOut}>
+                         Logout
+                    </li>
+
                </ul>
 
                     {/* Modal for displaying student or faculty info */}
@@ -190,9 +246,11 @@ const Navbar = () => {
 
                                    <div className='profile-grid'>
                                         <div className='profile-left'>
-                                        {studentImage
-                                             ? <img className="profile-img" src={studentImage}></img>
-
+                                        {studentDetail.student.image !== null
+                                             ? <>
+                                                  <img className="profile-img" src={studentDetail.student.image} alt="profile image"></img>
+                                                  <CloseIcon className='clear-profile' onClick={studentImgUpload} />
+                                             </>
                                              : <label>
                                                   <div className='img-upload'>
                                                        <DriveFolderUploadIcon />
@@ -215,15 +273,17 @@ const Navbar = () => {
                                    </div>  
                               </div>
                          )
-                         : facultyDetail && studentDetail?.role === 'faculty' ? (
+                         : facultyDetail && facultyDetail?.role === 'faculty' ? (
                               <div className='profile'>
                                    <h1 style={{textAlign:'center'}}>Profile</h1>
 
                                    <div className='profile-grid'>
                                         <div className='profile-left'>
-                                             {facultyImage
-                                                  ? <img className="profile-img" src={facultyImage}></img>
-
+                                             {facultyDetail.faculty.image !== null
+                                                  ? <>
+                                                       <img className="profile-img" src={facultyDetail.faculty.image} alt="profile image"></img>
+                                                       <CloseIcon className='clear-profile' onClick={facultyImgUpload} />
+                                                  </>
                                                   : <label>
                                                        <div className='img-upload'>
                                                             <DriveFolderUploadIcon />

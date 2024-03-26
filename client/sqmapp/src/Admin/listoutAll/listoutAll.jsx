@@ -17,15 +17,12 @@ const ListoutAll = () => {
       let facultyUrl = "http://localhost:3000/admin/getallfaculties";
 
       const [studentResponse, facultyResponse] = await Promise.all([
-        axios.get(studentUrl), { headers: { "Authorization": `Bearer ${token}` } },
+        axios.get(studentUrl, { headers: { "Authorization": `Bearer ${token}` } }),
         axios.get(facultyUrl, { headers: { "Authorization": `Bearer ${token}` } }),
       ]);
       
       setStudent(studentResponse.data.student);
       setFaculty(facultyResponse.data.faculty);
-
-      console.log(studentResponse.data.student);
-      console.log(facultyResponse.data.faculty);
 
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -57,7 +54,7 @@ const ListoutAll = () => {
   
                   return(
                     <div className="listout-card" key={id}>
-                      <h3>{name}</h3>
+                      <h3 className='list-name'>{name}</h3>
                       <p>
                         <b>Id:</b> {id}
                       </p>
@@ -78,7 +75,7 @@ const ListoutAll = () => {
 
                 return(
                   <div className="listout-card" key={id}>
-                    <h3>{name}</h3>
+                    <h3 className='list-name'>{name}</h3>
                     <p>
                       <b>Id:</b> {id}
                     </p>

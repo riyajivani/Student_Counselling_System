@@ -1,18 +1,13 @@
 :root {
   flex: 1;
   /* light theme */
-  --light-background: #ffffff;
-  --light-green: #9ed2c5;
-  --light-grey: #7b7b7b;
-  --hover-color: #7fad9e;
-  --black: #000000;
-  --input-color: #edf5f3;
-
-  /* dark theme */
-  --dark-background: #1d1e22;
-  --dark-grey: #393f4d;
-  --dark-silver: #d4d4dc;
-  --dark-yellow: #feda6a;
+  --light-background: #F9F7F7;
+  --light-green: #14355b;
+  --light-grey: #BBE1FA;
+  --hover-color: #3F72AF;
+  --black: #636363;
+  --input-color: #ffffff;
+  --dark-silver: #DBE2EF;
 }
 
 body {

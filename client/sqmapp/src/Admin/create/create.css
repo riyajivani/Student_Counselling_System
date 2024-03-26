@@ -12,6 +12,6 @@
 }
 
 .create-body h1{
-     color: var(--light-background);
-     text-shadow: 2px 2px 8px var(--black);
+     color: var(--light-green);
+     margin: 50px auto;
 }

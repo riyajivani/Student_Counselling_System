@@ -44,16 +44,16 @@ const Assign = () => {
   }
 
   return (
-     <div className='create-container'>
+    <div className='assign-container'>
       <Navbar/>
-      <div className='create-body'>
+      <div className='assign-body'>
         <h1>assign faculty</h1>
 
         <input type="text" placeholder="Enter student id" name="sid" value={data.sid} onChange={handleChange} required className="signup-input"/>
         <input type="text" placeholder="Enter faculty id" name="fid" value={data.fid} onChange={handleChange} required className="signup-input"/>
           
-        <button onClick={handleAssign} className="signup-green-btn" style={{border:"2px solid black", fontSize:"20px"}}>
-          assign
+        <button onClick={handleAssign} className="signup-white-btn">
+          ASSIGN
         </button>
         
       </div>

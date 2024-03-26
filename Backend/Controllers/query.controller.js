@@ -113,9 +113,9 @@ module.exports = {
             }
             let queryWithStudent = { ...query.toObject(), student };
 
-            if (query.sharetofaculty) {
+            if (query.solvebyfaculty) {
               const facultydata = await facultySchema.findOne({
-                _id: query.sharetofaculty,
+                _id: query.solvebyfaculty,
               });
               const faculty = {
                 id: facultydata.id,
@@ -248,12 +248,12 @@ module.exports = {
               total_query: studentdata.total_query,
             };
 
-            const facultydata = await facultySchema.findOne({_id : query.solvebyfaculty})
-            const faculty = {
+            const facultydata = query.solvebyfaculty ? await facultySchema.findOne({ _id: query.solvebyfaculty }) : null;
+            const faculty = facultydata ? {
               id: facultydata.id,
               name: facultydata.name,
               email: facultydata.email,
-            };
+            } : null;
             const queryWithStudent = { ...query.toObject(), student, faculty };
 
             return queryWithStudent;

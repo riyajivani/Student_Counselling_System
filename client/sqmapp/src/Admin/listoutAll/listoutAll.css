@@ -7,9 +7,9 @@
 }
 
 .listout-body h1{
-     color: var(--light-background);
+     color: var(--light-green);
      text-align: center;
-     text-shadow: 2px 2px 8px var(--black);
+     margin: 30px auto;
 }
 
 .listout-grid {
@@ -21,19 +21,28 @@
    
    .listout-card {
      cursor: pointer;
-     background-color: var(--hover-color);
+     background-color: var(--light-background);
+     color: var(--black);
      padding: 1em;
-     border: 2px solid var(--light-background);
-     border-radius: 20px;
-     box-shadow: 5px 2px 3px var(--light-background);
+     border-radius: 10px;
    }
    
    .listout-card p {
-     color: var(--light-background);
+     color: var(--light-green);
+     padding-left: 10px;
    }
    
+   .list-name{
+     background-color: #3F72AF;
+     color: var(--input-color);
+     padding: 5px 10px;
+     font-weight: 400;
+
+   }
+
    .listout-card h5 {
-     color: var(--dark-grey);
+     color: var(--black);
+     padding-left: 10px;
    }
    
    @media only screen and (max-width: 954px) {

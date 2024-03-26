@@ -13,7 +13,8 @@ const facultyschema = new mongoose.Schema({
         total_query : {type : Number , default : 0},
         solved_query : {type : Number, default : 0},
         remaining_query : {type : Number, default : 0},
-        role : {type : String}
+    role: { type: String },
+    image: { type: String, default: null }
         
 },
 {

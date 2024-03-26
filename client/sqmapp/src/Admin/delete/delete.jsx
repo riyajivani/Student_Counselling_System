@@ -74,8 +74,8 @@ const DeleteOne = () => {
 
         <input type="text" placeholder="Enter id" name="id" value={data.id} onChange={handleChange} required className="signup-input"/>
 
-        <button onClick={handleDelete} className="signup-green-btn" style={{border:"2px solid black", fontSize:"20px"}}>
-          delete
+        <button onClick={handleDelete} className="signup-white-btn">
+          DELETE
         </button>
         </div>
      </div>

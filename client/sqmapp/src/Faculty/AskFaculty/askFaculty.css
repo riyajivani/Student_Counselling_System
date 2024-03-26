@@ -6,20 +6,62 @@
 
 .askfaculty-body{
      margin: 0 2rem 0 7rem;
+     padding-bottom: 2px;
 }
 .askfaculty-body h1{
-     color: var(--light-background);
+     color: var(--light-green);
      text-align: center;
-     text-shadow: 2px 2px 8px var(--black);
+     margin: 50px auto;
+}
+
+.ask-faculty-card{
+     width: '100%';
+     position: relative;
+     display: 'flex';
+     justify-content: 'space-between';
+     align-items: 'center';
+     background-color: var(--light-background);
+     padding: 10px;
+     margin-bottom: 20px;
+     border-radius: 10px;
+     color: var(--black);
+}
+
+.ask-faculty-card h2{
+     background-color: var(--hover-color);
+     color: var(--light-background);
+     padding: 5px 10px;
+     border-radius: 5px;
+     font-weight: normal;
+     font-size: 20px;
+}
+.ask-faculty-card p{
+     line-height: 10px;
+}
+
+.ask-faculty-card p img {
+     max-width: 50rem;
+     max-height: 30rem; 
+}
+   
+.ask-faculty-card p img{
+     overflow: auto;
+     white-space: nowrap;
 }
 
 .remove-btn{
-     height: fit-content;
-     width: fit-content;
-     padding: 5px;
-     margin-right: 20px;
-     background-color: rgba(255, 0, 0,0.5);
-     border-radius: 50px;
-     color: white;
-     box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+     padding: 5px 10px;
+     border-radius: 5px;
+     margin: 10px;
+     background-color: rgb(244, 149, 149);
+     color: var(--light-background);
+     position: absolute;
+     right: 0;
+     bottom:0;
+     outline: none;
+     border: none;
+}
+
+.remove-btn:hover{
+     background-color: var(--hover-color);
 }

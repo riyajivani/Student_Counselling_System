@@ -46,7 +46,7 @@
 	background-color: var(--input-color);
 	margin: 5px 0;
 	font-size: 14px;
-	color: var(--light-grey);
+	color: rgb(110, 107, 107);
 }
 
 .login-input {
@@ -81,14 +81,17 @@
 
 .login-right {
 	color: var(--light-green);
+	flex: 1;
+	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	background-color: var(--light-background);
 	text-align: center;
 }
 
 .login-right h1 {
-	font-size: 25px;
-	margin-bottom: 20px;
+	font-size: 20px;
 }
 
 .login-white-btn {

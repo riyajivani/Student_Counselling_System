@@ -94,8 +94,8 @@ const Create = () => {
           </>
         }
 
-        <button onClick={handleAdd} className="signup-green-btn" style={{border:"2px solid black", fontSize:"20px"}}>
-          add
+        <button onClick={handleAdd} className="signup-white-btn">
+          ADD
         </button>
         
       </div>

@@ -9,7 +9,8 @@ const studentschema = new mongoose.Schema({
         batch : {type : String},
         total_query : {type : Number,default : 0},
         facultyId : {type : mongoose.Schema.Types.ObjectId, ref : "faculty"},
-        role : {type : String}
+    role: { type: String },
+    image: { type: String, default: null }
 },
 {
     timestamps: true,   

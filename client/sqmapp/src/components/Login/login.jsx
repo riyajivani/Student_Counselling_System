@@ -1,7 +1,7 @@
 import "./login.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import loginImg from "../../assets/picture1.png";
+import loginImg from "../../assets/Picture1.png";
 import axios from "axios";
 
 const Login = () => {
@@ -46,7 +46,6 @@ const Login = () => {
 
           const studentobj = {
             role,
-            // isStudent: true,
             id: data.id,
             student: res.data.student,
             faculty: res.data.faculty,
@@ -76,11 +75,10 @@ const Login = () => {
         );
 
         if (res.data.success === true) {
-          navigate("../askfaculty");
+          navigate("../askedquestion");
 
           const facultyobj = {
             role,
-            // isFaculty: true,
             id: data.id,
             token: res.data.token,
             faculty: res.data.faculty
@@ -113,7 +111,6 @@ const Login = () => {
           navigate("../create");
           const adminobj = {
             role,
-            // isAdmin: true,
             email: data.email,
             token: res.data.token,
           };
@@ -198,8 +195,8 @@ const Login = () => {
             </form>
           </div>
           <div className="login-right">
-            <img src={loginImg} style={{ width: "200px"}}></img>
-            <h1>New Here!?</h1>
+            <img src={loginImg} style={{ width: "200px" }}></img>
+            <h1>Welcome Back!</h1>
             <Link to="/signup">
               <button type="button" className="login-white-btn">
                 {" "}

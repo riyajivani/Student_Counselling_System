@@ -20,15 +20,18 @@
 
 .signup-left{
 	flex: 1;
+	display: flex;
 	flex-direction: column;
-	background-color: var(--light-green);
-	text-align: center;
+	background-color: var(--light-background);
+	/* text-align: center; */
+	align-items: center;
+	justify-content: center;
 }
 
 .signup-left h1{
-	color: var(--light-background);
+	color: var(--light-green);
 	font-size: 30px;
-	text-align: center;
+	/* text-align: center; */
 	margin: 0;
 }
 
@@ -52,7 +55,7 @@
 	background-color: var(--input-color);
 	margin: 5px 0;
 	font-size: 14px;
-	color: var(--light-grey);
+	color: rgb(110, 107, 107);
 }
 
 .signup-input {
@@ -67,7 +70,7 @@
 }
 
 .signup-white-btn{
-	background-color: var(--light-background);
+	background-color: var(--light-green);
 	padding: 15px;
 	border: none;
 	border-radius: 5px;
@@ -75,7 +78,7 @@
 	font-size: 16px;
 	transition: background-color 0.3s ease;
 	align-self: center;
-	color: var(--light-green);
+	color: var(--light-background);
 	width: 150px;	
 	margin-top: 5px;
 }
@@ -86,7 +89,7 @@
 }
 
 .signup-green-btn {
-	background-color: var(--light-green);
+	background-color: var(--light-background);
 	padding: 15px;
 	border: none;
 	border-radius: 5px;
@@ -94,7 +97,7 @@
 	font-size: 16px;
 	transition: background-color 0.3s ease;
 	align-self: center;
-	color: var(--light-background);
+	color: var(--light-green);
 	margin-bottom: 15px;
 	margin-top: 15px;
 	width: 150px;
@@ -102,16 +105,17 @@
 
 .signup-green-btn:hover{
 	background-color: var(--hover-color);
+	color: var(--light-background);
 }
 
 .signup-right {
 	flex: 2;
 	flex-direction: column;
-	background-color: var(--light-background);
+	background-color: var(--light-green);
 }
 
 .signup-right h1{
-	color: var(--light-green);
+	color: var(--light-background);
 	font-size: 35px;
 }
 

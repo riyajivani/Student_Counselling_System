@@ -6,10 +6,25 @@
 
 .sby-body {
      margin: 0 2rem 0 7rem;
+     padding-bottom: 20px;
    }
 
 .sby-body h1{
-     color: var(--light-background);
+     color: var(--light-green);
      text-align: center;
-     text-shadow: 2px 2px 8px var(--black);
+     margin: 50px auto;
 }
+
+.sby-body p{
+     line-height: 10px;
+}
+
+.sby-body p img {
+     max-width: 50rem;
+     max-height: 30rem;
+   }
+   
+.sby-body p img{
+     overflow: auto;
+     white-space: nowrap;
+   }

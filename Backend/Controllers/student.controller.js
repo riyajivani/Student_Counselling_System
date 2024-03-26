@@ -108,10 +108,10 @@ module.exports = {
             faculty = {
                 id : facultydata.id,
                 name : facultydata.name,
-                email : facultydata.email
+                email: facultydata.email,
+                image: facultydata.image
             }
            }
-        
 
            const student = {
                id : studentExist[0].id,
@@ -120,7 +120,8 @@ module.exports = {
                semester : studentExist[0].sem,
                email : studentExist[0].email,
                facultyId : studentExist[0].facultyId,
-               total_query : studentExist[0].total_query
+               total_query: studentExist[0].total_query,
+               image: studentExist[0].image,
            } 
 
             return res
@@ -139,6 +140,7 @@ module.exports = {
     changePassword : async (req,res) => {
         
     },
+
     displayAllStudentsByBatch : async (req,res) => {
         const { batch } = req.body
        try{
@@ -157,5 +159,38 @@ module.exports = {
                     .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
                     .json({success:false , message: error.message})
        }  
+    },
+
+    setProfileImage: async (req, res) => {
+        const { id, image } = req.body
+
+        try {
+            const studentExist = await studentSchema.find({ id: id })
+
+            if (!studentExist) {
+                console.log(studentExist);
+                return res
+                    .status(enums.HTTP_CODE.BAD_REQUEST)
+                    .json({ success: false, message: message.USER_NOT_FOUND })
+            }
+
+            const update = await studentSchema.updateOne({ id: id }, { $set: { image: image } });
+
+            if (update) {
+                return res
+                    .status(enums.HTTP_CODE.OK)
+                    .json({ success: true, message: message.SUCCESS })
+            }
+            else {
+                return res
+                    .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
+                    .json({ success: false, message: message.FAILED })
+            }
+        }
+        catch (error) {
+            return res
+                .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
+                .json({ success: false, message: error.message })
+        }
     },
 }

@@ -12,7 +12,7 @@
 }
 
 .delete-body h1{
-     color: var(--light-background);
+     color: var(--light-green);
      text-align: center;
-     text-shadow: 2px 2px 8px var(--black);
+     margin: 50px auto;
 }

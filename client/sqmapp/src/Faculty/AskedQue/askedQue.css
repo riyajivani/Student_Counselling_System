@@ -11,9 +11,9 @@
    }
 
 .askedque-body h1{
-     color: var(--light-background);
+     color: var(--light-green);
      text-align: center;
-     text-shadow: 2px 2px 8px var(--black);
+     margin: 50px auto;
 }
 
 .askedque-select{
@@ -31,45 +31,61 @@
      outline: none;
 }
 .askedque-select option {
-     background-color: var(--black);
-     color: var(--light-green);
+     background-color: var(--light-green);
+     color: var(--light-background);
      font-size: 20px; 
 }
+
 .askedque-select option:disabled{
      background-color: var(--light-background);
-     color: black;
+     color: var(--black);
      font-size: 20px; 
 }
 
 .askedque-grid {
-     display: grid;
-     grid-template-columns: 1fr 1fr 1fr;
-     gap: 1.6rem;
+     display: flex;
+     flex-direction: column;
+     gap: 2rem;
      margin: 1rem;
 }
 
 .askedque-card {
      cursor: pointer;
      padding: 1em;
-     border: 2px solid var(--black);
+     background-color: var(--light-background);
      border-radius: 10px;
-     box-shadow: 5px 5px 1px var(--black);
      position: relative;
+     color: var(--black);
 }
 
 .askedque-card h2{
      line-height: 35px;
-     border-bottom: 1px solid var(--black);
+     background-color: var(--hover-color);
+     color: var(--light-background);
+     padding: 5px 10px;
+     border-radius: 5px;
+     font-weight: normal;
+     font-size: 20px;
 }
 
 .askedque-card li{
      padding: 5px;
-     list-style: linear-gradient(black, #7fad9e);
+     list-style: linear-gradient(black, #3F72AF);
 }
 
 
 .askedque-card p{
      line-height: 10px;
+}
+
+.askedque-card p img {
+     max-width: 50rem;
+     max-height: 30rem; 
+}
+   
+.askedque-card p img{
+     overflow: auto;
+     white-space: nowrap;
 }
 
 .buttons{
@@ -85,13 +101,16 @@
      height: fit-content;
      background-color: transparent;
      font-size: medium;
-     border: 2px solid var(--black);
-     box-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+     border:none;
+     background-color: #ced4e1;
+     color: var(--black);
+     padding: 10px;
+     border-radius: 5px;
 }
 
 .fac-button:hover{
-     background-color: var(--black);
-     color: white;
+     background-color: var(--hover-color);
+     color: var(--light-background);
 }
 
 .solve-model{
@@ -108,6 +127,7 @@
      border:2px solid var(--black);
      box-shadow: 2px 2px 5px rgba(0,0,0,0.6);
 }
+
 .share-form{
      display: flex;
      flex-direction: column;

@@ -9,9 +9,23 @@
 }
 
 .myque-body h1 {
-  color: var(--light-background);
-  text-shadow: 2px 2px 8px var(--black);
+  color: var(--light-green);
   text-align: center;
+  margin: 50px auto;
+}
+
+.sub-detail{
+  background-color: var(--light-green);
+}
+
+.myque-body p img {
+  max-width: 50rem;
+  max-height: 30rem; 
+}
+
+.myque-body p img{
+  overflow: auto;
+  white-space: nowrap;
 }
 /* 
 .myque-grid {

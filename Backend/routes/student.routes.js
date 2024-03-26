@@ -15,6 +15,7 @@ router.post("/getquery",queryController.displayQueryBySatusForStudent)
 router.post("/getstudentsbybatch",studentController.displayAllStudentsByBatch)
 router.post("/comment",commentController.addComment)
 router.post("/comments",commentController.getComments)
+router.put("/setprofileimage", studentController.setProfileImage)
 
 
 module.exports = router

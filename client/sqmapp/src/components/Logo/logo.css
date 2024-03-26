@@ -3,7 +3,7 @@
      align-items: center;
      justify-content: center;
      color: var(--black);
-     background-color: var(--input-color);
+     background-color: var(--light-green);
      padding: 10px;
      margin: 0;
 }
@@ -15,5 +15,5 @@
      border-radius: 100%;
      border: 1px solid var(--black);
      justify-content: center;
-     background-color: var(--light-green);
+     background-color: var(--light-background);
 }

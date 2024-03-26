@@ -63,11 +63,11 @@ const StudentList = () => {
             <div key={index} className="student-card">
                 
               <div className='sub-card-text'>
-                <Avatar sx={{ bgcolor: 'orange' }} alt={studentInfo.email} src={studentInfo.email[0]} />
-                   <h4>{studentInfo.email}</h4>
+                <Avatar sx={{ bgcolor: '#14355b' }} alt={studentInfo.email} src={studentInfo.email[0]} />
+                <h3 style={{ color: '#14355b', fontWeight: '400' }}>{studentInfo.email}</h3>
               </div>
 
-                <div style={{display:'flex',flexDirection:'column'}}>
+              <div style={{ display: 'flex', flexDirection: 'column', color: '#636363' }}>
                     <p style={{margin:'0'}}>id: {studentInfo.id}</p>
                     <p style={{margin:'0'}}>name: {studentInfo.name}</p>
                </div>

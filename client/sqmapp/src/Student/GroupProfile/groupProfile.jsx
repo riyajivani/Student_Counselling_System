@@ -40,12 +40,18 @@ const GroupProfile = () => {
         <Sidebar />
 
         <div className="group-profile-body">
-          <h1>your batch information</h1>
+          <h1>Batch Information</h1>
 
           <div className="grp-card">
             {/* <img className="faculty-img" src={facultyImg}></img> */}
             <div className="faculty-img">
-              <p style={{color:'white',fontSize:'60px'}}>R</p>
+              {facultyDetail.image !== null
+                ?
+                <img src={facultyDetail.image} alt="mentor image" className="mentor-image" />
+                :
+                <p style={{ color: 'white', fontSize: '60px' }}>{facultyDetail?.name[0]}</p>
+              }
+
             </div>
 
             <div className="faculty-detail">
@@ -55,21 +61,24 @@ const GroupProfile = () => {
             </div>
           </div>
 
-          {students && students.map((studentInfo, index) => (
-            <div key={index} className="student-card">
-                
-              <div className='sub-card-text'>
-                <Avatar sx={{ bgcolor: 'orange' }} alt={studentInfo.email} src={studentInfo.email[0]} />
-                <h2 style={{ color: 'rgba(0,0,0,0.4)' }}>{studentInfo.id}</h2>
-              </div>
+          {students && students.map((studentInfo, index) => {
+            if (studentInfo.name !== "") {
+              return (
+                <div key={index} className="student-card">
+                  <div className='sub-card-text'>
+                    <Avatar sx={{ bgcolor: '#14355b' }} alt={studentInfo.name} src={studentInfo.name[0]} />
+                    <h2 style={{ color: '#14355b', fontWeight: '400' }}>{studentInfo.id}</h2>
+                  </div>
 
-                <div style={{display:'flex',flexDirection:'column'}}>
-                {studentInfo.email ? <p style={{ margin: '0' }}>email: {studentInfo.email}</p> : <p>student has not signed in yet.</p>}
-                {studentInfo.name && <p style={{ margin: '0' }}>name: {studentInfo.name}</p>}
-               </div>
-              
-            </div>
-          ))}
+                  <div style={{ display: 'flex', flexDirection: 'column', color: '#636363' }}>
+                    <p style={{ margin: '0' }}>email: {studentInfo.email}</p>
+                    <p style={{ margin: '0' }}>name: {studentInfo.name}</p>
+                  </div>
+                </div>
+              )
+            }
+          })}
+
         </div>
 
         {/* <Footer /> */}
