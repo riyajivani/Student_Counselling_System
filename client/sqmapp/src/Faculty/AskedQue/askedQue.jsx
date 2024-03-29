@@ -105,7 +105,6 @@ const AskedQue = () => {
   const handleSubmitAnswer = async (e) => {
     e.preventDefault();
     if (answer) {
-      console.log(selectedQuestionId);
       const res = await axios.put(
         "http://localhost:3000/faculty/solvequery",
         { qid: selectedQuestionId, fid: fid, solution: answer },
@@ -115,16 +114,15 @@ const AskedQue = () => {
           },
         }
       );
-      toast(res.data.message);
       setAnswer('');
       setSolve(false);
-
       setQuestion(prevQuestions => prevQuestions.map(question => {
         if (question._id === selectedQuestionId) {
           return { ...question, status: "Solved" };
         }
         return question;
       }));
+      toast(res.data.message);
       window.location.reload();
     }
   }

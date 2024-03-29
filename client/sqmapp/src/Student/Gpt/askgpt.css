@@ -1,0 +1,16 @@
+.gpt-container {
+     background: var(--dark-silver);
+     max-width: 100%;
+     min-height: 100vh;
+}
+   
+.gpt-body {
+     overflow-x: hidden;
+     margin: 0 2rem 0 7rem;
+}
+   
+.gpt-body h1 {
+     color: var(--light-green);
+     text-align: center;
+     margin: 50px auto;
+}

@@ -1,11 +1,10 @@
-import SchoolIcon from '@mui/icons-material/School';
 import './logo.css'
+import SsLogo from '../../assets/SsLogo.png'
+
 const Logo = () => {
        return (
             <div className="logo">
-                 <div className="logo-icon">
-                      <SchoolIcon className='logo-item'/>
-                 </div>
+                 <img src={SsLogo} alt="logo" className='logo-item' />
           </div>
        );
 };

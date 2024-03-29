@@ -5,10 +5,11 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 //student
-import GroupProfile from './Student/GroupProfile/groupProfile';
+import GroupProfile from './Student/GroupProfile/groupProfile'
 import AskMentor from './Student/AskMentor/askmentor'
 import MyQuestion from './Student/MyQuestion/myquestion'
 import PublicQuestion from './Student/publicQuestion/publicque'
+import AskGpt from './Student/Gpt/askGpt'
 
 //faculty
 import StudentList from './Faculty/StudentList/studentList'
@@ -21,6 +22,7 @@ import Create from './Admin/create/create'
 import ListoutAll from './Admin/listoutAll/listoutAll'
 import DeleteOne from './Admin/delete/delete';
 import Assign from './Admin/assign/assign';
+import Report from './Admin/Report/report'
 
 
 function App() {
@@ -35,6 +37,7 @@ function App() {
           <Route exact path='/groupprofile' element={<GroupProfile />}></Route>
           <Route exact path='/askmentor' element={<AskMentor />}></Route>
           <Route exact path='/myquestion' element={<MyQuestion />}></Route>
+        <Route exact path='/askgpt' element={<AskGpt />}></Route>
 
         <Route exact path='/publicquestion' element={<PublicQuestion />}></Route>
 
@@ -47,6 +50,7 @@ function App() {
           <Route exact path='/delete' element={<DeleteOne/>}></Route>
           <Route exact path='/assign' element={<Assign/>}></Route>
           <Route exact path='/listoutall' element={<ListoutAll />}></Route>
+        <Route exact path='/report' element={<Report />}></Route>
       </Routes>
         <ToastContainer position='top-left' theme='dark' autoClose={1000} icon={false}/>
       </div>

@@ -17,10 +17,10 @@
 .navbar ul {
      display: flex;
      align-items: center;
+     gap:1rem;
 }
 .navbar li {
      list-style: none;
-     /* padding-right: 20px; */
 }
 
 .navbar a {

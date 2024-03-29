@@ -1,11 +1,7 @@
 import "./login.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-<<<<<<< HEAD
 import loginImg from "../../assets/Picture1.png";
-=======
-import loginImg from "/assets/Picture1.png";
->>>>>>> 38eb09c87e5b3f1ef0f3006c6b14284d09e75154
 import axios from "axios";
 
 const Login = () => {

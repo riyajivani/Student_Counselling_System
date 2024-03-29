@@ -1,0 +1,61 @@
+.report-container{
+     background: var(--dark-silver);
+     max-width: 100%;
+     min-height: 100vh;
+     overflow-y: hidden;
+     z-index: -1;
+}
+
+.report-body{
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+}
+.report-body h1{
+     color: var(--light-green);
+     text-align: center;
+     margin: 30px auto;
+}
+
+.filtered-que-report{
+     background-color: var(--light-background);
+     margin: 2rem;
+     padding: 2rem;
+     width: 800px;
+}
+
+.filtered-que{
+     background-color: var(--input-color);
+     padding: 20px;
+     border: 1px solid var(--black);
+     margin: 20px;
+}
+
+.filtered-que h4{
+     border-bottom: 1px solid var(--black);
+}
+
+.filtered-que p img{
+     width: 300px;
+     height: 200px;
+}
+
+.filtered-que p{
+     line-height: 1rem;
+}
+
+.pdf-btn{
+     margin-top: 20px;
+     background-color: var(--hover-color);
+     color: var(--light-background);
+     border: none;
+     outline: none;
+     padding: 20px;
+     border-radius: 10px;
+     font-size: 20px;
+}
+
+.pdf-btn:hover{
+     cursor: pointer;
+     background-color: var(--black);
+}

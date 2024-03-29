@@ -6,6 +6,7 @@ import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import PublicIcon from "@mui/icons-material/Public";
 import ChecklistRtlIcon from "@mui/icons-material/ChecklistRtl";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
+import BubbleChartIcon from '@mui/icons-material/BubbleChart';
 import "./menuList.css";
 
 const MenuList = () => {
@@ -58,6 +59,14 @@ const MenuList = () => {
             className="custom-menu-item"
           >
             <Link to="/askmentor">Ask Mentor</Link>
+          </Menu.Item>
+
+          <Menu.Item
+            key="/askgpt"
+            icon={<BubbleChartIcon />}
+            className="custom-menu-item"
+          >
+            <Link to="/askgpt">Ask Gpt</Link>
           </Menu.Item>
         </>
       )}

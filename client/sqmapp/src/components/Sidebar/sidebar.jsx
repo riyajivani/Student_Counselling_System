@@ -18,8 +18,11 @@ const Sidebar = () => {
         collapsible
         trigger={null}
         onMouseEnter={()=>{setCollapsed(false)}}
-        onMouseLeave={()=>{setCollapsed(true)}}>        
-        <Logo />
+        onMouseLeave={() => { setCollapsed(true) }}>
+        <div className="logo-ss">
+          <Logo />
+          {!collapsed && <p>SCHOLARSPHERE</p>}
+        </div>
         <MenuList />
       </Sider>
     </Layout>

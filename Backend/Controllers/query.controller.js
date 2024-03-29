@@ -6,8 +6,10 @@ const enums = require("../utils/enums.json");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
+const SendMail = require("../mail");
 
 module.exports = {
+
   askMentor: async (req, res) => {
     const { question, sid } = await req.body;
     try {
@@ -44,14 +46,14 @@ module.exports = {
       );
 
       if (querydata && studentdata && facultydata) {
-        return res
-          .status(enums.HTTP_CODE.OK)
-          .json({ success: true, message: message.QUERY_SUCCESS });
-      } else {
+        await SendMail(req, res, faculty.email, `you get new question from ${student.id}`, message.QUERY_SUCCESS);
+      }
+      else {
         return res
           .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
           .json({ success: false, message: message.FAILED });
       }
+
     } catch (err) {
       return res
         .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
@@ -60,31 +62,49 @@ module.exports = {
   },
 
   solveQuery: async (req, res) => {
-    const { qid, fid, solution } = req.body;
+    try {
+      const { qid, fid, solution } = req.body;
 
-    const faculty = await facultySchema.findOne({ id: fid });
+      const faculty = await facultySchema.findOne({ id: fid });
+      if (!faculty) {
+        return res
+          .status(enums.HTTP_CODE.BAD_REQUEST)
+          .json({ success: false, message: "Faculty not found" });
+      }
 
-    const data = await querySchema.updateOne(
-      { _id: qid },
-      { $set: { solution: solution, solvebyfaculty: faculty._id, status: "Solved" } }
-    );
-    if (data) {
+      const data = await querySchema.updateOne(
+        { _id: qid },
+        { $set: { solution: solution, solvebyfaculty: faculty._id, status: "Solved" } }
+      );
+      if (!data) {
+        return res
+          .status(enums.HTTP_CODE.BAD_REQUEST)
+          .json({ success: false, message: message.FAILED });
+      }
+
       const solve_query = parseInt(faculty.solve_query);
       const remaining_query = parseInt(faculty.remaining_query);
 
       const update = await facultySchema.updateOne(
         { id: fid },
-        {$set : {solve_query : solve_query + 1, remaining_query : remaining_query + 1}})
-    }
+        { $set: { solve_query: solve_query + 1, remaining_query: remaining_query - 1 } });
 
-    if (data) {
-      return res
-        .status(enums.HTTP_CODE.OK)
-        .json({ success: true, message: message.QUERY_SOLVED });
-    } else {
-      return res
-        .status(enums.HTTP_CODE.BAD_REQUEST)
-        .json({ success: false, message: message.FAILED });
+      if (update) {
+        const query = await querySchema.findOne({ _id: qid });
+        const student = await studentSchema.findOne({ _id: query.querybystudent });
+
+        await SendMail(req, res, student.email, `your question is solved by ${fid}`, message.QUERY_SOLVED);
+
+      }
+      else {
+        return res
+          .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
+          .json({ success: false, message: "Update failed" });
+      }
+
+    } catch (error) {
+      console.error("Error in solveQuery:", error);
+      return res.status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR).json({ success: false, message: "Internal server error" });
     }
   },
 
@@ -502,51 +522,50 @@ module.exports = {
       return res
               .status(enums.HTTP_CODE.OK)
               .json({success : true, message : message.QUERY_FOUND, query : queriesWithStudents})
-  }catch(err){
-    return res
+    } catch (err) {
+      return res
         .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
         .json({ success: false, message: err.message });
-  }
-},
-solveSharedQuery : async (req,res) => {
-  const { fid , qid , solution} = req.body;
-  try{
-    const faculty = await facultySchema.findOne({id :fid});
-    if(!faculty) {
-      return res
-              .status(enums.HTTP_CODE.OK)
-              .json({success : false, message : message.FACULTY_NOT_EXIST})
     }
-    const query = await querySchema.findOne({_id : qid, sharetofaculty : faculty._id});
-    if(!query)
-    {
-      return res
-              .status(enums.HTTP_CODE.OK)
-              .json({success : false, message : message.NOT_ALLOW_TO_ANS})
-    }
-    const querydata = await querySchema.updateOne({_id : qid},{$set : {solution : solution, status : "Solved", solvebyfaculty : faculty._id}});
+  },
 
-    const remaingQuery = parseInt(faculty.remaining_query);
-    const solveQuery = parseInt(faculty.solve_query);
+  solveSharedQuery: async (req, res) => {
+    const { fid, qid, solution } = req.body;
+    try {
+      const faculty = await facultySchema.findOne({ id: fid });
+      if (!faculty) {
+        return res
+          .status(enums.HTTP_CODE.OK)
+          .json({ success: false, message: message.FACULTY_NOT_EXIST })
+      }
+      const query = await querySchema.findOne({ _id: qid, sharetofaculty: faculty._id });
+      if (!query) {
+        return res
+          .status(enums.HTTP_CODE.OK)
+          .json({ success: false, message: message.NOT_ALLOW_TO_ANS })
+      }
+      const querydata = await querySchema.updateOne({ _id: qid }, { $set: { solution: solution, status: "Solved", solvebyfaculty: faculty._id } });
 
-    const facultydata = await facultySchema.updateOne({id : faculty.id},{$set : {remaining_query : remaingQuery - 1, solve_query : solveQuery + 1}});
+      const remaingQuery = parseInt(faculty.remaining_query);
+      const solveQuery = parseInt(faculty.solve_query);
 
-    if(querydata && facultydata)
-    {
+      const facultydata = await facultySchema.updateOne({ id: faculty.id }, { $set: { remaining_query: remaingQuery - 1, solve_query: solveQuery + 1 } });
+
+      if (querydata && facultydata) {
+        return res
+          .status(enums.HTTP_CODE.OK)
+          .json({ success: true, message: message.QUERY_SOLVED })
+      } else {
+        return res
+          .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
+          .json({ success: false, message: message.FAILED })
+      }
+
+    } catch (error) {
       return res
-              .status(enums.HTTP_CODE.OK)
-              .json({success : true, message : message.QUERY_SOLVED})
-    }else{
-      return res
-              .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
-              .json({success : false, message : message.FAILED})
-    }
-    
-  } catch(error){
-    return res
         .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
         .json({ success: false, message: error.message });
+    }
   }
-}
 
 };

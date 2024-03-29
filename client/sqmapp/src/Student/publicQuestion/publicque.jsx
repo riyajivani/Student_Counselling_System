@@ -201,7 +201,7 @@ const PublicQuestion = () => {
                                                   <AccordionDetails className='que-accordian-detail'>
 
                                                        {status === "Solved" &&
-                                                            <p>
+                                                            <div>
                                                                  <b style={{ marginRight: '20px', borderBottom: '2px solid black' }}>Faculty Answer:</b>
 
                                                                  {containsImage(question.solution)
@@ -243,7 +243,7 @@ const PublicQuestion = () => {
                                                                       </>)
 
                                                                  }
-                                                            </p>
+                                                            </div>
                                                        }
 
                                                        <Accordion className='sub-accordian' id='sub-accordian' expanded={_id === expandedQuestionId} onChange={() => handleAccordionChange(_id)}>

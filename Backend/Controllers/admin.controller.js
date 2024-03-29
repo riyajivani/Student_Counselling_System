@@ -1,6 +1,7 @@
 const adminSchema = require("../Models/admin.model")
 const facultySchema = require("../Models/faculty.model")
 const studentSchema = require("../Models/student.model")
+const querySchema = require("../Models/query.model")
 const message = require("../utils/message.json")
 const enums = require("../utils/enums.json")
 const bcrypt = require("bcryptjs")
@@ -281,6 +282,53 @@ module.exports = {
                 return res
                     .status(enums.HTTP_CODE.OK)
                     .json({ success: true, faculty: faculty })
+            }
+            else {
+                return res
+                    .status(enums.HTTP_CODE.BAD_REQUEST)
+                    , json({ success: false, message: message.USER_NOT_FOUND })
+            }
+        } catch (err) {
+            return res
+                .status(enums.HTTP_CODE.INTERNAL_SERVER_ERROR)
+                .json({ success: false, message: err.message })
+        }
+    },
+
+    getAllQuery: async (req, res) => {
+
+        try {
+            let question = await querySchema.find()
+
+            const queriesWithStudents = await Promise.all(
+                question.map(async (query) => {
+
+                    const studentdata = await studentSchema.findOne({
+                        _id: query.querybystudent,
+                    });
+
+                    const student = {
+                        id: studentdata.id,
+                    };
+
+                    const facultydata = await facultySchema.findOne({
+                        _id: query.facultyId,
+                    });
+
+                    const faculty = {
+                        id: facultydata.id,
+                    };
+
+                    const queryWithStudent = { ...query.toObject(), student, faculty };
+
+                    return queryWithStudent;
+                })
+            );
+
+            if (question) {
+                return res
+                    .status(enums.HTTP_CODE.OK)
+                    .json({ success: true, question: queriesWithStudents })
             }
             else {
                 return res

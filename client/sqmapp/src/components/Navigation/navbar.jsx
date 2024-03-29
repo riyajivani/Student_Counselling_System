@@ -6,6 +6,7 @@ import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import GroupsIcon from "@mui/icons-material/Groups";
 import { Tooltip, Modal } from "antd";
 import { useState, useEffect } from 'react';
+import DateRangeIcon from '@mui/icons-material/DateRange';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
@@ -195,25 +196,31 @@ const Navbar = () => {
                               ?<>
                               <Tooltip title="Add Member" color='#3F72AF'>
                                    <li className="nav__item">
-                                        <Link to={"./create"} className="nav__link">{<PersonAddIcon style={{ fontSize: '30px' }} />}</Link>
+                                        <Link to={"/create"} className="nav__link">{<PersonAddIcon style={{ fontSize: '30px' }} />}</Link>
                                    </li>
                               </Tooltip>
 
                               <Tooltip title="Delete Member" color='#3F72AF'>
                                    <li className="nav__item">
-                                        <Link to={"./delete"} className="nav__link">{<PersonRemoveIcon style={{ fontSize: '30px' }} />}</Link>
+                                        <Link to={"/delete"} className="nav__link">{<PersonRemoveIcon style={{ fontSize: '30px' }} />}</Link>
                                    </li>
                               </Tooltip>
 
                               <Tooltip title="Assign Faculty" color='#3F72AF'>
                                    <li className="nav__item">
-                                        <Link to={"./assign"} className="nav__link">{<SupervisorAccountIcon style={{ fontSize: '30px' }} />}</Link>
+                                        <Link to={"/assign"} className="nav__link">{<SupervisorAccountIcon style={{ fontSize: '30px' }} />}</Link>
                                    </li>
                               </Tooltip>
 
                               <Tooltip title="ListOut All" color='#3F72AF'>
                                    <li className="nav__item">
-                                        <Link to={"./listoutall"} className="nav__link">{<GroupsIcon style={{ fontSize: '30px' }} />}</Link>
+                                        <Link to={"/listoutall"} className="nav__link">{<GroupsIcon style={{ fontSize: '30px' }} />}</Link>
+                                   </li>
+                              </Tooltip>
+
+                              <Tooltip title="Report" color='#3F72AF'>
+                                   <li className="nav__item">
+                                        <Link to={"/report"} className="nav__link">{<DateRangeIcon style={{ fontSize: '30px' }} />}</Link>
                                    </li>
                               </Tooltip>
                               </> 
