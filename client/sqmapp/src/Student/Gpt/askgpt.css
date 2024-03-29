@@ -1,16 +1,132 @@
-.gpt-container {
+.gpt-container{
      background: var(--dark-silver);
      max-width: 100%;
      min-height: 100vh;
 }
-   
+
 .gpt-body {
-     overflow-x: hidden;
-     margin: 0 2rem 0 7rem;
+     margin: 2rem 2rem 0 7rem;
+     font-size: 1rem;
+     background-color: var(--light-background);
+     min-height: 80vh;
+     display: flex;
 }
-   
-.gpt-body h1 {
+
+.gpt-sidebar{
+     flex: 3;
+     border-right: 1px solid var(--dark-silver);
+     padding: 1rem;
+     display: flex;
+     flex-direction: column;
+     gap: 3rem;
+}
+
+.brand{
+     font-size: 2.5rem;
      color: var(--light-green);
-     text-align: center;
-     margin: 50px auto;
+}
+
+.midBtn{
+     background-color: var(--hover-color);
+     color: var(--light-background);
+     padding: 10px;
+     outline: none;
+     border: none;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 0.5rem;
+     width: 100%;
+     font-size: 1.5rem;
+}
+
+.midBtn:hover{
+     cursor: pointer;
+     background-color: var(--black);
+}
+
+.main{
+     flex:9;
+     min-height: calc(80vh - 14rem);
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     margin: 1rem 3rem;
+}
+
+.gpt-logo{
+     width: 30px;
+     height: 30px;
+     background-color: var(--light-green);
+     border-radius: 10px;
+     padding: 4px;
+}
+
+.chats{
+     overflow: hidden;
+     overflow-y: scroll;
+     scroll-behavior: smooth;
+     width: 100%;
+     max-width: 70rem;
+     height: calc(80vh - 8rem);
+}
+
+.chat{
+     margin: 10px;
+     padding: 20px;
+     display: flex;
+     align-items: flex-start;
+     font-size: medium;
+     gap: 1rem;
+}
+
+.bot{
+     background-color: var(--dark-silver);
+     width: fit-content;
+     border-radius: 10px;
+}
+
+.chat p {
+     margin: 0;
+}
+
+.no-data{
+     color: var(--light-green);
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     height: 100%;
+     overflow-y: hidden;
+}
+
+.inp{
+     margin-top: auto;
+     max-width: calc(100% - 2rem);
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     border: 2px solid var(--light-green);
+     border-radius: 10px;
+     padding: 1rem;
+}
+
+.gpt-input{
+     border: none;
+     outline: none;
+     font-size: 20px;
+     background-color: transparent;
+     width: calc(100% - 3rem);
+}
+
+.sendGPTBtn{
+     background-color: var(--hover-color);
+     color: var(--light-background);
+     padding: 5px;
+     border-radius: 5px;
+     cursor: pointer;
+}
+
+.sendGPTBtn:hover{
+     background-color: var(--black);
 }

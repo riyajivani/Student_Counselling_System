@@ -1,4 +1,4 @@
-const apiKey = import.meta.env.API_KEY
+const apiKey = import.meta.env.VITE_REACT_API_KEY
 
 export async function sendMsgToOpenAI(message) {
 
@@ -17,6 +17,7 @@ export async function sendMsgToOpenAI(message) {
                })
           });
 
+          console.log(response);
           const data = await response.json();
           const res = data.choices[0].message['content'];
           console.log(res);
