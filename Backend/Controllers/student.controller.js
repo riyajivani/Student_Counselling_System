@@ -68,14 +68,14 @@ module.exports = {
 
             if(!studentExist)
             {   
-                console.log(studentExist);
+                // console.log(studentExist);
                 return res
                         .status(enums.HTTP_CODE.BAD_REQUEST)
                         .json({success : false , message : message.USER_NOT_FOUND})
             }
             if(!studentExist[0].password)
             {
-                console.log(studentExist);
+                // console.log(studentExist);
                 return res
                         .status(enums.HTTP_CODE.BAD_REQUEST)
                         .json({success : false , message : message.USER_NOT_FOUND})
