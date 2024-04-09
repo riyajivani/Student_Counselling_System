@@ -84,6 +84,7 @@
      background-color: var(--dark-silver);
      width: fit-content;
      border-radius: 10px;
+     align-items: flex-start;
 }
 
 .chat p {
@@ -102,7 +103,7 @@
 
 .inp{
      margin-top: auto;
-     max-width: calc(100% - 2rem);
+     width: calc(100% - 2rem);
      display: flex;
      align-items: center;
      justify-content: space-between;

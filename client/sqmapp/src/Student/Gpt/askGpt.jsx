@@ -75,9 +75,9 @@ const AskGpt = () => {
                                                   : <Avatar sx={{ bgcolor: '#3F72AF' }} alt={studentInfo.name} src={studentInfo.name[0]} />
                                              }
                                              {message.isBot ? (
-                                                  <pre style={{ whiteSpace: 'pre-wrap', lineHeight: '1.5rem', overflowWrap: 'break-word', fontFamily: '"poppins", sans-serif' }}>
+                                                  <p style={{ whiteSpace: 'pre-wrap', lineHeight: '1.5rem', overflowWrap: 'break-word', fontFamily: '"poppins", sans-serif' }}>
                                                        {message.text}
-                                                  </pre>
+                                                  </p>
                                              ) : (
                                                   <p style={{ lineHeight: '1.5rem' }}>{message.text}</p>
                                              )}
