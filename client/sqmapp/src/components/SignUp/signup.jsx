@@ -51,7 +51,7 @@ const SignUp = () => {
         <div className="signup-form-container">
           <div className="signup-left">
           <img src={loginImg} style={{ width: "300px" }}></img>
-            <h1>New Here!?</h1>
+            <h1>Welcome Back!</h1>
             <Link to="/login">
               <button type="button" className="signup-white-btn">
                 {" "}

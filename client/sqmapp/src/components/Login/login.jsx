@@ -196,7 +196,7 @@ const Login = () => {
           </div>
           <div className="login-right">
             <img src={loginImg} style={{ width: "200px" }}></img>
-            <h1>Welcome Back!</h1>
+            <h1>New Here!?</h1>
             <Link to="/signup">
               <button type="button" className="login-white-btn">
                 {" "}

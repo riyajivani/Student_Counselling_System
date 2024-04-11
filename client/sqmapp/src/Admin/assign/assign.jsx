@@ -23,7 +23,7 @@ const Assign = () => {
     try {
         let url = "http://localhost:3000/admin/assignfaculty";
 
-          let res = await axios.put(
+      await axios.put(
             url,
             {
               sid: data.sid,
@@ -51,7 +51,7 @@ const Assign = () => {
       <div className='assign-body'>
         <h1>assign faculty</h1>
 
-        <input type="text" placeholder="Enter student id" name="sid" value={data.sid} onChange={handleChange} required className="signup-input"/>
+        <input type="se" placeholder="Enter student id" name="sid" value={data.sid} onChange={handleChange} required className="signup-input" />
         <input type="text" placeholder="Enter faculty id" name="fid" value={data.fid} onChange={handleChange} required className="signup-input"/>
           
         <button onClick={handleAssign} className="signup-white-btn">

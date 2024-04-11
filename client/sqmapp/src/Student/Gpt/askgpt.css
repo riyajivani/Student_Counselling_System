@@ -84,7 +84,6 @@
      background-color: var(--dark-silver);
      width: fit-content;
      border-radius: 10px;
-     align-items: flex-start;
 }
 
 .chat p {
