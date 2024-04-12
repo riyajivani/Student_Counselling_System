@@ -30,7 +30,7 @@ const MyQuestion = () => {
 
     try{
       res = await axios.post(
-        "http://localhost:3000/student/getquery", 
+        `${dburl}/student/getquery`, 
         {sid : sid, status: newStatus},
         {
           headers:{

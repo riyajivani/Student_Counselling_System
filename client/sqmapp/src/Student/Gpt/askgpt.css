@@ -75,7 +75,7 @@
      margin: 10px;
      padding: 20px;
      display: flex;
-     align-items: flex-start;
+     /* align-items: flex-start; */
      font-size: medium;
      gap: 1rem;
 }
@@ -88,6 +88,15 @@
 
 .chat p {
      margin: 0;
+     line-height: 1.5rem;
+}
+
+.chat pre{
+     margin: 0;
+     white-space: pre-wrap;
+     line-height: 2rem;
+     overflow-wrap:break-word;
+     font-family: poppins, sans-serif;
 }
 
 .no-data{
