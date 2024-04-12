@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import loginImg from "../../assets/vector.png";
+const dburl = import.meta.env.PUBLIC_URL
 
 const SignUp = () => {
   const [role, setRole] = useState("");
@@ -27,8 +28,8 @@ const SignUp = () => {
       let url;
       {
         role === "student"
-          ? (url = "http://localhost:3000/student/createstudent")
-          : (url = "http://localhost:3000/faculty/createfaculty");
+          ? (url = `${dburl}/student/createstudent`)
+          : (url = `${dburl}/faculty/createfaculty`);
       }
 
       const res = await axios.put(url, data);

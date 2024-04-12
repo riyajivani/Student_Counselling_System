@@ -1,20 +1,19 @@
 import './listoutAll.css'
 import Navbar from '../../components/Navigation/navbar'
 import { useEffect, useState } from 'react';
-import MoonLoader from "react-spinners/MoonLoader";
 import axios from 'axios'
+const dburl = import.meta.env.PUBLIC_URL
 
 const ListoutAll = () => {
 
   const [student,setStudent]=useState([]);
-  const [faculty,setFaculty]=useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [faculty, setFaculty] = useState([]);
   const token = JSON.parse(localStorage.getItem("isAdmin"))?.token;
 
   const fetchData = async () => {
     try {
-      let studentUrl = "http://localhost:3000/admin/getallstudents";
-      let facultyUrl = "http://localhost:3000/admin/getallfaculties";
+      let facultyUrl = `${dburl}/admin/getallfaculties`;
+      let studentUrl = `${dburl}/admin/getallstudents`;
       const [studentResponse, facultyResponse] = await Promise.all([
         axios.get(studentUrl, { headers: { "Authorization": `Bearer ${token}` } }),
         axios.get(facultyUrl, { headers: { "Authorization": `Bearer ${token}` } }),
@@ -25,8 +24,6 @@ const ListoutAll = () => {
 
     } catch (error) {
       console.error('Error fetching data:', error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -40,12 +37,8 @@ const ListoutAll = () => {
       
       <div className='listout-body'> 
 
-        {
-          isLoading===true 
-          ? <MoonLoader color="rgba(214, 54, 54, 1)" size={70} cssOverride={{margin: '0 auto'}}/>  
 
-          : <>
-              <h1>faculty details</h1>
+        <h1>faculty details</h1>
                 
                 <div className="listout-grid">
                 {faculty && faculty.map((data) => {
@@ -85,10 +78,7 @@ const ListoutAll = () => {
                 );
 
                 })}
-              </div>
-            </>
-        }
-
+        </div>
       </div>
     </div>
   )

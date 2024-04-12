@@ -2,7 +2,8 @@ import './assign.css'
 import Navbar from '../../components/Navigation/navbar'
 import { useState } from 'react';
 import axios from 'axios';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
+const dburl = import.meta.env.PUBLIC_URL
 
 const Assign = () => {
   const token = JSON.parse(localStorage.getItem("isAdmin"))?.token;
@@ -21,7 +22,7 @@ const Assign = () => {
     e.preventDefault();
 
     try {
-        let url = "http://localhost:3000/admin/assignfaculty";
+      let url = `${dburl}/admin/assignfaculty`;
 
       await axios.put(
             url,

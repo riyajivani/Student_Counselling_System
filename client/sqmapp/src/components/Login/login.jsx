@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import loginImg from "../../assets/Picture1.png";
 import axios from "axios";
+const dburl = import.meta.env.PUBLIC_URL
 
 const Login = () => {
   const [role, setRole] = useState("");
@@ -26,7 +27,7 @@ const Login = () => {
       let res;
 
       if (role === "student") {
-        url = "http://localhost:3000/student/login";
+        url = `${dburl}/student/login`;
 
         res = await axios.post(
           url,
@@ -59,7 +60,7 @@ const Login = () => {
         }
       } 
       else if (role === "faculty") {
-        url = "http://localhost:3000/faculty/login";
+        url = `${url}/faculty/login`;
 
         res = await axios.post(
           url,
@@ -92,7 +93,7 @@ const Login = () => {
         }
       } 
       else if (role === "admin") {
-        url = "http://localhost:3000/admin/login";
+        url = `${dburl}/admin/login`;
 
         res = await axios.post(
           url,

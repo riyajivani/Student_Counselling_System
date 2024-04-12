@@ -96,14 +96,6 @@ const MenuList = () => {
             </Menu.Item>
           </Menu.SubMenu>
 
-          {/* <Menu.Item
-            key="/askedquestion"
-            icon={<QuestionAnswerIcon />}
-            className="custom-menu-item"
-          >
-            <Link to="/askedquestion">Your Question</Link>
-          </Menu.Item> */}
-
           <Menu.Item
             key="/askfaculty"
             icon={<PublicIcon />}

@@ -12,6 +12,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import axios from 'axios'
+const dburl = import.meta.env.PUBLIC_URL
 
 const Navbar = () => {
      const que = localStorage.getItem('searchedQue');
@@ -29,7 +30,7 @@ const Navbar = () => {
 
      const fetchQue = async () => {
           try {
-               const res = await axios.get("http://localhost:3000/student/publicquery",
+               const res = await axios.get(`${dburl}/student/publicquery`,
                     {
                          headers: {
                               "Content-Type": "application/json"
@@ -65,7 +66,7 @@ const Navbar = () => {
                base64 = await convertToBase64(e.target.files[0]);
 
           try {
-               const res = await axios.put("http://localhost:3000/student/setprofileimage",
+               const res = await axios.put(`${dburl}/student/setprofileimage`,
                     { id: studentDetail.id, image: base64 },
                     {
                          headers: {
@@ -93,7 +94,7 @@ const Navbar = () => {
                base64 = await convertToBase64(e.target.files[0]);
 
           try {
-               const res = await axios.put("http://localhost:3000/faculty/setprofileimage",
+               const res = await axios.put(`${dburl}/faculty/setprofileimage`,
                     { id: facultyDetail.id, image: base64 },
                     {
                          headers: {

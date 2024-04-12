@@ -3,6 +3,7 @@ import Navbar from '../../components/Navigation/navbar'
 import { useState } from 'react';
 import axios from "axios";
 import {toast} from 'react-toastify'
+const dburl = import.meta.env.PUBLIC_URL
 
 const Create = () => {
 
@@ -29,7 +30,7 @@ const Create = () => {
         
         if (role === "student") 
         {
-          url = "http://localhost:3000/admin/createstudent";
+          url = `${dburl}/admin/createstudent`;
 
           res = await axios.post(
             url,
@@ -46,11 +47,12 @@ const Create = () => {
             }
           );
           console.log(res.data);
-          window.alert("success student");
+          toast("success student");
+          setData({ batch: "", id: "", semester: "" })
         }   
         else if (role === "faculty") 
         {
-          url = "http://localhost:3000/admin/createfaculty";
+          url = `${dburl}/admin/createfaculty`;
 
           res = await axios.post(
             url,
@@ -66,6 +68,7 @@ const Create = () => {
           );
           console.log(res.data);
           toast("success faculty");
+          setData({ batch: "", id: "", semester: "" })
         }
 
     } catch (error) {

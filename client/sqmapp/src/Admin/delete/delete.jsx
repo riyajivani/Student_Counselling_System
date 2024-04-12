@@ -3,6 +3,7 @@ import Navbar from '../../components/Navigation/navbar'
 import { useState } from 'react';
 import axios from "axios";
 import {toast} from 'react-toastify'
+const dburl = import.meta.env.PUBLIC_URL
 
 const DeleteOne = () => {
 
@@ -25,7 +26,7 @@ const DeleteOne = () => {
         let res;
         if (role === "student") 
         {
-          url = "http://localhost:3000/admin/deletestudent";
+          url = `${dburl}/admin/deletestudent`;
 
           res = await axios.delete(url, {
             data: { id: data.id },
@@ -40,7 +41,7 @@ const DeleteOne = () => {
         }   
         else if (role === "faculty") 
         {
-          url = "http://localhost:3000/admin/deletefaculty";
+          url = `${dburl}/admin/deletefaculty`;
 
           res = await axios.delete(url, {
             data: { id: data.id },
@@ -51,7 +52,7 @@ const DeleteOne = () => {
           });
 
           console.log(res.data);
-          window.alert("successfully delete faculty");
+          toast("successfully delete faculty");
         }
 
     } catch (error) {
