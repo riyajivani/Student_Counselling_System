@@ -9,7 +9,7 @@ const Login = () => {
   const [role, setRole] = useState("");
   const [error, setError] = useState("");
   let navigate = useNavigate();
-  const dburl = import.meta.env.DBURL
+  const dburl = import.meta.env.VITE_REACT_DBURL
 
   const [data, setData] = useState({
     id: "",
