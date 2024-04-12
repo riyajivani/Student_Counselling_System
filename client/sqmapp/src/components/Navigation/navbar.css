@@ -35,7 +35,7 @@
 }
 
 .nav__button{
-     background-color: var(--hover-color);
+     /* background-color: var(--hover-color); */
      color: var(--light-background);
      padding: 5px;
      border-radius: 5px;
@@ -44,8 +44,9 @@
 }
 
 .nav__button:hover{
-     background-color: var(--light-background);
-     color: var(--dark-blue);
+     /* background-color: var(--light-background); */
+     text-shadow: 2px 2px 15px var(--black);
+     color: var(--hover-color);
 }
 
 .searchbar_container {
