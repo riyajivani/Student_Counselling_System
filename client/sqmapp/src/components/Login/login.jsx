@@ -3,12 +3,13 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import loginImg from "../../assets/Picture1.png";
 import axios from "axios";
-const dburl = import.meta.env.DBURL
+
 
 const Login = () => {
   const [role, setRole] = useState("");
   const [error, setError] = useState("");
   let navigate = useNavigate();
+  const dburl = import.meta.env.DBURL
 
   const [data, setData] = useState({
     id: "",
