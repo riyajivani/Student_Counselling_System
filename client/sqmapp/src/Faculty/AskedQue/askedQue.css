@@ -11,7 +11,7 @@
    }
 
 .askedque-body h1{
-     color: var(--light-green);
+     color: var(--dark-blue);
      text-align: center;
      margin: 50px auto;
 }
@@ -31,7 +31,7 @@
      outline: none;
 }
 .askedque-select option {
-     background-color: var(--light-green);
+     background-color: var(--dark-blue);
      color: var(--light-background);
      font-size: 20px; 
 }

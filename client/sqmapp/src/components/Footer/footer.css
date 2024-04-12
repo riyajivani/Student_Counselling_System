@@ -1,7 +1,7 @@
 .footer{
      display: flex;
      flex-direction: column;
-     background-color: var(--light-green);
+     background-color: var(--dark-blue);
      height: fit-content ;
      margin-top: auto;
      bottom: 0;

@@ -9,13 +9,13 @@
 }
 
 .myque-body h1 {
-  color: var(--light-green);
+  color: var(--dark-blue);
   text-align: center;
   margin: 50px auto;
 }
 
 .sub-detail{
-  background-color: var(--light-green);
+  background-color: var(--dark-blue);
 }
 
 .myque-body p img {
@@ -59,7 +59,7 @@
   right: 10px;
   width: 120px;
   height: 30px;
-  color: var(--light-green);
+  color: var(--dark-blue);
   align-items: center;
   background-color: var(--black);
   border: 2px solid var(--light-background);

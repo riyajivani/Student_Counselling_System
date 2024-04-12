@@ -29,7 +29,7 @@
 }
 
 .signup-left h1{
-	color: var(--light-green);
+	color: var(--dark-blue);
 	font-size: 30px;
 	/* text-align: center; */
 	margin: 0;
@@ -70,7 +70,7 @@
 }
 
 .signup-white-btn{
-	background-color: var(--light-green);
+	background-color: var(--dark-blue);
 	padding: 15px;
 	border: none;
 	border-radius: 5px;
@@ -97,7 +97,7 @@
 	font-size: 16px;
 	transition: background-color 0.3s ease;
 	align-self: center;
-	color: var(--light-green);
+	color: var(--dark-blue);
 	margin-bottom: 15px;
 	margin-top: 15px;
 	width: 150px;
@@ -111,7 +111,7 @@
 .signup-right {
 	flex: 2;
 	flex-direction: column;
-	background-color: var(--light-green);
+	background-color: var(--dark-blue);
 }
 
 .signup-right h1{

@@ -4,14 +4,14 @@
      gap: 50px;
      font-size: 1rem;
      position: relative;
-     background: var(--light-green);
+     background: var(--dark-blue);
      margin-top: 50px;
 }
    
 
 .custom-menu-item{
      color: var(--light-background) !important;
-     background-color: var(--light-green) !important;
+     background-color: var(--dark-blue) !important;
 }
 
 .ant-menu-light .ant-menu-item-selected,

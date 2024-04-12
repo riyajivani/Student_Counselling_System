@@ -13,7 +13,7 @@
    }
 
 .group-profile-body h1{
-     color: var(--light-green);
+     color: var(--dark-blue);
      margin: 40px auto;
 }
 
@@ -39,7 +39,7 @@
      align-items: center;
      justify-content: center;
      margin: 0 10px;
-     background-color: var(--light-green);
+     background-color: var(--dark-blue);
      
 }
 
@@ -77,7 +77,7 @@
 }
    
 .student-table th {
-     background-color: var(--light-green);
+     background-color: var(--dark-blue);
      color: var(--black);
 }
    

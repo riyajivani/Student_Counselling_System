@@ -10,7 +10,7 @@
 }
 
 .askmentor-body h1 {
-  color: var(--light-green);
+  color: var(--dark-blue);
   text-align: center;
   margin: 50px auto;
 }
@@ -32,7 +32,7 @@
   margin-top: 20px;
   color: var(--input-color);
   align-items: center;
-  background-color: var(--light-green);
+  background-color: var(--dark-blue);
   border-radius: 10px;
 }
 

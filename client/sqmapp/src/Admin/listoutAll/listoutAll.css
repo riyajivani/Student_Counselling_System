@@ -7,7 +7,7 @@
 }
 
 .listout-body h1{
-     color: var(--light-green);
+     color: var(--dark-blue);
      text-align: center;
      margin: 30px auto;
 }
@@ -28,7 +28,7 @@
    }
    
    .listout-card p {
-     color: var(--light-green);
+     color: var(--dark-blue);
      padding-left: 10px;
    }
    
