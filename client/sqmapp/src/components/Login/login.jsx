@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import loginImg from "../../assets/Picture1.png";
 import axios from "axios";
-const dburl = import.meta.env.PUBLIC_URL
+const dburl = import.meta.env.DBURL
 
 const Login = () => {
   const [role, setRole] = useState("");
@@ -60,7 +60,7 @@ const Login = () => {
         }
       } 
       else if (role === "faculty") {
-        url = `${url}/faculty/login`;
+        url = `${dburl}/faculty/login`;
 
         res = await axios.post(
           url,
