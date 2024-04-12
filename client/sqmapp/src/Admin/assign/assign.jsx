@@ -3,7 +3,7 @@ import Navbar from '../../components/Navigation/navbar'
 import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-const dburl = import.meta.env.PUBLIC_URL
+const dburl = import.meta.env.VITE_REACT_DBURL
 
 const Assign = () => {
   const token = JSON.parse(localStorage.getItem("isAdmin"))?.token;

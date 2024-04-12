@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import { format } from 'date-fns';
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
-const dburl = import.meta.env.PUBLIC_URL
+const dburl = import.meta.env.VITE_REACT_DBURL
 
 const Report = () => {
      const [startDate, setStartDate] = useState(new Date());

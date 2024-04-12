@@ -2,7 +2,7 @@ import './listoutAll.css'
 import Navbar from '../../components/Navigation/navbar'
 import { useEffect, useState } from 'react';
 import axios from 'axios'
-const dburl = import.meta.env.PUBLIC_URL
+const dburl = import.meta.env.VITE_REACT_DBURL
 
 const ListoutAll = () => {
 

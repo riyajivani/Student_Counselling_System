@@ -12,7 +12,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import axios from 'axios'
-const dburl = import.meta.env.PUBLIC_URL
+const dburl = import.meta.env.VITE_REACT_DBURL
 
 const Navbar = () => {
      const que = localStorage.getItem('searchedQue');
