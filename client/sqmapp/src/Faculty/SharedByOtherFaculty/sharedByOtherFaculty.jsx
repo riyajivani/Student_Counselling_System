@@ -12,6 +12,7 @@ import AccordionActions from '@mui/material/AccordionActions';
 import Button from '@mui/material/Button';
 import { toast } from 'react-toastify'
 import axios from 'axios'
+const dburl = import.meta.env.VITE_REACT_DBURL
 
 const SharedByOtherFaculty = () => {
 
@@ -48,7 +49,7 @@ const SharedByOtherFaculty = () => {
   const [answer, setAnswer] = useState('');
 
   const sharedQuery = async () => {
-    const res = await axios.post("http://localhost:3000/faculty/getsharedquery",
+    const res = await axios.post(`${dburl}/faculty/getsharedquery`,
       { fid: fid },
       {
         headers: {
@@ -66,7 +67,7 @@ const SharedByOtherFaculty = () => {
 
   const handleSharedSolve = async (id) => {
     console.log(id, answer);
-    const res = await axios.put("http://localhost:3000/faculty/solvesharedquery",
+    const res = await axios.put(`${dburl}/faculty/solvesharedquery`,
       { fid: fid, qid: id, solution: answer },
       {
         "Content-Type": "application/json",

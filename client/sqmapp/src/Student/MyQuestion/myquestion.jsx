@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import {toast} from 'react-toastify'
 import { useState } from "react";
 import axios from "axios";
+const dburl = import.meta.env.VITE_REACT_DBURL
 
 const MyQuestion = () => {
   const [question,setQuestion] = useState([]);
@@ -59,7 +60,7 @@ const MyQuestion = () => {
 
     try {
       const response = await axios.put(
-        "http://localhost:3000/student/changemode",
+        `${dburl}/student/changemode`,
         { qid: id, mode: newMode },
         {
           headers: {

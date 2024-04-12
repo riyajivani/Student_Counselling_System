@@ -2,6 +2,7 @@ import Sidebar from '../../components/Sidebar/sidebar'
 import './askFaculty.css'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+const dburl = import.meta.env.VITE_REACT_DBURL
 
 const AskFaculty = () => {
 
@@ -13,7 +14,7 @@ const AskFaculty = () => {
 
   const handleRemove = async (id) => {
     try {
-      const res = await axios.put("http://localhost:3000/faculty/removesharequery",
+      const res = await axios.put(`${dburl}/faculty/removesharequery`,
         { qid: id, fid: fid },
         {
           headers: {
@@ -30,7 +31,7 @@ const AskFaculty = () => {
   }
 
   const sharedQuery = async () => {
-    const res = await axios.post("http://localhost:3000/faculty/sharedquery",
+    const res = await axios.post(`${dburl}/faculty/sharedquery`,
       { fid: fid },
       {
         headers: {

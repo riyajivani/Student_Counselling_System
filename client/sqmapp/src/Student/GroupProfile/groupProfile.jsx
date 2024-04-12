@@ -4,6 +4,7 @@ import Sidebar from "../../components/Sidebar/sidebar";
 import Avatar from '@mui/material/Avatar';
 import { useState, useEffect } from "react";
 import axios from 'axios'
+const dburl = import.meta.env.VITE_REACT_DBURL
 
 const GroupProfile = () => {
   const facultyDetail = JSON.parse(localStorage.getItem("isStudent")).faculty;
@@ -13,7 +14,7 @@ const GroupProfile = () => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.post("http://localhost:3000/student/getstudentsbybatch",
+      const res = await axios.post(`${dburl}/student/getstudentsbybatch`,
         { batch: batch },
         {
           headers: {

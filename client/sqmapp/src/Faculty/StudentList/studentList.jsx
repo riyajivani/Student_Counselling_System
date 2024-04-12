@@ -4,6 +4,7 @@ import './studentList.css'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Avatar from '@mui/material/Avatar';
+const dburl = import.meta.env.VITE_REACT_DBURL
 
 const StudentList = () => {
   const [student, setStudent] = useState([]);
@@ -12,7 +13,7 @@ const StudentList = () => {
   
   const getStudents = async () => {
     let res = await axios.post(
-      "http://localhost:3000/faculty/getstudents", 
+      `${dburl}/faculty/getstudents`, 
       {id : fid},
       {
         headers:{

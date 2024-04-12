@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import {toast} from 'react-toastify'
 import {Modal} from 'antd'
+const dburl = import.meta.env.VITE_REACT_DBURL
 
 const AskedQue = () => {
 
@@ -47,7 +48,7 @@ const AskedQue = () => {
   }
 
   const getFaculties = async () => {
-    const res = await axios.get("http://localhost:3000/faculty/getfaculties")
+    const res = await axios.get(`${dburl}/faculty/getfaculties`)
     console.log(res.data.faculty);
     setFaculties(res.data.faculty);
   }
@@ -57,7 +58,7 @@ const AskedQue = () => {
 
   const receiveData = async () => {
       let res = await axios.post(
-        "http://localhost:3000/faculty/getquery", 
+        `${dburl}/faculty/getquery`, 
         {fid : fid},
         {
           headers:{
@@ -78,7 +79,7 @@ const AskedQue = () => {
     setStatus(newStatus);
     try {
       let res = await axios.post(
-      "http://localhost:3000/faculty/querybystatus", 
+        `${dburl}/faculty/querybystatus`, 
       {fid : fid, status: newStatus},
       {
         headers:{
@@ -106,7 +107,7 @@ const AskedQue = () => {
     e.preventDefault();
     if (answer) {
       const res = await axios.put(
-        "http://localhost:3000/faculty/solvequery",
+        `${dburl}/faculty/solvequery`,
         { qid: selectedQuestionId, fid: fid, solution: answer },
         {
           headers: {
@@ -131,7 +132,7 @@ const AskedQue = () => {
     e.preventDefault();
     if (selectedFaculty) {
       console.log(selectedQuestionId, selectedFaculty.id)
-      const res = await axios.put("http://localhost:3000/faculty/sharequery",
+      const res = await axios.put(`${dburl}/faculty/sharequery`,
         { qid: selectedQuestionId, fid: selectedFaculty.id },
         {
           headers: {

@@ -6,6 +6,7 @@ import SendIcon from '@mui/icons-material/Send'
 import { useState } from 'react'
 import axios from 'axios'
 import {toast} from 'react-toastify'
+const dburl = import.meta.env.VITE_REACT_DBURL
 
 const AskMentor = () => {
 
@@ -40,7 +41,7 @@ const AskMentor = () => {
           console.log(sid);
 
                await axios.post(
-                    "http://localhost:3000/student/askmentor",
+                    `${dburl}/student/askmentor`,
                     {
                          question: question,
                          sid: sid,

@@ -1,6 +1,5 @@
 import './publicque.css';
 import Sidebar from '../../components/Sidebar/sidebar'
-// import Footer from '../../components/Footer/footer'
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -8,10 +7,10 @@ import ArrowDropDownSharpIcon from '@mui/icons-material/ArrowDropDownSharp';
 import AccordionActions from '@mui/material/AccordionActions';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-// import AvatarGroup from '@mui/material/AvatarGroup';
 import { useEffect, useState,useRef } from 'react';
 import axios from 'axios'
 import { toast } from 'react-toastify';
+const dburl = import.meta.env.VITE_REACT_DBURL
 
 const PublicQuestion = () => {
 
@@ -44,7 +43,7 @@ const PublicQuestion = () => {
      const handleSend = async (e, qid, sid) => {
           if (e.key === 'Enter' && answer) {
                try {
-                    const res = await axios.post("http://localhost:3000/student/comment",
+                    const res = await axios.post(`${dburl}/student/comment`,
                          { qid: qid, sid: sid, comment: answer },
                          {
                               headers: {
@@ -66,7 +65,7 @@ const PublicQuestion = () => {
 
           const fetchPublicQue = async () => {
                try {
-                    const res = await axios.get("http://localhost:3000/student/publicquery",
+                    const res = await axios.get(`${dburl}/student/publicquery`,
                          {
                               headers: {
                                    "Content-Type": "application/json"
@@ -87,7 +86,7 @@ const PublicQuestion = () => {
      const fetchComment = async (id) => {
           console.log(id)
           try {
-               const res = await axios.post("http://localhost:3000/student/comments",
+               const res = await axios.post(`${dburl}/student/comments`,
                     { qid: id },
                     {
                          headers: {

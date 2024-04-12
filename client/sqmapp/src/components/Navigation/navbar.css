@@ -131,6 +131,7 @@
 
 .clear-profile{
      position: absolute;
+     cursor: pointer;
      top:100px;
      left:40px;
      background-color: rgb(244, 149, 149);
