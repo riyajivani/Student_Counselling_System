@@ -5,7 +5,8 @@
 }
 
 .myque-body {
-  margin: 0 2rem 2rem 7rem;
+  margin: 0 2rem 0 7rem;
+  padding: 2rem;
 }
 
 .myque-body h1 {
