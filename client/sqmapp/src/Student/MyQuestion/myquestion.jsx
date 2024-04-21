@@ -172,54 +172,47 @@ const MyQuestion = () => {
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
                       <h4 style={{margin:'0'}}>Status: {status} {status==="Solved" && " ✅ "}</h4>
                       <p >Mode: {mode}</p>
-                      {status==="Solved" 
-                      ?<>
+                      {status === "Solved" ? (
+                        <>
                           <p style={{ margin: '0' }}>Solved By: {faculty.name}</p>
-                          <p>
-                            <b style={{ marginRight: '20px', borderBottom: '2px solid black' }}>Faculty Answer:</b>
-
-                            {containsImage(que.solution)
-
-                              ? (<>
-                                {isAnsExpandedImage
-                                  ? <>
+                          <>
+                            <b style={{ marginRight: '20px', marginTop: '20px', borderBottom: '2px solid black' }}>Faculty Answer:</b>
+                            {containsImage(que.solution) ? (
+                              <>
+                                {isAnsExpandedImage ? (
+                                  <>
                                     <p dangerouslySetInnerHTML={{ __html: que.solution }}></p>
                                     <button className='fac-button' onClick={() => { setExpandAnsImageId(null) }}>View Less</button>
                                   </>
-                                  :
+                                ) : (
                                   <button className='fac-button' onClick={() => { setExpandAnsImageId(_id) }}>View Answer Image</button>
-                                }
-                              </>)
-
-                              :
-                              (<>
-                                {words.length > 10
-                                  ?
-                                  (<>
-                                    {isAnsExpanded
-                                      ? (
-                                        <>
-                                          <h3 dangerouslySetInnerHTML={{ __html: que.solution }} style={{ fontWeight: '400', fontSize: '20px' }}></h3>
-                                          <button className='fac-button' onClick={() => { setExpandedAnswerId(null) }}>View Less</button>
-                                        </>
-                                      )
-                                      : (
+                                )}
+                              </>
+                            ) : (
+                              <>
+                                {words.length > 10 ? (
+                                  <>
+                                    {isAnsExpanded ? (
+                                      <>
+                                        <h3 dangerouslySetInnerHTML={{ __html: que.solution }} style={{ fontWeight: '400', fontSize: '20px' }}></h3>
+                                        <button className='fac-button' onClick={() => { setExpandedAnswerId(null) }}>View Less</button>
+                                      </>
+                                      ) : (
                                         <>
                                           <h3 dangerouslySetInnerHTML={{ __html: shortenedAns }} style={{ fontWeight: '400', fontSize: '20px' }}></h3>
                                           <button className='fac-button' onClick={() => { setExpandedAnswerId(_id) }}>View Full Answer</button>
                                         </>
-                                      )
-                                    }
-                                  </>)
-                                  :
-                                  <h3 dangerouslySetInnerHTML={{ __html: question.solution }} style={{ fontWeight: '400', fontSize: '20px' }}></h3>
-                                }
-                              </>)
+                                      )}
+                                    </>
+                                ) : (
+                                  <h3 dangerouslySetInnerHTML={{ __html: que.solution }} style={{ fontWeight: '400', fontSize: '20px' }}></h3>
+                                )}
+                              </>
+                            )}
+                          </>
+                        </>
+                      ) : null}
 
-                            }
-                          </p>
-                      </>
-                      :<></>}
                       
                     </div>
                   </AccordionDetails>
