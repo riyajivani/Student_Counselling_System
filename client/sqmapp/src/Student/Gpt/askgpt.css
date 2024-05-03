@@ -139,3 +139,10 @@
 .sendGPTBtn:hover{
      background-color: var(--black);
 }
+
+@media only screen and (max-width: 920px) {
+     .gpt-body{
+          flex-direction: column;
+     }
+
+}
