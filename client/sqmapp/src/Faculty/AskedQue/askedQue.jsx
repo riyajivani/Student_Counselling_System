@@ -172,6 +172,7 @@ const AskedQue = () => {
         </select>
 
         <div className="askedque-grid">
+          {!question && <h2 style={{ color: 'red', textAlign: 'center' }}>no question asked by student</h2>}
           {question && question.map((que, index) => {
             let { _id, query, status, student } = que;
 

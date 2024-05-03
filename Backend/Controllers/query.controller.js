@@ -82,12 +82,12 @@ module.exports = {
           .json({ success: false, message: message.FAILED });
       }
 
-      const solve_query = parseInt(faculty.solve_query);
-      const remaining_query = parseInt(faculty.remaining_query);
+      const solve_query = parseInt(faculty.solve_query) + 1;
+      const remaining_query = parseInt(faculty.remaining_query) - 1;
 
       const update = await facultySchema.updateOne(
         { id: fid },
-        { $set: { solve_query: solve_query + 1, remaining_query: remaining_query - 1 } });
+        { $set: { solve_query: solve_query, remaining_query: remaining_query } });
 
       if (update) {
         const query = await querySchema.findOne({ _id: qid });
@@ -357,10 +357,10 @@ module.exports = {
           .status(enums.HTTP_CODE.OK)
           .json({ success: false, message: message.QUERY_ALREADY_SHARED });
       }
-      const totalQuery = parseInt(faculty.total_query);
-      const remaingQuery = parseInt(faculty.remaining_query);
+      const totalQuery = parseInt(faculty.total_query) + 1;
+      const remaingQuery = parseInt(faculty.remaining_query) + 1;
 
-      const data = await querySchema.updateOne({id: fid },{$set : {total_query : totalQuery + 1, remaining_query : remaingQuery + 1}})
+      const data = await querySchema.updateOne({ id: fid }, { $set: { total_query: totalQuery, remaining_query: remaingQuery } })
       const query = await querySchema.updateOne(
         { _id: qid },
         { $set: { sharetofaculty: faculty._id } }
@@ -455,10 +455,10 @@ module.exports = {
       }
 
       const faculty = await facultySchema.findOne({ _id: query.sharetofaculty});
-      const remaingQuery = parseInt(faculty.remaining_query);
-      const totalQuery = parseInt(faculty.total_query);
+      const remaingQuery = parseInt(faculty.remaining_query) - 1;
+      const totalQuery = parseInt(faculty.total_query) - 1;
 
-      const data = await facultySchema.updateOne({ id: faculty.id }, {$set : {remaining_query : remaingQuery - 1, total_query : totalQuery - 1}});
+      const data = await facultySchema.updateOne({ id: faculty.id }, { $set: { remaining_query: remaingQuery, total_query: totalQuery } });
 
       const update = await querySchema.updateOne({_id : qid},{$set : {sharetofaculty : null}})
 
@@ -546,10 +546,10 @@ module.exports = {
       }
       const querydata = await querySchema.updateOne({ _id: qid }, { $set: { solution: solution, status: "Solved", solvebyfaculty: faculty._id } });
 
-      const remaingQuery = parseInt(faculty.remaining_query);
-      const solveQuery = parseInt(faculty.solve_query);
+      const remaingQuery = parseInt(faculty.remaining_query) - 1;
+      const solveQuery = parseInt(faculty.solve_query) + 1;
 
-      const facultydata = await facultySchema.updateOne({ id: faculty.id }, { $set: { remaining_query: remaingQuery - 1, solve_query: solveQuery + 1 } });
+      const facultydata = await facultySchema.updateOne({ id: faculty.id }, { $set: { remaining_query: remaingQuery, solve_query: solveQuery } });
 
       if (querydata && facultydata) {
         return res

@@ -131,8 +131,10 @@ const PublicQuestion = () => {
                          
                     <h1>Public Question</h1>
 
+                         {filteredQuestions == null && <h2 style={{ color: 'red', textAlign: 'center' }}>public question not available</h2>}
+
                          {
-                              filteredQuestions.map((question, index) => {
+                              filteredQuestions && filteredQuestions.map((question, index) => {
                                    let { _id, query, status, student } = question;
 
                                    const words = query.split(" ");

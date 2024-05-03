@@ -107,7 +107,7 @@ const MyQuestion = () => {
             let { query, status, mode, faculty, _id } = que;
 
             const words = query.split(" ");
-            const shortenedQuery = words.length > 10 ? words.slice(0, 5).join(" ") + "..." : query;
+            const shortenedQuery = words.length > 10 ? words.slice(0, 10).join(" ") + "..." : query;
             const isQueExpanded = _id === expandQuestionId;
             const isQueExpandedImage = _id === expandQueImageId;
 
@@ -190,7 +190,7 @@ const MyQuestion = () => {
                               </>
                             ) : (
                               <>
-                                {words.length > 10 ? (
+                                  {words.length > 20 ? (
                                   <>
                                     {isAnsExpanded ? (
                                       <>
