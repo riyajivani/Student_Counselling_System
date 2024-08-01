@@ -138,7 +138,7 @@ const PublicQuestion = () => {
                                    let { _id, query, status, student } = question;
 
                                    const words = query.split(" ");
-                                   const shortenedQuery = words.length > 10 ? words.slice(0, 5).join(" ") + "..." : query;
+                                   const shortenedQuery = words.length > 10 ? words.slice(0, 10).join(" ") + "..." : query;
                                    const isQueExpanded = _id === expandQuestionId;
                                    const isQueExpandedImage = _id === expandQueImageId;
 
