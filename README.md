@@ -79,4 +79,4 @@ npm run dev
 ![22](https://github.com/user-attachments/assets/c405a6ec-9973-4ea3-9453-4554a5954aef)
 
 ## 📧 Contact
-For any inquiries or issues, please contact riyajivani8@gmail.com
+For any inquiries or issues, please contact [riyajivani8@gmail.com](mailto:riyajivani8@gmail.com)
